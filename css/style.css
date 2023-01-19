@@ -137,3 +137,23 @@ body {
     top: 0;
     left: 0;
 }
+/* Media query for screens larger than 1200px */
+@media only screen and (min-width: 1200px) {
+  body {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+/* Default styles for larger screens */
+body {
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+}
+
+/* Media query for screens smaller than 600px */
+@media only screen and (max-width: 600px) {
+  body {
+    font-size: 14px;
+  }
+}
