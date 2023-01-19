@@ -57,6 +57,8 @@ help = [
   "<br>",
   '<span class="command">whois</span>          Who is Tim?',
   '<span class="command">whoami</span>         Who are you?',
+  '<span class="command">matrix</span>         You have to see it for yourself.',
+  '<span class="command">stopmatrix</span>         you wake up in your bed and believe whatever you want to believe.'
 //  '<span class="command">video</span>          View YouTube videos',
   '<span class="command">social</span>         Display social networks',
   '<span class="command">secret</span>         Find the password',
