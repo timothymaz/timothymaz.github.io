@@ -8,6 +8,7 @@ var git = 0;
 var pw = false;
 let pwd = false;
 var commands = [];
+let matrixInterval;
 
 setTimeout(function() {
   loopLines(banner, "", 80);
@@ -150,6 +151,14 @@ function commander(cmd) {
       addLine("Opening GitHub...", "color2", 0);
       newTab(github);
       break;
+    case "matrix":
+      startMatrix();
+      break;
+    case "stopmatrix":
+      stopMatrix();
+      break;
+
+
     default:
       addLine("<span class=\"inherit\">Command not found. For a list of commands, type <span class=\"command\">'help'</span>.</span>", "error", 100);
       break;
@@ -187,4 +196,20 @@ function loopLines(name, style, time) {
   name.forEach(function(item, index) {
     addLine(item, style, index * time);
   });
+}
+
+
+
+
+//Matrix
+function startMatrix() {
+  canvas.style.display = "block"; // show the canvas element
+  setInterval(draw, 30); // start the animation
+  matrixInterval = setInterval(draw, 30);
+}
+
+function stopMatrix() {
+  canvas.style.display = "none"; // hide the canvas element
+  clearInterval(draw); // stop the animation
+  clearInterval(matrixInterval);
 }
