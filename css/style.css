@@ -129,3 +129,11 @@ body {
   a:focus {
     outline: 0;
   }
+  canvas{
+    display: none;
+  }
+  canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
