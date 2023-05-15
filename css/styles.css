@@ -1,73 +1,62 @@
-/* Reset some styles */
-body, h1, h2, p, div {
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
     margin: 0;
     padding: 0;
 }
 
-body {
-    font-family: 'Helvetica Neue', Arial, sans-serif; /* Apple uses Helvetica Neue */
-    color: #333; /* Dark grey color for most text */
-    background-color: #fff; /* White background */
-    line-height: 1.6;
-}
-
-/* Header */
 header {
-    background-color: #f8f8f8; /* Light grey background */
-    padding: 20px;
+    background-color: #333;
+    color: white;
+    padding: 10px;
     text-align: center;
-    border-bottom: 1px solid #ccc; /* Light border line */
 }
 
-header h1 {
-    font-size: 2em;
-}
-
-/* Navigation bar */
 #navbar {
-    background-color: #f8f8f8;
-    display: flex;
-    justify-content: space-around;
-    padding: 10px 0;
-    border-bottom: 1px solid #ccc;
+    background-color: #444;
+    overflow: auto;
 }
 
 #navbar a {
-    color: #333;
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px;
     text-decoration: none;
 }
 
-/* Hero section */
-#hero {
-    padding: 40px;
-    text-align: center;
+#navbar a:hover {
+    background-color: #ddd;
+    color: black;
 }
 
-#hero h2 {
-    font-size: 1.5em;
-    margin-bottom: 20px;
+#hero {
+    background-color: #ddd;
+    padding: 50px;
+    text-align: center;
 }
 
 #hero button {
-    background-color: #007AFF; /* Apple blue */
-    color: #fff;
-    border: none;
+    margin: 10px;
     padding: 10px 20px;
-    margin-right: 10px;
-    border-radius: 5px;
-    cursor: pointer;
+    font-size: 16px;
 }
 
-/* Sections */
 #about, #education, #experience, #volunteering, #contact, #portfolio {
     padding: 20px;
+    margin: 10px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
 }
 
-/* Footer */
 footer {
-    background-color: #f8f8f8;
-    padding: 20px;
+    background-color: #333;
+    color: white;
     text-align: center;
-    border-top: 1px solid #ccc;
-    margin-top: 20px;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
