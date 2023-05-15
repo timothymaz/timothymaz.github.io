@@ -1,0 +1,73 @@
+/* Reset some styles */
+body, h1, h2, p, div {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif; /* Apple uses Helvetica Neue */
+    color: #333; /* Dark grey color for most text */
+    background-color: #fff; /* White background */
+    line-height: 1.6;
+}
+
+/* Header */
+header {
+    background-color: #f8f8f8; /* Light grey background */
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid #ccc; /* Light border line */
+}
+
+header h1 {
+    font-size: 2em;
+}
+
+/* Navigation bar */
+#navbar {
+    background-color: #f8f8f8;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+}
+
+#navbar a {
+    color: #333;
+    text-decoration: none;
+}
+
+/* Hero section */
+#hero {
+    padding: 40px;
+    text-align: center;
+}
+
+#hero h2 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+#hero button {
+    background-color: #007AFF; /* Apple blue */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin-right: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Sections */
+#about, #education, #experience, #volunteering, #contact, #portfolio {
+    padding: 20px;
+}
+
+/* Footer */
+footer {
+    background-color: #f8f8f8;
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid #ccc;
+    margin-top: 20px;
+}
