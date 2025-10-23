@@ -31,7 +31,7 @@ const Portfolio = () => {
       tags: ['Security', 'XSS', 'Education'],
       description: 'Educational tool demonstrating Cross-Site Scripting and SQL injection vulnerabilities. Helps developers understand common security flaws and prevention techniques.',
       image: '/images/xss_sql_project_thumbnail.jpg',
-      link: '/XSSSQL/index.html',
+      link: '/security-demo',
       github: 'https://github.com/timothymaz/timothymaz.github.io',
       features: [
         'Live XSS demonstration',

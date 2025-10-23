@@ -1,0 +1,47 @@
+.security-demo-page {
+  min-height: 100vh;
+  padding-top: calc(var(--header-height) + var(--spacing-3xl));
+  padding-bottom: var(--spacing-4xl);
+}
+
+.hero-section {
+  text-align: center;
+  margin-bottom: var(--spacing-3xl);
+}
+
+.coming-soon {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  padding: var(--spacing-3xl);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-color);
+}
+
+.coming-soon h2 {
+  color: var(--accent-primary);
+  margin-bottom: var(--spacing-lg);
+}
+
+.coming-soon p {
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-md);
+}
+
+.btn {
+  display: inline-block;
+  padding: var(--spacing-md) var(--spacing-xl);
+  background: var(--accent-gradient);
+  color: var(--text-inverse);
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  font-weight: var(--font-weight-semibold);
+  transition: all var(--transition-base);
+  margin-top: var(--spacing-lg);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
+}
