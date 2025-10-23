@@ -5,6 +5,8 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Home from './pages/Home/Home';
 import Portfolio from './pages/Portfolio/Portfolio';
+import Blog from './pages/Blog/Blog';
+import BlogPost from './pages/Blog/BlogPost';
 import Contact from './pages/Contact/Contact';
 import Terminal from './pages/Terminal/Terminal';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
@@ -21,6 +23,8 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/portfolio" element={<Portfolio />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<BlogPost />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/terminal" element={<Terminal />} />
             </Routes>

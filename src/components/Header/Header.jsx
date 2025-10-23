@@ -28,6 +28,7 @@ const Header = () => {
   const navItems = [
     { path: '/', label: 'Home' },
     { path: '/portfolio', label: 'Portfolio' },
+    { path: '/blog', label: 'Blog' },
     { path: '/contact', label: 'Contact' },
     { path: '/terminal', label: 'Terminal', icon: <FiTerminal /> }
   ];
@@ -61,7 +62,11 @@ const Header = () => {
             <Link
               key={item.path}
               to={item.path}
-              className={`nav-link ${location.pathname === item.path ? 'active' : ''}`}
+              className={`nav-link ${
+                location.pathname === item.path ||
+                (item.path === '/blog' && location.pathname.startsWith('/blog/'))
+                ? 'active' : ''
+              }`}
             >
               {item.icon && <span className="nav-icon">{item.icon}</span>}
               {item.label}
@@ -108,7 +113,11 @@ const Header = () => {
               >
                 <Link
                   to={item.path}
-                  className={`mobile-nav-link ${location.pathname === item.path ? 'active' : ''}`}
+                  className={`mobile-nav-link ${
+                    location.pathname === item.path ||
+                    (item.path === '/blog' && location.pathname.startsWith('/blog/'))
+                    ? 'active' : ''
+                  }`}
                 >
                   {item.icon && <span className="nav-icon">{item.icon}</span>}
                   {item.label}
