@@ -109,8 +109,8 @@ export const blogPosts = [
     date: "2025-10-15",
     readTime: 10,
     author: "Timothy Mazur",
-    thumbnail: "https://via.placeholder.com/400x250/0a0a0a/00d4aa?text=Malware+Analysis",
-    featuredImage: "https://via.placeholder.com/1200x600/0a0a0a/00d4aa?text=Malware+Analysis+Workflow",
+    thumbnail: "/images/malware_analysis_thumbnail.jpg",
+    featuredImage: "/images/malware_analysis_featured.jpg",
     featured: true
   },
   {
@@ -273,8 +273,8 @@ export const blogPosts = [
     date: "2025-09-28",
     readTime: 12,
     author: "Timothy Mazur",
-    thumbnail: "https://via.placeholder.com/400x250/0a0a0a/ff0055?text=Vendor+Evaluation",
-    featuredImage: "https://via.placeholder.com/1200x600/0a0a0a/ff0055?text=Security+Tool+Evaluation",
+    thumbnail: "/images/vendor_evaluation_thumbnail.jpg",
+    featuredImage: "/images/vendor_evaluation_featured.jpg",
     featured: true
   },
   {
@@ -459,8 +459,8 @@ export const blogPosts = [
     date: "2025-08-12",
     readTime: 11,
     author: "Timothy Mazur",
-    thumbnail: "https://via.placeholder.com/400x250/0a0a0a/0099ff?text=ZTNA+Deployment",
-    featuredImage: "https://via.placeholder.com/1200x600/0a0a0a/0099ff?text=Zero+Trust+Network+Access",
+    thumbnail: "/images/ztna_deployment_thumbnail.jpg",
+    featuredImage: "/images/ztna_deployment_featured.jpg",
     featured: true
   },
   {
@@ -690,8 +690,8 @@ export const blogPosts = [
     date: "2025-07-20",
     readTime: 12,
     author: "Timothy Mazur",
-    thumbnail: "https://via.placeholder.com/400x250/0a0a0a/00ff41?text=Endpoint+Security",
-    featuredImage: "https://via.placeholder.com/1200x600/0a0a0a/00ff41?text=Endpoint+Security+Mistakes",
+    thumbnail: "/images/endpoint_security_thumbnail.jpg",
+    featuredImage: "/images/endpoint_security_featured.jpg",
     featured: false
   },
   {
@@ -959,8 +959,8 @@ export const blogPosts = [
     date: "2025-06-05",
     readTime: 14,
     author: "Timothy Mazur",
-    thumbnail: "https://via.placeholder.com/400x250/0a0a0a/b900ff?text=Incident+Response",
-    featuredImage: "https://via.placeholder.com/1200x600/0a0a0a/b900ff?text=IR+Playbook",
+    thumbnail: "/images/incident_response_thumbnail.jpg",
+    featuredImage: "/images/incident_response_featured.jpg",
     featured: false
   }
 ];

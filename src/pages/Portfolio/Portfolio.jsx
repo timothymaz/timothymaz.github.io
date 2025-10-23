@@ -14,7 +14,7 @@ const Portfolio = () => {
       category: 'web',
       tags: ['JavaScript', 'Canvas API', 'Terminal'],
       description: 'A web-based terminal emulator with Matrix rain effect, command history, and Easter eggs. Features custom commands, password protection, and cyberpunk aesthetics.',
-      image: 'https://via.placeholder.com/600x360/0a0a0a/00d4aa?text=Terminal+Project',
+      image: '/images/terminal_project_thumbnail.jpg',
       link: '/terminal',
       github: 'https://github.com/timothymaz/timothymaz.github.io',
       features: [
@@ -30,7 +30,7 @@ const Portfolio = () => {
       category: 'security',
       tags: ['Security', 'XSS', 'Education'],
       description: 'Educational tool demonstrating Cross-Site Scripting and SQL injection vulnerabilities. Helps developers understand common security flaws and prevention techniques.',
-      image: 'https://via.placeholder.com/600x360/0a0a0a/ff0055?text=XSS+SQL+Demo',
+      image: '/images/xss_sql_project_thumbnail.jpg',
       link: '/XSSSQL/index.html',
       github: 'https://github.com/timothymaz/timothymaz.github.io',
       features: [
@@ -46,7 +46,7 @@ const Portfolio = () => {
       category: 'security',
       tags: ['Python', 'Tkinter', 'Network Security'],
       description: 'Powerful port scanner using Python and Tkinter for network administrators and security professionals. Features multi-threaded scanning, hostname resolution, and real-time updates.',
-      image: 'https://via.placeholder.com/600x360/0a0a0a/0099ff?text=Port+Scanner',
+      image: '/images/port_scanner_thumbnail.jpg',
       github: 'https://github.com/timothymaz',
       features: [
         'Multi-threaded scanning',
@@ -61,7 +61,7 @@ const Portfolio = () => {
       category: 'web',
       tags: ['Python', 'Tkinter', 'Windows'],
       description: 'Convenient startup manager for Windows systems with an intuitive interface. Enables users to manage programs that run at startup, optimizing system performance.',
-      image: 'https://via.placeholder.com/600x360/0a0a0a/00ff41?text=Startup+Manager',
+      image: '/images/startup_manager_thumbnail.jpg',
       github: 'https://github.com/timothymaz',
       features: [
         'Windows Registry integration',
