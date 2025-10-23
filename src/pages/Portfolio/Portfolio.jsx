@@ -2,12 +2,9 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FiExternalLink, FiGithub, FiTerminal, FiShield, FiFilter } from 'react-icons/fi';
-import { useInView } from '../../hooks/useInView';
 import './Portfolio.css';
 
 const Portfolio = () => {
-  const [headerRef, headerInView] = useInView();
-  const [projectsRef, projectsInView] = useInView();
   const [filter, setFilter] = useState('all');
 
   const projects = [
@@ -88,13 +85,7 @@ const Portfolio = () => {
   return (
     <div className="portfolio-page">
       {/* Header */}
-      <motion.section
-        ref={headerRef}
-        className="portfolio-header"
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: headerInView ? 1 : 0, y: headerInView ? 0 : 30 }}
-        transition={{ duration: 0.8 }}
-      >
+      <section className="portfolio-header">
         <div className="container">
           <h1 className="page-title">
             My <span className="text-gradient">Portfolio</span>
@@ -104,105 +95,84 @@ const Portfolio = () => {
             Each project showcases different aspects of security, development, and problem-solving.
           </p>
         </div>
-      </motion.section>
+      </section>
 
       {/* Filter Tabs */}
       <section className="filter-section">
         <div className="container">
           <div className="filter-tabs">
             {categories.map((cat) => (
-              <motion.button
+              <button
                 key={cat.id}
                 className={`filter-tab ${filter === cat.id ? 'active' : ''}`}
                 onClick={() => setFilter(cat.id)}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
               >
                 <span className="filter-icon">{cat.icon}</span>
                 {cat.label}
-              </motion.button>
+              </button>
             ))}
           </div>
         </div>
       </section>
 
       {/* Projects Grid */}
-      <motion.section
-        ref={projectsRef}
-        className="projects-section"
-      >
+      <section className="projects-section">
         <div className="container">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={filter}
-              className="projects-grid"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              {filteredProjects.map((project, index) => (
-                <motion.article
-                  key={project.id}
-                  className="project-card"
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{
-                    opacity: projectsInView ? 1 : 0,
-                    y: projectsInView ? 0 : 30
-                  }}
-                  transition={{ delay: index * 0.2 }}
-                  whileHover={{ y: -10 }}
-                >
-                  <div className="project-image">
-                    <img src={project.image} alt={project.title} loading="lazy" />
-                    <div className="project-overlay">
-                      <div className="project-links">
-                        {project.link.startsWith('/') ? (
-                          <Link to={project.link} className="project-link" aria-label="View project">
-                            <FiExternalLink />
-                          </Link>
-                        ) : (
-                          <a
-                            href={project.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="project-link"
-                            aria-label="View project"
-                          >
-                            <FiExternalLink />
-                          </a>
-                        )}
+          <div className="projects-grid">
+            {filteredProjects.map((project) => (
+              <article
+                key={project.id}
+                className="project-card"
+              >
+                <div className="project-image">
+                  <img src={project.image} alt={project.title} loading="lazy" />
+                  <div className="project-overlay">
+                    <div className="project-links">
+                      {project.link?.startsWith('/') ? (
+                        <Link to={project.link} className="project-link" aria-label="View project">
+                          <FiExternalLink />
+                        </Link>
+                      ) : project.link ? (
                         <a
-                          href={project.github}
+                          href={project.link}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="project-link"
-                          aria-label="View source code"
+                          aria-label="View project"
                         >
-                          <FiGithub />
+                          <FiExternalLink />
                         </a>
-                      </div>
+                      ) : null}
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="project-link"
+                        aria-label="View source code"
+                      >
+                        <FiGithub />
+                      </a>
                     </div>
                   </div>
+                </div>
 
-                  <div className="project-content">
-                    <div className="project-tags">
-                      {project.tags.map(tag => (
-                        <span key={tag} className="project-tag">{tag}</span>
-                      ))}
-                    </div>
-                    <h3 className="project-title">{project.title}</h3>
-                    <p className="project-description">{project.description}</p>
-                    <ul className="project-features">
-                      {project.features.map((feature, i) => (
-                        <li key={i}>{feature}</li>
-                      ))}
-                    </ul>
+                <div className="project-content">
+                  <div className="project-tags">
+                    {project.tags.map(tag => (
+                      <span key={tag} className="project-tag">{tag}</span>
+                    ))}
                   </div>
-                </motion.article>
-              ))}
-            </motion.div>
-          </AnimatePresence>
+                  <h3 className="project-title">{project.title}</h3>
+                  <p className="project-description">{project.description}</p>
+                  <ul className="project-features">
+                    {project.features.map((feature, i) => (
+                      <li key={i}>{feature}</li>
+                    ))}
+                  </ul>
+                </div>
+              </article>
+            ))}
+          </div>
 
           {filteredProjects.length === 0 && (
             <div className="no-projects">
@@ -210,7 +180,7 @@ const Portfolio = () => {
             </div>
           )}
         </div>
-      </motion.section>
+      </section>
 
       {/* CTA Section */}
       <section className="portfolio-cta">
