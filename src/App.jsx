@@ -9,6 +9,7 @@ import Blog from './pages/Blog/Blog';
 import BlogPost from './pages/Blog/BlogPost';
 import Contact from './pages/Contact/Contact';
 import Terminal from './pages/Terminal/Terminal';
+import SecurityDemo from './pages/SecurityDemo/SecurityDemo';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 import { ThemeProvider } from './context/ThemeContext';
 import './App.css';
@@ -27,6 +28,7 @@ function App() {
               <Route path="/blog/:slug" element={<BlogPost />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/terminal" element={<Terminal />} />
+              <Route path="/security-demo" element={<SecurityDemo />} />
             </Routes>
           </AnimatePresence>
         </main>
