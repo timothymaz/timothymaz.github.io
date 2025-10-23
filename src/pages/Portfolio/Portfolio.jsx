@@ -47,7 +47,7 @@ const Portfolio = () => {
       tags: ['Python', 'Tkinter', 'Network Security'],
       description: 'Powerful port scanner using Python and Tkinter for network administrators and security professionals. Features multi-threaded scanning, hostname resolution, and real-time updates.',
       image: '/images/port_scanner_thumbnail.jpg',
-      github: 'https://github.com/timothymaz',
+      github: 'https://github.com/timothymaz/Port-Scanner',
       features: [
         'Multi-threaded scanning',
         'Hostname resolution',
@@ -62,7 +62,7 @@ const Portfolio = () => {
       tags: ['Python', 'Tkinter', 'Windows'],
       description: 'Convenient startup manager for Windows systems with an intuitive interface. Enables users to manage programs that run at startup, optimizing system performance.',
       image: '/images/startup_manager_thumbnail.jpg',
-      github: 'https://github.com/timothymaz',
+      github: 'https://github.com/timothymaz/Startup-Manager',
       features: [
         'Windows Registry integration',
         'Search & filter programs',
