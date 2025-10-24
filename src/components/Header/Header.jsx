@@ -29,6 +29,7 @@ const Header = () => {
     { path: '/', label: 'Home' },
     { path: '/portfolio', label: 'Portfolio' },
     { path: '/blog', label: 'Blog' },
+    { path: '/automotive', label: 'Automotive' },
     { path: '/contact', label: 'Contact' },
     { path: '/terminal', label: 'Terminal', icon: <FiTerminal /> }
   ];
