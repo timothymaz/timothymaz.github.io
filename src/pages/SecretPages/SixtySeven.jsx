@@ -57,6 +57,15 @@ const SixtySeven = () => {
   const [modesUsed, setModesUsed] = useState(new Set());
   const [showModeSelector, setShowModeSelector] = useState(false);
 
+  // Gamification state
+  const [score, setScore] = useState(0);
+  const [combo, setCombo] = useState(0);
+  const [level, setLevel] = useState(1);
+  const [powerUps, setPowerUps] = useState([]);
+  const [levelUpNotif, setLevelUpNotif] = useState(null);
+  const comboTimerRef = useRef(null);
+  const prevLevelRef = useRef(1);
+
   // All available modes
   const MODES = [
     { id: 'normal', label: 'Normal', key: 'N', icon: '😎' },
@@ -89,6 +98,42 @@ const SixtySeven = () => {
     }
   };
 
+  // Hide header on mount
+  useEffect(() => {
+    const header = document.querySelector('header');
+    if (header) {
+      header.style.display = 'none';
+    }
+
+    return () => {
+      if (header) {
+        header.style.display = '';
+      }
+    };
+  }, []);
+
+  // Level up logic
+  useEffect(() => {
+    const pointsForNextLevel = level * 1000;
+    if (score >= pointsForNextLevel) {
+      const newLevel = level + 1;
+      setLevel(newLevel);
+
+      // Show level-up notification with new level's rank
+      const rank = getRank(newLevel);
+      setLevelUpNotif({
+        level: newLevel,
+        rank: rank
+      });
+
+      // Spawn power-up as reward
+      spawnPowerUp();
+
+      // Hide notification after 3 seconds
+      setTimeout(() => setLevelUpNotif(null), 3000);
+    }
+  }, [score, level]);
+
   // Track visit time
   useEffect(() => {
     const timer = setInterval(() => {
@@ -97,6 +142,8 @@ const SixtySeven = () => {
         if (newTime === 300) {
           unlockAchievement('time_traveler');
         }
+        // Passive score gain
+        setScore(s => s + level);
         return newTime;
       });
     }, 1000);
@@ -328,7 +375,74 @@ const SixtySeven = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  // Click handler
+  // Spawn power-up
+  const spawnPowerUp = () => {
+    const powerUpTypes = ['🌟', '💎', '⚡', '🔥', '💫'];
+    const newPowerUp = {
+      id: Date.now(),
+      x: Math.random() * (window.innerWidth - 100) + 50,
+      y: Math.random() * (window.innerHeight - 100) + 50,
+      type: powerUpTypes[Math.floor(Math.random() * powerUpTypes.length)]
+    };
+
+    setPowerUps(prev => [...prev, newPowerUp]);
+
+    // Auto-remove after 10 seconds
+    setTimeout(() => {
+      setPowerUps(prev => prev.filter(p => p.id !== newPowerUp.id));
+    }, 10000);
+  };
+
+  // Collect power-up
+  const collectPowerUp = (powerUp) => {
+    setPowerUps(prev => prev.filter(p => p.id !== powerUp.id));
+
+    // Power-up effects
+    switch(powerUp.type) {
+      case '🌟':
+        setScore(s => s + 500);
+        break;
+      case '💎':
+        setScore(s => s + 1000);
+        break;
+      case '⚡':
+        setCombo(c => c + 5);
+        break;
+      case '🔥':
+        fireworks();
+        setScore(s => s + 300);
+        break;
+      case '💫':
+        setScore(s => s + (level * 100));
+        break;
+    }
+  };
+
+  // Increase combo
+  const increaseCombo = () => {
+    setCombo(prev => prev + 1);
+
+    // Reset combo timer
+    if (comboTimerRef.current) {
+      clearTimeout(comboTimerRef.current);
+    }
+
+    // Reset combo after 3 seconds of inactivity
+    comboTimerRef.current = setTimeout(() => {
+      setCombo(0);
+    }, 3000);
+  };
+
+  // Get level rank
+  const getRank = (lvl = level) => {
+    if (lvl < 5) return { name: 'Novice', icon: '🥉', color: '#CD7F32' };
+    if (lvl < 10) return { name: 'Expert', icon: '🥈', color: '#C0C0C0' };
+    if (lvl < 20) return { name: 'Master', icon: '🥇', color: '#FFD700' };
+    if (lvl < 30) return { name: 'Legend', icon: '💎', color: '#00FFFF' };
+    return { name: 'GOD', icon: '👑', color: '#FF00FF' };
+  };
+
+  // Click handler with gamification
   const handleClick = (event) => {
     const newSpawned = [];
     const count = 10;
@@ -354,6 +468,21 @@ const SixtySeven = () => {
     }
 
     explosionNumbersRef.current = [...explosionNumbersRef.current, ...newSpawned];
+
+    // Gamification
+    const points = (10 + combo) * (level);
+    setScore(s => s + points);
+    increaseCombo();
+
+    // Show points popup
+    const pointsPopup = document.createElement('div');
+    pointsPopup.className = 'points-popup';
+    pointsPopup.textContent = `+${points}`;
+    pointsPopup.style.left = event.clientX + 'px';
+    pointsPopup.style.top = event.clientY + 'px';
+    document.body.appendChild(pointsPopup);
+    setTimeout(() => pointsPopup.remove(), 1000);
+
     setSpawned67s(prev => {
       const newCount = prev + count;
       if (newCount >= 100) {
@@ -440,6 +569,9 @@ const SixtySeven = () => {
           return newSet;
         });
       };
+
+      // Define trackMode here so it's accessible in mode selector
+      window.trackMode = trackMode;
 
       switch(key) {
         case 'n':
@@ -595,6 +727,53 @@ const SixtySeven = () => {
         67
       </motion.div>
 
+      {/* Game HUD - Score, Combo, Level */}
+      <motion.div
+        className="game-hud"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3 }}
+      >
+        <div className="hud-rank">
+          <span className="rank-icon">{getRank().icon}</span>
+          <span className="rank-name" style={{ color: getRank().color }}>{getRank().name}</span>
+        </div>
+        <div className="hud-level">Level {level}</div>
+        <div className="hud-score">
+          <span className="score-label">Score:</span>
+          <span className="score-value">{score.toLocaleString()}</span>
+        </div>
+
+        {/* Progress to next level */}
+        <div className="hud-progress">
+          <div className="progress-label">
+            Next: {((level * 1000) - score).toLocaleString()} pts
+          </div>
+          <div className="progress-bar">
+            <motion.div
+              className="progress-fill"
+              initial={{ width: 0 }}
+              animate={{
+                width: `${Math.min(100, (score / (level * 1000)) * 100)}%`
+              }}
+              transition={{ duration: 0.3 }}
+            />
+          </div>
+        </div>
+
+        {combo > 0 && (
+          <motion.div
+            className="hud-combo"
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            exit={{ scale: 0 }}
+          >
+            <span className="combo-text">{combo}x COMBO!</span>
+            <span className="combo-bonus">+{combo * level} pts/click</span>
+          </motion.div>
+        )}
+      </motion.div>
+
       {/* Stats Overlay */}
       <motion.div
         className="stats-overlay"
@@ -664,7 +843,14 @@ const SixtySeven = () => {
                     className={`mode-button ${mode === modeOption.id ? 'active' : ''}`}
                     onClick={() => {
                       setMode(modeOption.id);
-                      trackMode(modeOption.id);
+                      setModesUsed(prev => {
+                        const newSet = new Set(prev);
+                        newSet.add(modeOption.id);
+                        if (newSet.size >= 5) {
+                          unlockAchievement('explorer');
+                        }
+                        return newSet;
+                      });
                       setShowModeSelector(false);
                     }}
                     whileHover={{ scale: 1.1 }}
@@ -744,6 +930,59 @@ const SixtySeven = () => {
             </div>
           </motion.div>
         )}
+      </AnimatePresence>
+
+      {/* Level Up Notification */}
+      <AnimatePresence>
+        {levelUpNotif && (
+          <motion.div
+            className="levelup-notification"
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
+            transition={{ type: 'spring', stiffness: 200, damping: 15 }}
+          >
+            <motion.div
+              className="levelup-content"
+              animate={{
+                scale: [1, 1.1, 1],
+                rotate: [0, 5, -5, 0]
+              }}
+              transition={{ duration: 0.5, repeat: Infinity }}
+            >
+              <div className="levelup-icon">{levelUpNotif.rank.icon}</div>
+              <div className="levelup-title">LEVEL UP!</div>
+              <div className="levelup-level">Level {levelUpNotif.level}</div>
+              <div className="levelup-rank" style={{ color: levelUpNotif.rank.color }}>
+                {levelUpNotif.rank.name}
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Power-ups */}
+      <AnimatePresence>
+        {powerUps.map(powerUp => (
+          <motion.div
+            key={powerUp.id}
+            className="power-up"
+            initial={{ scale: 0, rotate: 0 }}
+            animate={{ scale: 1, rotate: 360 }}
+            exit={{ scale: 0, opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            style={{
+              left: powerUp.x,
+              top: powerUp.y
+            }}
+            onClick={(e) => {
+              e.stopPropagation();
+              collectPowerUp(powerUp);
+            }}
+          >
+            {powerUp.type}
+          </motion.div>
+        ))}
       </AnimatePresence>
 
       {/* Explosion 67s */}
