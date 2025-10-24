@@ -2706,30 +2706,6 @@ const SixtySeven = () => {
           </div>
 
           <div className="debug-section">
-            <h4>Cheats:</h4>
-            <button onClick={() => {
-              setSixtySevenCount(prev => prev + 1000);
-              setTotalSixtySevensMade(prev => prev + 1000);
-            }}>+1K 67s</button>
-            <button onClick={() => {
-              setSixtySevenCount(prev => prev + 1000000);
-              setTotalSixtySevensMade(prev => prev + 1000000);
-            }}>+1M 67s</button>
-            <button onClick={() => {
-              setSixtySevenCount(prev => prev + 1000000000);
-              setTotalSixtySevensMade(prev => prev + 1000000000);
-            }}>+1B 67s</button>
-            <button onClick={() => {
-              setSixtySevenCount(prev => prev + 1000000000000);
-              setTotalSixtySevensMade(prev => prev + 1000000000000);
-            }}>+1T 67s</button>
-            <button onClick={() => {
-              setHeavenlySeventies(prev => prev + 10);
-              setLifetimePrestigePoints(prev => prev + 10);
-            }}>+10 Heavenly</button>
-          </div>
-
-          <div className="debug-section">
             <h4>Save Management:</h4>
             <button onClick={() => {
               const saveData = localStorage.getItem(SAVE_KEY);
