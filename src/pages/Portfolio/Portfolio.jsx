@@ -25,6 +25,22 @@ const Portfolio = () => {
       ]
     },
     {
+      id: 5,
+      title: '67 Clicker - Incremental Game',
+      category: 'web',
+      tags: ['React', 'Three.js', 'Game Dev'],
+      description: 'A Cookie Clicker-style incremental game built with React and Three.js. Features persistent save system, golden multipliers, click upgrades, and smooth animations with particle effects.',
+      image: '/images/placeholder-project.jpg',
+      link: '/67',
+      github: 'https://github.com/timothymaz/timothymaz.github.io',
+      features: [
+        'LocalStorage save system',
+        'Golden 67s with 50x multipliers',
+        '10 building types with exponential costs',
+        'Offline earnings calculation'
+      ]
+    },
+    {
       id: 2,
       title: 'XSS/SQL Injection Demonstrator',
       category: 'security',
