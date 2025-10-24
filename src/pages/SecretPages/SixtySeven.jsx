@@ -1,34 +1,103 @@
 import { useEffect, useRef, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import * as THREE from 'three';
 import './SixtySeven.css';
 
-const FACTS_ABOUT_67 = [
-  "67 is a prime number",
-  "67 is the atomic number of Holmium",
-  "67 in binary is 1000011",
-  "Route 67 crosses multiple US states",
-  "67 is the sum of five consecutive primes",
-  "In hex, 67 is 0x43",
-  "67 degrees is a perfect temperature",
-  "There are 67 moons in the solar system... wait, that's not true",
-  "67 is the number of awesomeness",
-  "You found the secret 67 page!",
-  "67 backwards is 76, which is boring",
-  "67 is the best number, fight me",
-  "The year 67 AD was pretty cool probably",
-  "67 is divisible by... 1 and 67. That's it.",
-  "In Roman numerals: LXVII"
+// Click upgrade definitions
+const CLICK_UPGRADES = [
+  { id: 'click1', name: 'Better Fingers', cost: 100, power: 1, icon: '👆', description: '+1 per click' },
+  { id: 'click2', name: 'Strong Hands', cost: 500, power: 2, icon: '✋', description: '+2 per click' },
+  { id: 'click3', name: 'Power Fists', cost: 2500, power: 5, icon: '👊', description: '+5 per click' },
+  { id: 'click4', name: 'Super Arms', cost: 15000, power: 10, icon: '💪', description: '+10 per click' },
+  { id: 'click5', name: 'Mega Clicker', cost: 100000, power: 25, icon: '⚡', description: '+25 per click' },
+  { id: 'click6', name: 'Ultra Hands', cost: 750000, power: 50, icon: '🔥', description: '+50 per click' },
+  { id: 'click7', name: 'God Mode Click', cost: 5000000, power: 100, icon: '👑', description: '+100 per click' },
+  { id: 'click8', name: 'Cosmic Clicker', cost: 50000000, power: 250, icon: '🌟', description: '+250 per click' },
+  { id: 'click9', name: 'Infinite Power', cost: 500000000, power: 500, icon: '💫', description: '+500 per click' },
+  { id: 'click10', name: 'Omnipotent Click', cost: 10000000000, power: 1000, icon: '✨', description: '+1000 per click' },
 ];
 
-const ACHIEVEMENTS = {
-  'first_visit': { title: 'Secret Found!', desc: 'You discovered the secret page', icon: '🔍' },
-  'click_master': { title: 'Click Master', desc: 'Spawned 100 67s', icon: '🖱️' },
-  'konami_legend': { title: 'Konami Legend', desc: 'Entered the Konami Code', icon: '🎮' },
-  'time_traveler': { title: 'Time Traveler', desc: 'Spent 5 minutes here', icon: '⏰' },
-  'explorer': { title: 'Explorer', desc: 'Tried all modes', icon: '🧭' },
-  'disco_king': { title: 'Disco King', desc: 'Activated disco mode', icon: '🕺' },
-  'matrix_fan': { title: 'Matrix Fan', desc: 'Activated 67 rain', icon: '🌧️' }
+// Building definitions
+const BUILDINGS = {
+  cursor: {
+    name: 'Cursor',
+    baseCost: 15,
+    baseProduction: 1,
+    costMultiplier: 1.15,
+    icon: '👆',
+    description: 'Auto-clicks for you'
+  },
+  grandma: {
+    name: 'Grandma',
+    baseCost: 100,
+    baseProduction: 5,
+    costMultiplier: 1.15,
+    icon: '👵',
+    description: 'A nice grandma to bake 67s'
+  },
+  farm: {
+    name: '67 Farm',
+    baseCost: 1100,
+    baseProduction: 20,
+    costMultiplier: 1.15,
+    icon: '🚜',
+    description: 'Grows 67s from the ground'
+  },
+  factory: {
+    name: 'Factory',
+    baseCost: 12000,
+    baseProduction: 100,
+    costMultiplier: 1.15,
+    icon: '🏭',
+    description: 'Mass produces 67s'
+  },
+  bank: {
+    name: 'Bank',
+    baseCost: 130000,
+    baseProduction: 500,
+    costMultiplier: 1.15,
+    icon: '🏦',
+    description: 'Generates 67s from interest'
+  },
+  temple: {
+    name: 'Temple',
+    baseCost: 1400000,
+    baseProduction: 2500,
+    costMultiplier: 1.15,
+    icon: '⛩️',
+    description: 'Summons 67s from the gods'
+  },
+  wizard: {
+    name: 'Wizard Tower',
+    baseCost: 20000000,
+    baseProduction: 15000,
+    costMultiplier: 1.15,
+    icon: '🧙',
+    description: 'Conjures 67s with magic'
+  },
+  portal: {
+    name: 'Portal',
+    baseCost: 330000000,
+    baseProduction: 100000,
+    costMultiplier: 1.15,
+    icon: '🌀',
+    description: 'Brings 67s from another dimension'
+  },
+  timeMachine: {
+    name: 'Time Machine',
+    baseCost: 5100000000,
+    baseProduction: 500000,
+    costMultiplier: 1.15,
+    icon: '⏰',
+    description: 'Retrieves 67s from the past'
+  },
+  quantum: {
+    name: 'Quantum Computer',
+    baseCost: 75000000000,
+    baseProduction: 3000000,
+    costMultiplier: 1.15,
+    icon: '💻',
+    description: 'Calculates 67s into existence'
+  }
 };
 
 const SixtySeven = () => {
@@ -36,67 +105,260 @@ const SixtySeven = () => {
   const sceneRef = useRef(null);
   const rendererRef = useRef(null);
   const particlesRef = useRef([]);
-  const explosionNumbersRef = useRef([]);
-  const rain67sRef = useRef([]);
+  const lastSaveRef = useRef(Date.now());
 
-  const [fps, setFps] = useState(60);
-  const [particleCount, setParticleCount] = useState(0);
-  const [visitTime, setVisitTime] = useState(0);
-  const [spawned67s, setSpawned67s] = useState(0);
-  const [currentFact, setCurrentFact] = useState('');
-  const [showFact, setShowFact] = useState(false);
-  const [shake, setShake] = useState(false);
-  const [mode, setMode] = useState('normal');
-  const [showControls, setShowControls] = useState(true);
-  const [konami, setKonami] = useState([]);
-  const [celebration, setCelebration] = useState(false);
-  const [discoMode, setDiscoMode] = useState(false);
-  const [rainMode, setRainMode] = useState(false);
-  const [timeWarp, setTimeWarp] = useState(false);
-  const [achievement, setAchievement] = useState(null);
-  const [modesUsed, setModesUsed] = useState(new Set());
-  const [showModeSelector, setShowModeSelector] = useState(false);
+  // Core game state
+  const [sixtySevenCount, setSixtySevenCount] = useState(0);
+  const [totalSixtySevensMade, setTotalSixtySevensMade] = useState(0);
+  const [perClick, setPerClick] = useState(1);
+  const [perSecond, setPerSecond] = useState(0);
+  const [buildings, setBuildings] = useState({
+    cursor: 0,
+    grandma: 0,
+    farm: 0,
+    factory: 0,
+    bank: 0,
+    temple: 0,
+    wizard: 0,
+    portal: 0,
+    timeMachine: 0,
+    quantum: 0
+  });
+  const [purchasedClickUpgrades, setPurchasedClickUpgrades] = useState([]);
 
-  // Gamification state
-  const [score, setScore] = useState(0);
-  const [combo, setCombo] = useState(0);
-  const [level, setLevel] = useState(1);
-  const [powerUps, setPowerUps] = useState([]);
-  const [levelUpNotif, setLevelUpNotif] = useState(null);
-  const comboTimerRef = useRef(null);
-  const prevLevelRef = useRef(1);
+  // UI state
+  const [floatingNumbers, setFloatingNumbers] = useState([]);
+  const [clickAnimation, setClickAnimation] = useState(false);
+  const [showStats, setShowStats] = useState(false);
 
-  // All available modes
-  const MODES = [
-    { id: 'normal', label: 'Normal', key: 'N', icon: '😎' },
-    { id: 'gravity', label: 'Gravity', key: 'G', icon: '⬇️' },
-    { id: 'explosion', label: 'Explosion', key: 'E', icon: '💥' },
-    { id: 'spin', label: 'Spin', key: 'S', icon: '🌀' },
-    { id: 'bounce', label: 'Bounce', key: 'B', icon: '⚡' },
-    { id: 'glitch', label: 'Glitch', key: 'L', icon: '📺' },
-    { id: 'wave', label: 'Wave', key: 'W', icon: '🌊' },
-    { id: 'neon', label: 'Neon', key: 'O', icon: '💎' },
-    { id: 'rainbow', label: 'Rainbow', key: 'I', icon: '🌈' },
-    { id: 'shake', label: 'Shake', key: 'K', icon: '📳' },
-    { id: 'pulse', label: 'Pulse', key: 'P', icon: '💓' },
-    { id: 'zoom', label: 'Zoom', key: 'Z', icon: '🔍' }
-  ];
+  // Golden 67 state
+  const [goldenSixtySeven, setGoldenSixtySeven] = useState(null);
+  const [productionMultiplier, setProductionMultiplier] = useState(1);
+  const multiplierTimerRef = useRef(null);
 
-  const mouseRef = useRef({ x: 0, y: 0 });
-  const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+  // Format large numbers
+  const formatNumber = (num) => {
+    if (num < 1000) return Math.floor(num).toLocaleString();
+    if (num < 1000000) return (num / 1000).toFixed(1) + 'K';
+    if (num < 1000000000) return (num / 1000000).toFixed(1) + 'M';
+    if (num < 1000000000000) return (num / 1000000000).toFixed(1) + 'B';
+    return (num / 1000000000000).toFixed(1) + 'T';
+  };
 
-  // Achievement system
-  const unlockAchievement = (id) => {
-    const unlocked = JSON.parse(localStorage.getItem('achievements-67') || '{}');
+  // Calculate building cost
+  const getBuildingCost = (buildingKey) => {
+    const building = BUILDINGS[buildingKey];
+    const owned = buildings[buildingKey];
+    return Math.floor(building.baseCost * Math.pow(building.costMultiplier, owned));
+  };
 
-    if (!unlocked[id]) {
-      unlocked[id] = true;
-      localStorage.setItem('achievements-67', JSON.stringify(unlocked));
-      setAchievement(ACHIEVEMENTS[id]);
+  // Calculate total per second
+  const calculatePerSecond = () => {
+    let total = 0;
+    Object.keys(BUILDINGS).forEach(key => {
+      const building = BUILDINGS[key];
+      const owned = buildings[key];
+      total += building.baseProduction * owned;
+    });
+    return total;
+  };
 
-      setTimeout(() => setAchievement(null), 3000);
+  // Update per second when buildings change
+  useEffect(() => {
+    setPerSecond(calculatePerSecond());
+  }, [buildings]);
+
+  // Update per click when upgrades change
+  useEffect(() => {
+    const totalClickPower = 1 + purchasedClickUpgrades.reduce((sum, upgradeId) => {
+      const upgrade = CLICK_UPGRADES.find(u => u.id === upgradeId);
+      return sum + (upgrade?.power || 0);
+    }, 0);
+    setPerClick(totalClickPower);
+  }, [purchasedClickUpgrades]);
+
+  // Purchase building
+  const purchaseBuilding = (buildingKey) => {
+    const cost = getBuildingCost(buildingKey);
+
+    if (sixtySevenCount >= cost) {
+      setSixtySevenCount(prev => prev - cost);
+      setBuildings(prev => ({
+        ...prev,
+        [buildingKey]: prev[buildingKey] + 1
+      }));
+
+      // Show purchase feedback
+      showFloatingText(`+1 ${BUILDINGS[buildingKey].name}`, 'building');
     }
   };
+
+  // Purchase click upgrade
+  const purchaseClickUpgrade = (upgradeId) => {
+    const upgrade = CLICK_UPGRADES.find(u => u.id === upgradeId);
+    if (!upgrade || purchasedClickUpgrades.includes(upgradeId)) return;
+
+    if (sixtySevenCount >= upgrade.cost) {
+      setSixtySevenCount(prev => prev - upgrade.cost);
+      setPurchasedClickUpgrades(prev => [...prev, upgradeId]);
+
+      // Show purchase feedback
+      showFloatingText(`${upgrade.name}!`, 'upgrade');
+    }
+  };
+
+  // Big 67 click handler
+  const handleBigClick = (event) => {
+    const clickX = event?.clientX || window.innerWidth * 0.35;
+    const clickY = event?.clientY || window.innerHeight / 2;
+
+    // Add to count
+    setSixtySevenCount(prev => prev + perClick);
+    setTotalSixtySevensMade(prev => prev + perClick);
+
+    // Show floating +X
+    showFloatingText(`+${formatNumber(perClick)}`, 'click', clickX, clickY);
+
+    // Click animation
+    setClickAnimation(true);
+    setTimeout(() => setClickAnimation(false), 100);
+
+    // Pulse wave effect
+    const wave = document.createElement('div');
+    wave.className = 'pulse-wave';
+    wave.style.left = clickX + 'px';
+    wave.style.top = clickY + 'px';
+    document.body.appendChild(wave);
+    setTimeout(() => wave.remove(), 1000);
+  };
+
+  // Show floating text
+  const showFloatingText = (text, type = 'click', x, y) => {
+    const id = Date.now() + Math.random();
+    const newFloat = {
+      id,
+      text,
+      type,
+      x: x || window.innerWidth * 0.35,
+      y: y || window.innerHeight / 2
+    };
+
+    setFloatingNumbers(prev => [...prev, newFloat]);
+
+    setTimeout(() => {
+      setFloatingNumbers(prev => prev.filter(f => f.id !== id));
+    }, 1000);
+  };
+
+  // Spawn golden 67
+  const spawnGoldenSixtySeven = () => {
+    // Don't spawn if one already exists
+    if (goldenSixtySeven) return;
+
+    const golden = {
+      id: Date.now(),
+      x: Math.random() * (window.innerWidth - 200) + 100,
+      y: Math.random() * (window.innerHeight - 200) + 100
+    };
+
+    setGoldenSixtySeven(golden);
+
+    // Remove after 4 seconds if not clicked
+    setTimeout(() => {
+      setGoldenSixtySeven(prev => prev?.id === golden.id ? null : prev);
+    }, 4000);
+  };
+
+  // Click golden 67
+  const clickGoldenSixtySeven = () => {
+    if (!goldenSixtySeven) return;
+
+    // Remove the golden 67
+    setGoldenSixtySeven(null);
+
+    // Apply 50x multiplier for 5 seconds
+    setProductionMultiplier(50);
+
+    // Show notification
+    showFloatingText('50x PRODUCTION!', 'golden');
+
+    // Clear existing timer if any
+    if (multiplierTimerRef.current) {
+      clearTimeout(multiplierTimerRef.current);
+    }
+
+    // Remove multiplier after 5 seconds
+    multiplierTimerRef.current = setTimeout(() => {
+      setProductionMultiplier(1);
+      showFloatingText('Bonus ended', 'building');
+    }, 5000);
+  };
+
+  // Passive income generation
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (perSecond > 0) {
+        setSixtySevenCount(prev => prev + perSecond);
+        setTotalSixtySevensMade(prev => prev + perSecond);
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [perSecond]);
+
+  // Auto-save system
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const gameState = {
+        sixtySevenCount,
+        totalSixtySevensMade,
+        buildings,
+        purchasedClickUpgrades,
+        lastSave: Date.now()
+      };
+      localStorage.setItem('67-clicker-save', JSON.stringify(gameState));
+      lastSaveRef.current = Date.now();
+    }, 10000); // Auto-save every 10 seconds
+
+    return () => clearInterval(interval);
+  }, [sixtySevenCount, totalSixtySevensMade, buildings, purchasedClickUpgrades]);
+
+  // Load save on mount
+  useEffect(() => {
+    const saved = localStorage.getItem('67-clicker-save');
+    if (saved) {
+      try {
+        const gameState = JSON.parse(saved);
+
+        // Calculate offline earnings
+        const timeAway = Date.now() - (gameState.lastSave || Date.now());
+        const secondsAway = Math.floor(timeAway / 1000);
+
+        // Recalculate perSecond from saved buildings
+        let offlinePerSecond = 0;
+        Object.keys(BUILDINGS).forEach(key => {
+          const building = BUILDINGS[key];
+          const owned = gameState.buildings[key] || 0;
+          offlinePerSecond += building.baseProduction * owned;
+        });
+
+        const offlineEarnings = offlinePerSecond * secondsAway;
+
+        setSixtySevenCount(gameState.sixtySevenCount + offlineEarnings);
+        setTotalSixtySevensMade(gameState.totalSixtySevensMade + offlineEarnings);
+        setBuildings(gameState.buildings);
+        setPurchasedClickUpgrades(gameState.purchasedClickUpgrades || []);
+
+        if (offlineEarnings > 0) {
+          setTimeout(() => {
+            showFloatingText(`+${formatNumber(offlineEarnings)} offline!`, 'building');
+          }, 1000);
+        }
+      } catch (e) {
+        console.error('Failed to load save:', e);
+      }
+    }
+  }, []);
 
   // Hide header on mount
   useEffect(() => {
@@ -112,85 +374,7 @@ const SixtySeven = () => {
     };
   }, []);
 
-  // Level up logic
-  useEffect(() => {
-    const pointsForNextLevel = level * 1000;
-    if (score >= pointsForNextLevel) {
-      const newLevel = level + 1;
-      setLevel(newLevel);
-
-      // Show level-up notification with new level's rank
-      const rank = getRank(newLevel);
-      setLevelUpNotif({
-        level: newLevel,
-        rank: rank
-      });
-
-      // Spawn power-up as reward
-      spawnPowerUp();
-
-      // Hide notification after 3 seconds
-      setTimeout(() => setLevelUpNotif(null), 3000);
-    }
-  }, [score, level]);
-
-  // Track visit time
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setVisitTime(prev => {
-        const newTime = prev + 1;
-        if (newTime === 300) {
-          unlockAchievement('time_traveler');
-        }
-        // Passive score gain
-        setScore(s => s + level);
-        return newTime;
-      });
-    }, 1000);
-
-    const visits = parseInt(localStorage.getItem('67-visits') || '0') + 1;
-    localStorage.setItem('67-visits', visits.toString());
-
-    if (visits === 1) {
-      setTimeout(() => unlockAchievement('first_visit'), 2000);
-    }
-
-    const factInterval = setInterval(() => {
-      const randomFact = FACTS_ABOUT_67[Math.floor(Math.random() * FACTS_ABOUT_67.length)];
-      setCurrentFact(randomFact);
-      setShowFact(true);
-
-      setTimeout(() => setShowFact(false), 4000);
-    }, 8000);
-
-    return () => {
-      clearInterval(timer);
-      clearInterval(factInterval);
-    };
-  }, []);
-
-  // FPS counter
-  useEffect(() => {
-    let lastTime = performance.now();
-    let frames = 0;
-
-    const countFPS = () => {
-      frames++;
-      const currentTime = performance.now();
-
-      if (currentTime >= lastTime + 1000) {
-        setFps(frames);
-        frames = 0;
-        lastTime = currentTime;
-      }
-
-      requestAnimationFrame(countFPS);
-    };
-
-    countFPS();
-  }, []);
-
-  // Three.js Scene - PARTICLES ONLY (NO TEXT GEOMETRY)
+  // Three.js Scene - Background particles only
   useEffect(() => {
     if (!mountRef.current) return;
 
@@ -260,9 +444,6 @@ const SixtySeven = () => {
       scene.add(particles);
 
       particlesRef.current.push({ mesh: particles, velocities });
-      setParticleCount(count);
-
-      return particles;
     };
 
     const isMobile = window.innerWidth < 768;
@@ -293,40 +474,29 @@ const SixtySeven = () => {
     let time = 0;
     const animate = () => {
       requestAnimationFrame(animate);
-      const speed = timeWarp ? 0.2 : 1;
-      time += 0.01 * speed;
+      time += 0.01;
 
       // Animate particles
       particlesRef.current.forEach(({ mesh, velocities }) => {
-        mesh.rotation.y += 0.001 * speed;
+        mesh.rotation.y += 0.001;
 
         const positions = mesh.geometry.attributes.position.array;
 
-        if (mode === 'gravity') {
-          for (let i = 0; i < positions.length; i += 3) {
-            positions[i + 1] -= 0.02;
+        for (let i = 0; i < positions.length; i += 3) {
+          const idx = i / 3;
+          positions[i] += velocities[idx].x;
+          positions[i + 1] += velocities[idx].y;
+          positions[i + 2] += velocities[idx].z;
 
-            if (positions[i + 1] < -50) {
-              positions[i + 1] = 50;
-            }
-          }
-        } else {
-          for (let i = 0; i < positions.length; i += 3) {
-            const idx = i / 3;
-            positions[i] += velocities[idx].x * speed;
-            positions[i + 1] += velocities[idx].y * speed;
-            positions[i + 2] += velocities[idx].z * speed;
-
-            if (Math.abs(positions[i]) > 50) velocities[idx].x *= -1;
-            if (Math.abs(positions[i + 1]) > 50) velocities[idx].y *= -1;
-            if (Math.abs(positions[i + 2]) > 50) velocities[idx].z *= -1;
-          }
+          if (Math.abs(positions[i]) > 50) velocities[idx].x *= -1;
+          if (Math.abs(positions[i + 1]) > 50) velocities[idx].y *= -1;
+          if (Math.abs(positions[i + 2]) > 50) velocities[idx].z *= -1;
         }
 
         mesh.geometry.attributes.position.needsUpdate = true;
       });
 
-      stars.rotation.y += 0.0005 * speed;
+      stars.rotation.y += 0.0005;
 
       pointLight1.intensity = 3 + Math.sin(time * 2) * 1;
       pointLight2.intensity = 3 + Math.cos(time * 2) * 1;
@@ -351,676 +521,190 @@ const SixtySeven = () => {
       }
       renderer.dispose();
     };
-  }, [mode, timeWarp]);
-
-  // Mouse movement handler with trail
-  useEffect(() => {
-    const handleMouseMove = (event) => {
-      mouseRef.current.x = (event.clientX / window.innerWidth) * 2 - 1;
-      mouseRef.current.y = -(event.clientY / window.innerHeight) * 2 + 1;
-
-      if (Math.random() > 0.7) {
-        const trail = document.createElement('div');
-        trail.className = 'trail-67';
-        trail.textContent = '67';
-        trail.style.left = event.clientX + 'px';
-        trail.style.top = event.clientY + 'px';
-        document.body.appendChild(trail);
-
-        setTimeout(() => trail.remove(), 1000);
-      }
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  // Spawn power-up
-  const spawnPowerUp = () => {
-    const powerUpTypes = ['🌟', '💎', '⚡', '🔥', '💫'];
-    const newPowerUp = {
-      id: Date.now(),
-      x: Math.random() * (window.innerWidth - 100) + 50,
-      y: Math.random() * (window.innerHeight - 100) + 50,
-      type: powerUpTypes[Math.floor(Math.random() * powerUpTypes.length)]
-    };
-
-    setPowerUps(prev => [...prev, newPowerUp]);
-
-    // Auto-remove after 10 seconds
-    setTimeout(() => {
-      setPowerUps(prev => prev.filter(p => p.id !== newPowerUp.id));
-    }, 10000);
-  };
-
-  // Collect power-up
-  const collectPowerUp = (powerUp) => {
-    setPowerUps(prev => prev.filter(p => p.id !== powerUp.id));
-
-    // Power-up effects
-    switch(powerUp.type) {
-      case '🌟':
-        setScore(s => s + 500);
-        break;
-      case '💎':
-        setScore(s => s + 1000);
-        break;
-      case '⚡':
-        setCombo(c => c + 5);
-        break;
-      case '🔥':
-        fireworks();
-        setScore(s => s + 300);
-        break;
-      case '💫':
-        setScore(s => s + (level * 100));
-        break;
-    }
-  };
-
-  // Increase combo
-  const increaseCombo = () => {
-    setCombo(prev => prev + 1);
-
-    // Reset combo timer
-    if (comboTimerRef.current) {
-      clearTimeout(comboTimerRef.current);
-    }
-
-    // Reset combo after 3 seconds of inactivity
-    comboTimerRef.current = setTimeout(() => {
-      setCombo(0);
-    }, 3000);
-  };
-
-  // Get level rank
-  const getRank = (lvl = level) => {
-    if (lvl < 5) return { name: 'Novice', icon: '🥉', color: '#CD7F32' };
-    if (lvl < 10) return { name: 'Expert', icon: '🥈', color: '#C0C0C0' };
-    if (lvl < 20) return { name: 'Master', icon: '🥇', color: '#FFD700' };
-    if (lvl < 30) return { name: 'Legend', icon: '💎', color: '#00FFFF' };
-    return { name: 'GOD', icon: '👑', color: '#FF00FF' };
-  };
-
-  // Click handler with gamification
-  const handleClick = (event) => {
-    const newSpawned = [];
-    const count = 10;
-
-    const wave = document.createElement('div');
-    wave.className = 'pulse-wave';
-    wave.style.left = event.clientX + 'px';
-    wave.style.top = event.clientY + 'px';
-    document.body.appendChild(wave);
-    setTimeout(() => wave.remove(), 1000);
-
-    for (let i = 0; i < count; i++) {
-      const angle = (Math.PI * 2 * i) / count;
-      const distance = 100 + Math.random() * 200;
-
-      newSpawned.push({
-        id: Date.now() + i,
-        x: event.clientX,
-        y: event.clientY,
-        tx: Math.cos(angle) * distance,
-        ty: Math.sin(angle) * distance
-      });
-    }
-
-    explosionNumbersRef.current = [...explosionNumbersRef.current, ...newSpawned];
-
-    // Gamification
-    const points = (10 + combo) * (level);
-    setScore(s => s + points);
-    increaseCombo();
-
-    // Show points popup
-    const pointsPopup = document.createElement('div');
-    pointsPopup.className = 'points-popup';
-    pointsPopup.textContent = `+${points}`;
-    pointsPopup.style.left = event.clientX + 'px';
-    pointsPopup.style.top = event.clientY + 'px';
-    document.body.appendChild(pointsPopup);
-    setTimeout(() => pointsPopup.remove(), 1000);
-
-    setSpawned67s(prev => {
-      const newCount = prev + count;
-      if (newCount >= 100) {
-        unlockAchievement('click_master');
-      }
-      return newCount;
-    });
-
-    setTimeout(() => {
-      explosionNumbersRef.current = explosionNumbersRef.current.filter(
-        n => !newSpawned.find(sn => sn.id === n.id)
-      );
-    }, 1000);
-  };
-
-  const handleDoubleClick = () => {
-    setShake(true);
-    setTimeout(() => setShake(false), 500);
-  };
-
-  const toggle67Rain = () => {
-    setRainMode(prev => {
-      const newMode = !prev;
-
-      if (newMode) {
-        unlockAchievement('matrix_fan');
-        const columns = Math.floor(window.innerWidth / 30);
-
-        for (let i = 0; i < columns; i++) {
-          const drop = document.createElement('div');
-          drop.className = 'rain-67';
-          drop.textContent = '67';
-          drop.style.left = (i * 30) + 'px';
-          drop.style.animationDelay = Math.random() * 2 + 's';
-          drop.style.animationDuration = (Math.random() * 2 + 3) + 's';
-          document.body.appendChild(drop);
-          rain67sRef.current.push(drop);
-        }
-      } else {
-        rain67sRef.current.forEach(drop => drop.remove());
-        rain67sRef.current = [];
-      }
-
-      return newMode;
-    });
-  };
-
-  const toggleDiscoMode = () => {
-    setDiscoMode(prev => {
-      if (!prev) {
-        unlockAchievement('disco_king');
-      }
-      return !prev;
-    });
-  };
-
-  // Keyboard controls
+  // Keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (event) => {
       const key = event.key.toLowerCase();
 
-      setKonami(prev => {
-        const newKonami = [...prev, event.key];
-        if (newKonami.length > konamiCode.length) {
-          newKonami.shift();
-        }
-
-        if (newKonami.join(',') === konamiCode.join(',')) {
-          ultimateCelebration();
-          unlockAchievement('konami_legend');
-          return [];
-        }
-
-        return newKonami;
-      });
-
-      const trackMode = (modeName) => {
-        setModesUsed(prev => {
-          const newSet = new Set(prev);
-          newSet.add(modeName);
-          if (newSet.size >= 5) {
-            unlockAchievement('explorer');
-          }
-          return newSet;
-        });
-      };
-
-      // Define trackMode here so it's accessible in mode selector
-      window.trackMode = trackMode;
-
       switch(key) {
-        case 'n':
-          setMode('normal');
-          trackMode('normal');
-          break;
-        case 'g':
-          setMode('gravity');
-          trackMode('gravity');
-          break;
-        case 'e':
-          setMode('explosion');
-          trackMode('explosion');
-          break;
-        case 's':
-          setMode('spin');
-          trackMode('spin');
-          break;
-        case 'b':
-          setMode('bounce');
-          trackMode('bounce');
-          break;
-        case 'l':
-          setMode('glitch');
-          trackMode('glitch');
-          break;
-        case 'w':
-          setMode('wave');
-          trackMode('wave');
-          break;
-        case 'o':
-          setMode('neon');
-          trackMode('neon');
-          break;
-        case 'i':
-          setMode('rainbow');
-          trackMode('rainbow');
-          break;
-        case 'k':
-          setMode('shake');
-          trackMode('shake');
-          break;
-        case 'p':
-          setMode('pulse');
-          trackMode('pulse');
-          break;
-        case 'z':
-          setMode('zoom');
-          trackMode('zoom');
-          break;
-        case 'r':
-          // Cycle through random mode
-          const randomMode = MODES[Math.floor(Math.random() * MODES.length)];
-          setMode(randomMode.id);
-          trackMode('random');
-          break;
-        case 'f':
-          toggleFullscreen();
-          break;
-        case 'm':
-          toggle67Rain();
-          trackMode('rain');
-          break;
-        case 'd':
-          toggleDiscoMode();
-          trackMode('disco');
-          break;
-        case 't':
-          setTimeWarp(prev => !prev);
-          trackMode('timewarp');
-          break;
-        case 'v':
-          // Toggle mode selector (mobile friendly)
-          setShowModeSelector(prev => !prev);
-          break;
         case ' ':
           event.preventDefault();
-          fireworks();
+          handleBigClick();
+          break;
+        case 's':
+          setShowStats(prev => !prev);
           break;
         case 'escape':
-          setShowControls(prev => !prev);
+          setShowStats(false);
           break;
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
-
-  const toggleFullscreen = () => {
-    if (!document.fullscreenElement) {
-      document.documentElement.requestFullscreen();
-    } else {
-      document.exitFullscreen();
-    }
-  };
-
-  const fireworks = () => {
-    const centerX = window.innerWidth / 2;
-    const centerY = window.innerHeight / 2;
-
-    for (let burst = 0; burst < 5; burst++) {
-      setTimeout(() => {
-        handleClick({
-          clientX: centerX + (Math.random() - 0.5) * 400,
-          clientY: centerY + (Math.random() - 0.5) * 400
-        });
-      }, burst * 200);
-    }
-  };
-
-  const ultimateCelebration = () => {
-    setCelebration(true);
-    setMode('explosion');
-    setDiscoMode(true);
-
-    for (let i = 0; i < 30; i++) {
-      setTimeout(() => {
-        handleClick({
-          clientX: Math.random() * window.innerWidth,
-          clientY: Math.random() * window.innerHeight
-        });
-      }, i * 100);
-    }
-
-    setTimeout(() => {
-      setCelebration(false);
-      setMode('normal');
-      setDiscoMode(false);
-    }, 5000);
-  };
-
-  const formatTime = (seconds) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins}:${secs.toString().padStart(2, '0')}`;
-  };
+  }, [perClick]);
 
   return (
-    <div
-      className={`sixtyseven-page ${shake ? 'shake' : ''} ${celebration ? 'celebration' : ''} ${discoMode ? 'disco-mode' : ''}`}
-      onClick={handleClick}
-      onDoubleClick={handleDoubleClick}
-      ref={mountRef}
-    >
-      {/* GIANT CSS 67 - GUARANTEED VISIBLE! */}
-      <motion.div
-        className={`giant-67 ${mode} ${timeWarp ? 'timewarp' : ''}`}
-        initial={{ scale: 0, rotate: -180 }}
-        animate={{ scale: 1, rotate: 0 }}
-        transition={{ type: 'spring', stiffness: 50, damping: 10 }}
+    <div className="sixtyseven-page clicker-mode" ref={mountRef}>
+      {/* Big Clickable 67 */}
+      <div
+        className={`big-67 ${clickAnimation ? 'clicked' : ''}`}
+        onClick={handleBigClick}
       >
         67
-      </motion.div>
+        <div className="big-67-shadow">67</div>
+      </div>
 
-      {/* Game HUD - Score, Combo, Level */}
-      <motion.div
-        className="game-hud"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
-      >
-        <div className="hud-rank">
-          <span className="rank-icon">{getRank().icon}</span>
-          <span className="rank-name" style={{ color: getRank().color }}>{getRank().name}</span>
-        </div>
-        <div className="hud-level">Level {level}</div>
-        <div className="hud-score">
-          <span className="score-label">Score:</span>
-          <span className="score-value">{score.toLocaleString()}</span>
-        </div>
-
-        {/* Progress to next level */}
-        <div className="hud-progress">
-          <div className="progress-label">
-            Next: {((level * 1000) - score).toLocaleString()} pts
+      {/* Count Display */}
+      <div className="count-display">
+        <div className="count-main">{formatNumber(sixtySevenCount)}</div>
+        <div className="count-label">sixty-sevens</div>
+        {perSecond > 0 && (
+          <div className="count-per-second">
+            per second: {formatNumber(perSecond)}
           </div>
-          <div className="progress-bar">
-            <motion.div
-              className="progress-fill"
-              initial={{ width: 0 }}
-              animate={{
-                width: `${Math.min(100, (score / (level * 1000)) * 100)}%`
-              }}
-              transition={{ duration: 0.3 }}
-            />
-          </div>
+        )}
+      </div>
+
+      {/* Upgrade Shop */}
+      <div className="upgrade-shop">
+        <div className="shop-header">
+          <h2>Upgrades</h2>
+          <div className="shop-subtitle">Increase your power</div>
         </div>
 
-        {combo > 0 && (
-          <motion.div
-            className="hud-combo"
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            exit={{ scale: 0 }}
-          >
-            <span className="combo-text">{combo}x COMBO!</span>
-            <span className="combo-bonus">+{combo * level} pts/click</span>
-          </motion.div>
-        )}
-      </motion.div>
+        {/* Click Power Upgrades */}
+        <div className="shop-section">
+          <div className="shop-section-title">Click Power</div>
+          <div className="shop-upgrades">
+            {CLICK_UPGRADES.map(upgrade => {
+              const isPurchased = purchasedClickUpgrades.includes(upgrade.id);
+              const canAfford = sixtySevenCount >= upgrade.cost && !isPurchased;
 
-      {/* Stats Overlay */}
-      <motion.div
-        className="stats-overlay"
-        initial={{ opacity: 0, x: 20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ delay: 0.5 }}
-      >
-        <div>FPS: {fps}</div>
-        <div>Particles: {particleCount.toLocaleString()}</div>
-        <div>Time: {formatTime(visitTime)}</div>
-        <div>67s Spawned: {spawned67s}</div>
-        <div>Visitors: #{localStorage.getItem('67-visits')}</div>
-        <div>Mode: {mode.toUpperCase()}</div>
-        {timeWarp && <div className="time-warp-indicator">⏱️ TIME WARP</div>}
-        {rainMode && <div className="rain-indicator">🌧️ 67 RAIN</div>}
-        {discoMode && <div className="disco-indicator">🕺 DISCO MODE</div>}
-      </motion.div>
-
-      {/* Controls Hint */}
-      <AnimatePresence>
-        {showControls && (
-          <motion.div
-            className="controls-hint"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-          >
-            <div className="control-title">┌─ SECRET CONTROLS ─┐</div>
-            <div className="control-item">CLICK - Spawn 67</div>
-            <div className="control-item">SPACE - Fireworks</div>
-            <div className="control-item">V - Mode Selector</div>
-            <div className="control-item">R - Random Mode</div>
-            <div className="control-item">M - Matrix Rain</div>
-            <div className="control-item">D - Disco Mode</div>
-            <div className="control-item">T - Time Warp</div>
-            <div className="control-item">F - Fullscreen</div>
-            <div className="control-secret">Press V for all modes!</div>
-            <div className="control-secret">↑↑↓↓←→←→BA</div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Mobile-Friendly Mode Selector */}
-      <AnimatePresence>
-        {showModeSelector && (
-          <motion.div
-            className="mode-selector-overlay"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setShowModeSelector(false)}
-          >
-            <motion.div
-              className="mode-selector"
-              initial={{ scale: 0.5, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.5, opacity: 0 }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="mode-selector-title">
-                🎮 SELECT MODE 🎮
-              </div>
-              <div className="mode-grid">
-                {MODES.map(modeOption => (
-                  <motion.button
-                    key={modeOption.id}
-                    className={`mode-button ${mode === modeOption.id ? 'active' : ''}`}
-                    onClick={() => {
-                      setMode(modeOption.id);
-                      setModesUsed(prev => {
-                        const newSet = new Set(prev);
-                        newSet.add(modeOption.id);
-                        if (newSet.size >= 5) {
-                          unlockAchievement('explorer');
-                        }
-                        return newSet;
-                      });
-                      setShowModeSelector(false);
-                    }}
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <div className="mode-icon">{modeOption.icon}</div>
-                    <div className="mode-label">{modeOption.label}</div>
-                    <div className="mode-key">{modeOption.key}</div>
-                  </motion.button>
-                ))}
-              </div>
-              <div className="mode-selector-footer">
-                <button
-                  className="mode-close-btn"
-                  onClick={() => setShowModeSelector(false)}
+              return (
+                <div
+                  key={upgrade.id}
+                  className={`upgrade-card ${canAfford ? 'affordable' : 'expensive'} ${isPurchased ? 'purchased' : ''}`}
+                  onClick={() => purchaseClickUpgrade(upgrade.id)}
                 >
-                  CLOSE
-                </button>
+                  <div className="upgrade-icon">{upgrade.icon}</div>
+                  <div className="upgrade-info">
+                    <div className="upgrade-name">{upgrade.name}</div>
+                    <div className="upgrade-description">{upgrade.description}</div>
+                  </div>
+                  <div className="upgrade-cost">
+                    {isPurchased ? '✓' : formatNumber(upgrade.cost)}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Buildings Section */}
+        <div className="shop-section">
+          <div className="shop-section-title">Buildings</div>
+          <div className="shop-buildings">
+            {Object.keys(BUILDINGS).map(key => {
+            const building = BUILDINGS[key];
+            const cost = getBuildingCost(key);
+            const owned = buildings[key];
+            const canAfford = sixtySevenCount >= cost;
+
+            return (
+              <div
+                key={key}
+                className={`building-card ${canAfford ? 'affordable' : 'expensive'}`}
+                onClick={() => purchaseBuilding(key)}
+              >
+                <div className="building-icon">{building.icon}</div>
+                <div className="building-info">
+                  <div className="building-name">{building.name}</div>
+                  <div className="building-description">{building.description}</div>
+                  <div className="building-production">
+                    Produces {formatNumber(building.baseProduction)}/sec
+                  </div>
+                </div>
+                <div className="building-purchase">
+                  <div className="building-cost">
+                    {formatNumber(cost)}
+                  </div>
+                  <div className="building-owned">{owned}</div>
+                </div>
               </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            );
+          })}
+          </div>
+        </div>
+      </div>
 
-      {/* Floating Mode Selector Button (Mobile) */}
-      <motion.button
-        className="mode-selector-fab"
-        onClick={() => setShowModeSelector(true)}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1 }}
-      >
-        <span className="fab-icon">🎮</span>
-        <span className="fab-label">MODES</span>
-      </motion.button>
-
-      {/* Floating Fact Cards */}
-      <AnimatePresence>
-        {showFact && (
-          <motion.div
-            className="fact-card"
-            initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
-            animate={{
-              opacity: 1,
-              scale: 1,
-              rotate: 0,
-              y: [0, -20, 0]
-            }}
-            exit={{ opacity: 0, scale: 0.5, rotate: 10 }}
-            transition={{ duration: 0.5 }}
-            style={{
-              left: `${20 + Math.random() * 60}%`,
-              top: `${20 + Math.random() * 60}%`
-            }}
-          >
-            {currentFact}
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Achievement Popup */}
-      <AnimatePresence>
-        {achievement && (
-          <motion.div
-            className="achievement-popup"
-            initial={{ x: 400 }}
-            animate={{ x: 0 }}
-            exit={{ x: 400 }}
-            transition={{ type: 'spring', stiffness: 100 }}
-          >
-            <div className="achievement-icon">{achievement.icon}</div>
-            <div className="achievement-text">
-              <div className="achievement-title">{achievement.title}</div>
-              <div className="achievement-desc">{achievement.desc}</div>
+      {/* Stats Panel */}
+      {showStats && (
+        <div className="stats-panel" onClick={() => setShowStats(false)}>
+          <div className="stats-content" onClick={(e) => e.stopPropagation()}>
+            <h2>Statistics</h2>
+            <div className="stat-row">
+              <span>Total 67s made:</span>
+              <span>{formatNumber(totalSixtySevensMade)}</span>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+            <div className="stat-row">
+              <span>67s per click:</span>
+              <span>{formatNumber(perClick)}</span>
+            </div>
+            <div className="stat-row">
+              <span>67s per second:</span>
+              <span>{formatNumber(perSecond)}</span>
+            </div>
+            <div className="stat-divider"></div>
+            {Object.keys(BUILDINGS).map(key => {
+              const building = BUILDINGS[key];
+              const owned = buildings[key];
+              if (owned === 0) return null;
 
-      {/* Level Up Notification */}
-      <AnimatePresence>
-        {levelUpNotif && (
-          <motion.div
-            className="levelup-notification"
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            exit={{ scale: 0, opacity: 0 }}
-            transition={{ type: 'spring', stiffness: 200, damping: 15 }}
-          >
-            <motion.div
-              className="levelup-content"
-              animate={{
-                scale: [1, 1.1, 1],
-                rotate: [0, 5, -5, 0]
-              }}
-              transition={{ duration: 0.5, repeat: Infinity }}
-            >
-              <div className="levelup-icon">{levelUpNotif.rank.icon}</div>
-              <div className="levelup-title">LEVEL UP!</div>
-              <div className="levelup-level">Level {levelUpNotif.level}</div>
-              <div className="levelup-rank" style={{ color: levelUpNotif.rank.color }}>
-                {levelUpNotif.rank.name}
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+              return (
+                <div key={key} className="stat-row">
+                  <span>{building.icon} {building.name}:</span>
+                  <span>{owned}</span>
+                </div>
+              );
+            })}
+            <button className="stats-close" onClick={() => setShowStats(false)}>
+              Close
+            </button>
+          </div>
+        </div>
+      )}
 
-      {/* Power-ups */}
-      <AnimatePresence>
-        {powerUps.map(powerUp => (
-          <motion.div
-            key={powerUp.id}
-            className="power-up"
-            initial={{ scale: 0, rotate: 0 }}
-            animate={{ scale: 1, rotate: 360 }}
-            exit={{ scale: 0, opacity: 0 }}
-            transition={{ duration: 0.5 }}
-            style={{
-              left: powerUp.x,
-              top: powerUp.y
-            }}
-            onClick={(e) => {
-              e.stopPropagation();
-              collectPowerUp(powerUp);
-            }}
-          >
-            {powerUp.type}
-          </motion.div>
-        ))}
-      </AnimatePresence>
-
-      {/* Explosion 67s */}
-      {explosionNumbersRef.current.map(num => (
+      {/* Floating Numbers */}
+      {floatingNumbers.map(float => (
         <div
-          key={num.id}
-          className="explosion-67"
+          key={float.id}
+          className={`floating-number ${float.type}`}
           style={{
-            left: num.x,
-            top: num.y,
-            '--tx': `${num.tx}px`,
-            '--ty': `${num.ty}px`
+            left: float.x + 'px',
+            top: float.y + 'px'
           }}
         >
-          67
+          {float.text}
         </div>
       ))}
 
-      {/* Celebration overlay */}
-      {celebration && (
-        <motion.div
-          className="celebration-overlay"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-        >
-          <motion.div
-            className="celebration-text"
-            animate={{
-              scale: [1, 1.5, 1],
-              rotate: [0, 360, 0]
-            }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            67!!! 🎉
-          </motion.div>
-        </motion.div>
-      )}
+      {/* Controls Hint */}
+      <div className="clicker-controls">
+        <div className="control-hint">
+          <kbd>SPACE</kbd> or <kbd>CLICK</kbd> - Click the 67
+        </div>
+        <div className="control-hint">
+          <kbd>S</kbd> - Stats
+        </div>
+      </div>
+
+      {/* Auto-save indicator */}
+      <div className="autosave-indicator">
+        Auto-save enabled
+      </div>
     </div>
   );
 };
