@@ -100,6 +100,42 @@ const BUILDINGS = {
   }
 };
 
+// Load initial game state from localStorage
+const loadInitialState = () => {
+  const saved = localStorage.getItem('67-clicker-save');
+  if (saved) {
+    try {
+      const gameState = JSON.parse(saved);
+      console.log('Loading initial state from save:', gameState);
+
+      // Calculate offline earnings
+      const timeAway = Date.now() - (gameState.lastSave || Date.now());
+      const secondsAway = Math.floor(timeAway / 1000);
+
+      // Recalculate perSecond from saved buildings
+      let offlinePerSecond = 0;
+      Object.keys(BUILDINGS).forEach(key => {
+        const building = BUILDINGS[key];
+        const owned = gameState.buildings[key] || 0;
+        offlinePerSecond += building.baseProduction * owned;
+      });
+
+      const offlineEarnings = offlinePerSecond * secondsAway;
+
+      return {
+        sixtySevenCount: gameState.sixtySevenCount + offlineEarnings,
+        totalSixtySevensMade: gameState.totalSixtySevensMade + offlineEarnings,
+        buildings: gameState.buildings,
+        purchasedClickUpgrades: gameState.purchasedClickUpgrades || [],
+        offlineEarnings
+      };
+    } catch (e) {
+      console.error('Failed to load initial state:', e);
+    }
+  }
+  return null;
+};
+
 const SixtySeven = () => {
   const mountRef = useRef(null);
   const sceneRef = useRef(null);
@@ -107,12 +143,15 @@ const SixtySeven = () => {
   const particlesRef = useRef([]);
   const lastSaveRef = useRef(Date.now());
 
+  // Load saved state or use defaults
+  const initialState = loadInitialState();
+
   // Core game state
-  const [sixtySevenCount, setSixtySevenCount] = useState(0);
-  const [totalSixtySevensMade, setTotalSixtySevensMade] = useState(0);
+  const [sixtySevenCount, setSixtySevenCount] = useState(initialState?.sixtySevenCount || 0);
+  const [totalSixtySevensMade, setTotalSixtySevensMade] = useState(initialState?.totalSixtySevensMade || 0);
   const [perClick, setPerClick] = useState(1);
   const [perSecond, setPerSecond] = useState(0);
-  const [buildings, setBuildings] = useState({
+  const [buildings, setBuildings] = useState(initialState?.buildings || {
     cursor: 0,
     grandma: 0,
     farm: 0,
@@ -124,7 +163,7 @@ const SixtySeven = () => {
     timeMachine: 0,
     quantum: 0
   });
-  const [purchasedClickUpgrades, setPurchasedClickUpgrades] = useState([]);
+  const [purchasedClickUpgrades, setPurchasedClickUpgrades] = useState(initialState?.purchasedClickUpgrades || []);
 
   // UI state
   const [floatingNumbers, setFloatingNumbers] = useState([]);
@@ -294,17 +333,41 @@ const SixtySeven = () => {
     }, 5000);
   };
 
-  // Passive income generation
+  // Passive income generation (with multiplier)
   useEffect(() => {
     const interval = setInterval(() => {
       if (perSecond > 0) {
-        setSixtySevenCount(prev => prev + perSecond);
-        setTotalSixtySevensMade(prev => prev + perSecond);
+        // Update 10 times per second for smoother number changes
+        const amount = (perSecond * productionMultiplier) / 10;
+        setSixtySevenCount(prev => prev + amount);
+        setTotalSixtySevensMade(prev => prev + amount);
       }
-    }, 1000);
+    }, 100); // 100ms = 10 updates per second
 
     return () => clearInterval(interval);
-  }, [perSecond]);
+  }, [perSecond, productionMultiplier]);
+
+  // Golden 67 spawner (every 1-2 minutes)
+  useEffect(() => {
+    const spawnInterval = () => {
+      // Random interval between 60-120 seconds
+      const nextSpawn = (60 + Math.random() * 60) * 1000;
+
+      setTimeout(() => {
+        spawnGoldenSixtySeven();
+        spawnInterval(); // Schedule next spawn
+      }, nextSpawn);
+    };
+
+    // Start the spawn cycle
+    spawnInterval();
+
+    return () => {
+      if (multiplierTimerRef.current) {
+        clearTimeout(multiplierTimerRef.current);
+      }
+    };
+  }, []);
 
   // Auto-save system
   useEffect(() => {
@@ -318,45 +381,18 @@ const SixtySeven = () => {
       };
       localStorage.setItem('67-clicker-save', JSON.stringify(gameState));
       lastSaveRef.current = Date.now();
-    }, 10000); // Auto-save every 10 seconds
+      console.log('Game saved:', gameState);
+    }, 5000); // Auto-save every 5 seconds
 
     return () => clearInterval(interval);
   }, [sixtySevenCount, totalSixtySevensMade, buildings, purchasedClickUpgrades]);
 
-  // Load save on mount
+  // Show offline earnings notification on mount
   useEffect(() => {
-    const saved = localStorage.getItem('67-clicker-save');
-    if (saved) {
-      try {
-        const gameState = JSON.parse(saved);
-
-        // Calculate offline earnings
-        const timeAway = Date.now() - (gameState.lastSave || Date.now());
-        const secondsAway = Math.floor(timeAway / 1000);
-
-        // Recalculate perSecond from saved buildings
-        let offlinePerSecond = 0;
-        Object.keys(BUILDINGS).forEach(key => {
-          const building = BUILDINGS[key];
-          const owned = gameState.buildings[key] || 0;
-          offlinePerSecond += building.baseProduction * owned;
-        });
-
-        const offlineEarnings = offlinePerSecond * secondsAway;
-
-        setSixtySevenCount(gameState.sixtySevenCount + offlineEarnings);
-        setTotalSixtySevensMade(gameState.totalSixtySevensMade + offlineEarnings);
-        setBuildings(gameState.buildings);
-        setPurchasedClickUpgrades(gameState.purchasedClickUpgrades || []);
-
-        if (offlineEarnings > 0) {
-          setTimeout(() => {
-            showFloatingText(`+${formatNumber(offlineEarnings)} offline!`, 'building');
-          }, 1000);
-        }
-      } catch (e) {
-        console.error('Failed to load save:', e);
-      }
+    if (initialState?.offlineEarnings > 0) {
+      setTimeout(() => {
+        showFloatingText(`+${formatNumber(initialState.offlineEarnings)} offline!`, 'building');
+      }, 1000);
     }
   }, []);
 
@@ -526,6 +562,9 @@ const SixtySeven = () => {
   // Keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (event) => {
+      // Prevent key repeat spam (holding down key)
+      if (event.repeat) return;
+
       const key = event.key.toLowerCase();
 
       switch(key) {
@@ -674,6 +713,31 @@ const SixtySeven = () => {
               Close
             </button>
           </div>
+        </div>
+      )}
+
+      {/* Golden 67 */}
+      {goldenSixtySeven && (
+        <div
+          className="golden-67"
+          style={{
+            left: goldenSixtySeven.x + 'px',
+            top: goldenSixtySeven.y + 'px'
+          }}
+          onClick={(e) => {
+            e.stopPropagation();
+            clickGoldenSixtySeven();
+          }}
+        >
+          <div className="golden-67-glow">67</div>
+          67
+        </div>
+      )}
+
+      {/* Production Multiplier Indicator */}
+      {productionMultiplier > 1 && (
+        <div className="multiplier-indicator">
+          {productionMultiplier}x PRODUCTION!
         </div>
       )}
 
