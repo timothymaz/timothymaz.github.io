@@ -2100,17 +2100,25 @@ const SixtySeven = () => {
 
   // Keyboard shortcuts
   useEffect(() => {
-    const handleKeyDown = (event) => {
-      // Prevent key repeat spam (holding down key)
-      if (event.repeat) return;
+    const spacePressed = new Set(); // Track if spacebar is already pressed
 
+    const handleKeyDown = (event) => {
       const key = event.key.toLowerCase();
 
-      switch(key) {
-        case ' ':
+      // CRITICAL: Prevent spacebar spam by checking both event.repeat AND manual tracking
+      if (key === ' ') {
+        if (event.repeat || spacePressed.has(' ')) {
           event.preventDefault();
-          handleBigClick();
-          break;
+          return; // Block all repeated spacebar presses
+        }
+        spacePressed.add(' ');
+        event.preventDefault();
+        handleBigClick();
+        return;
+      }
+
+      // Other keyboard shortcuts
+      switch(key) {
         case 's':
           setShowStats(prev => !prev);
           break;
@@ -2120,9 +2128,20 @@ const SixtySeven = () => {
       }
     };
 
+    const handleKeyUp = (event) => {
+      const key = event.key.toLowerCase();
+      if (key === ' ') {
+        spacePressed.delete(' '); // Clear spacebar tracking on release
+      }
+    };
+
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [perClick]);
+    window.addEventListener('keyup', handleKeyUp);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('keyup', handleKeyUp);
+    };
+  }, [handleBigClick]);
 
   // Debug: Log buildings state for troubleshooting
   useEffect(() => {
