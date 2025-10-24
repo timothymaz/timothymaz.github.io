@@ -207,10 +207,17 @@ Object.keys(folderConfig).forEach(folderName => {
     const ext = path.extname(filename);
     const nameWithoutExt = path.basename(filename, ext);
 
+    // Check if optimized thumbnail exists
+    const thumbPath = path.join(folderPath, 'thumbs', `${nameWithoutExt}.jpg`);
+    const optimizedPath = path.join(folderPath, `${nameWithoutExt}_optimized.jpg`);
+
+    const hasThumbnail = fs.existsSync(thumbPath);
+    const hasOptimized = fs.existsSync(optimizedPath);
+
     allPhotos.push({
       id: photoId++,
-      thumbnail: `/images/automotive/${folderName}/${filename}`,
-      fullSize: `/images/automotive/${folderName}/${filename}`,
+      thumbnail: hasThumbnail ? `/images/automotive/${folderName}/thumbs/${nameWithoutExt}.jpg` : `/images/automotive/${folderName}/${filename}`,
+      fullSize: hasOptimized ? `/images/automotive/${folderName}/${nameWithoutExt}_optimized.jpg` : `/images/automotive/${folderName}/${filename}`,
       caption: `${config.label} - ${nameWithoutExt}`,
       category: config.category,
       event: config.defaultEvent,

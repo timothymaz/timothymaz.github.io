@@ -133,10 +133,15 @@ Done!
 
 ## 💡 Tips
 
-### Photo Quality
-- Recommended: 1600-2400px wide
-- File size: < 500KB (use TinyPNG.com)
-- Any filename works!
+### Photo Optimization (NEW! 🚀)
+- **Run optimization:** `npm run optimize`
+- **What it does:**
+  - Creates 600px thumbnails for fast grid loading
+  - Creates 1920px optimized full-size images for lightbox
+  - Compresses to 85% quality JPEG
+  - Reduces file sizes by 60-90%!
+- **One-time setup** - only processes new images
+- Any original filename works!
 
 ### Organization
 - Group by event/location (one folder per event)
@@ -172,6 +177,7 @@ Done!
 | Task | Command |
 |------|---------|
 | Add photos to gallery | `npm run photos` |
+| Optimize images (FASTER LOADING!) | `npm run optimize` |
 | Start dev server | `npm run dev` |
 | Build for production | `npm run build` |
 

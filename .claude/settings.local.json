@@ -13,7 +13,8 @@
       "Bash(mkdir:*)",
       "Bash(npm run dev:*)",
       "Bash(ren:*)",
-      "Bash(npm run photos:*)"
+      "Bash(npm run photos:*)",
+      "Bash(find:*)"
     ],
     "deny": [],
     "ask": []
