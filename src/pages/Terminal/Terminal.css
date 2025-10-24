@@ -108,13 +108,15 @@
   overflow-x: hidden;
   margin-bottom: var(--spacing-md);
   padding-right: var(--spacing-sm);
+  text-align: left;
 }
 
 .terminal-line {
-  margin: 0.25rem 0;
+  margin: 2px 0;
   white-space: pre-wrap;
   word-wrap: break-word;
   animation: fadeIn 0.2s ease-in;
+  text-align: left;
 }
 
 .terminal-line.typing {

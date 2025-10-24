@@ -19,65 +19,50 @@ const Terminal = () => {
 
   // Command data
   const BANNER = [
-    '<span class="index">',
+    '╔════════════════════════════════════════════════════════════╗',
+    '║         TIMOTHY MAZUR - INTERACTIVE TERMINAL v2.0         ║',
+    '╚════════════════════════════════════════════════════════════╝',
     '',
-    'TTTTTTTTTTTTTTTTTTTTTTT  iiii                               MMMMMMMM               MMMMMMMM                                                                         ',
-    'T:::::::::::::::::::::T i::::i                              M:::::::M             M:::::::M                                                                         ',
-    'T:::::::::::::::::::::T  iiii                               M::::::::M           M::::::::M                                                                         ',
-    'T:::::TT:::::::TT:::::T                                     M:::::::::M         M:::::::::M                                                                         ',
-    'TTTTTT  T:::::T  TTTTTTiiiiiii    mmmmmmm    mmmmmmm        M::::::::::M       M::::::::::M  aaaaaaaaaaaaa   zzzzzzzzzzzzzzzzzuuuuuu    uuuuuu  rrrrr   rrrrrrrrr   ',
-    '        T:::::T        i:::::i  mm:::::::m  m:::::::mm      M:::::::::::M     M:::::::::::M  a::::::::::::a  z:::::::::::::::zu::::u    u::::u  r::::rrr:::::::::r  ',
-    '        T:::::T         i::::i m::::::::::mm::::::::::m     M:::::::M::::M   M::::M:::::::M  aaaaaaaaa:::::a z::::::::::::::z u::::u    u::::u  r:::::::::::::::::r ',
-    '        T:::::T         i::::i m::::::::::::::::::::::m     M::::::M M::::M M::::M M::::::M           a::::a zzzzzzzz::::::z  u::::u    u::::u  rr::::::rrrrr::::::r',
-    '        T:::::T         i::::i m:::::mmm::::::mmm:::::m     M::::::M  M::::M::::M  M::::::M    aaaaaaa:::::a       z::::::z   u::::u    u::::u   r:::::r     r:::::r',
-    '        T:::::T         i::::i m::::m   m::::m   m::::m     M::::::M   M:::::::M   M::::::M  aa::::::::::::a      z::::::z    u::::u    u::::u   r:::::r     rrrrrrr',
-    '        T:::::T         i::::i m::::m   m::::m   m::::m     M::::::M    M:::::M    M::::::M a::::aaaa::::::a     z::::::z     u::::u    u::::u   r:::::r            ',
-    '        T:::::T         i::::i m::::m   m::::m   m::::m     M::::::M     MMMMM     M::::::Ma::::a    a:::::a    z::::::z      u:::::uuuu:::::u   r:::::r            ',
-    '      TT:::::::TT      i::::::im::::m   m::::m   m::::m     M::::::M               M::::::Ma::::a    a:::::a   z::::::zzzzzzzzu:::::::::::::::uu r:::::r            ',
-    '      T:::::::::T      i::::::im::::m   m::::m   m::::m     M::::::M               M::::::Ma:::::aaaa::::::a  z::::::::::::::z u:::::::::::::::u r:::::r            ',
-    '      T:::::::::T      i::::::im::::m   m::::m   m::::m     M::::::M               M::::::M a::::::::::aa:::az:::::::::::::::z  uu::::::::uu:::u r:::::r            ',
-    '      TTTTTTTTTTT      iiiiiiiimmmmmm   mmmmmm   mmmmmm     MMMMMMMM               MMMMMMMM  aaaaaaaaaa  aaaazzzzzzzzzzzzzzzzz    uuuuuuuu  uuuu rrrrrrr            ',
-    '',
-    '',
-    '<span class="color2">Welcome to my interactive web terminal v2.0</span>',
-    '<span class="color2">For a list of available commands, type <span class="command">help</span></span>',
+    'Welcome to my interactive web terminal.',
+    'Type <span class="command">help</span> for a list of available commands.',
     '',
   ];
 
   const HELP = [
-    '<br>',
-    '<span class="command">help</span>           You\'re looking at it',
-    '<span class="command">about</span>          Learn about Tim',
-    '<span class="command">skills</span>         Technical expertise',
-    '<span class="command">experience</span>     Work history',
-    '<span class="command">education</span>      Academic background',
-    '<span class="command">certs</span>          Certifications',
-    '<span class="command">projects</span>       View my work',
-    '<span class="command">social</span>         Find me online',
-    '<span class="command">contact</span>        Get in touch',
-    '<span class="command">resume</span>         Download my resume',
-    '<span class="command">blog</span>           Read my articles',
-    '<span class="command">matrix</span>         Enter the Matrix',
-    '<span class="command">stopmatrix</span>     Exit the Matrix',
-    '<span class="command">secret</span>         Find the hidden command',
-    '<span class="command">history</span>        Command history',
-    '<span class="command">clear</span>          Clear terminal',
-    '<span class="command">banner</span>         Show welcome banner',
-    '<span class="command">echo</span>           Echo your text',
-    '<span class="command">date</span>           Show current date/time',
-    '<span class="command">weather</span>        Check the weather (joke)',
-    '<span class="command">coffee</span>         Make coffee (joke)',
-    '<span class="command">hack</span>           Hacking simulation',
-    '<span class="command">joke</span>           Tell a security joke',
-    '<br>',
+    '',
+    'Available Commands:',
+    '  <span class="command">help</span>           Show this help message',
+    '  <span class="command">about</span>          Learn about Tim',
+    '  <span class="command">skills</span>         Technical expertise',
+    '  <span class="command">experience</span>     Work history',
+    '  <span class="command">education</span>      Academic background',
+    '  <span class="command">certs</span>          Certifications',
+    '  <span class="command">projects</span>       View my work',
+    '  <span class="command">social</span>         Find me online',
+    '  <span class="command">contact</span>        Get in touch',
+    '  <span class="command">resume</span>         Download my resume',
+    '  <span class="command">blog</span>           Read my articles',
+    '  <span class="command">matrix</span>         Enter the Matrix',
+    '  <span class="command">stopmatrix</span>     Exit the Matrix',
+    '  <span class="command">secret</span>         Find the hidden command',
+    '  <span class="command">history</span>        Command history',
+    '  <span class="command">clear</span>          Clear terminal',
+    '  <span class="command">banner</span>         Show welcome banner',
+    '  <span class="command">echo</span>           Echo your text',
+    '  <span class="command">date</span>           Show current date/time',
+    '  <span class="command">weather</span>        Check the weather (joke)',
+    '  <span class="command">coffee</span>         Make coffee (joke)',
+    '  <span class="command">hack</span>           Hacking simulation',
+    '  <span class="command">joke</span>           Tell a security joke',
+    '',
   ];
 
   const ABOUT = [
-    '<br>',
-    '<span class="cyan">▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓</span>',
-    '<span class="cyan">▓</span>  <span class="white">TIMOTHY MAZUR - CYBERSECURITY DIRECTOR</span>  <span class="cyan">▓</span>',
-    '<span class="cyan">▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓</span>',
-    '<br>',
+    '',
+    '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
+    '  TIMOTHY MAZUR - CYBERSECURITY DIRECTOR',
+    '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
+    '',
     'Hey! I\'m Tim, a cybersecurity professional with a passion for',
     'protecting people and organizations from digital threats.',
     '',
@@ -95,15 +80,15 @@ const Terminal = () => {
     '  🎮 Playing CTF challenges',
     '',
     '<span class="cyan">Fun Fact:</span> I\'ve evaluated 70+ security tools and lived to tell the tale.',
-    '<br>',
+    '',
   ];
 
   const SKILLS = [
-    '<br>',
-    '<span class="cyan">═══════════════════════════════════════════════</span>',
-    '<span class="cyan">           TECHNICAL SKILLSET</span>',
-    '<span class="cyan">═══════════════════════════════════════════════</span>',
-    '<br>',
+    '',
+    '═══════════════════════════════════════════════',
+    '           TECHNICAL SKILLSET',
+    '═══════════════════════════════════════════════',
+    '',
     '<span class="white">Security Operations:</span>',
     '  ▸ Endpoint Detection & Response (EDR/XDR)',
     '  ▸ Malware Analysis & Reverse Engineering',
@@ -130,12 +115,12 @@ const Terminal = () => {
     '  ▸ JavaScript/React',
     '  ▸ PowerShell Scripting',
     '  ▸ Bash/Linux Administration',
-    '<br>',
+    '',
   ];
 
   const EXPERIENCE = [
-    '<br>',
-    '<span class="cyan">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>',
+    '',
+    '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
     '<span class="white">Director of Cybersecurity</span> @ KPInterface',
     '<span class="gray">January 2024 – Present</span>',
     '<span class="cyan">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>',
@@ -146,7 +131,7 @@ const Terminal = () => {
     '• Evaluated 70+ security tools, influenced procurement decisions',
     '• Built incident response playbooks, reduced MTTC from 4hrs to 15min',
     '',
-    '<span class="cyan">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>',
+    '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
     '<span class="white">Cyber Security Analyst</span> @ KPInterface',
     '<span class="gray">January 2023 – January 2024</span>',
     '<span class="cyan">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>',
@@ -156,7 +141,7 @@ const Terminal = () => {
     '• Patched OS and application vulnerabilities',
     '• Collaborated with service desk and project teams',
     '',
-    '<span class="cyan">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>',
+    '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━',
     '<span class="white">Tech Office Intern</span> @ Wissahickon School District',
     '<span class="gray">September 2020 – June 2021</span>',
     '<span class="cyan">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</span>',
@@ -164,12 +149,12 @@ const Terminal = () => {
     '• Provided frontline IT support',
     '• Maintained technology inventory systems',
     '• Assisted with staff onboarding',
-    '<br>',
+    '',
   ];
 
   const EDUCATION = [
-    '<br>',
-    '<span class="cyan">🎓 EDUCATION</span>',
+    '',
+    '🎓 EDUCATION',
     '',
     '<span class="white">Bachelor of Science - Cybersecurity & Information Assurance</span>',
     'Western Governors University',
@@ -180,12 +165,12 @@ const Terminal = () => {
     '  • Penetration Testing & Ethical Hacking',
     '  • Security Policy & Governance',
     '  • Incident Response & Forensics',
-    '<br>',
+    '',
   ];
 
   const CERTS = [
-    '<br>',
-    '<span class="cyan">📜 CERTIFICATIONS</span>',
+    '',
+    '📜 CERTIFICATIONS',
     '',
     '<span class="white">CompTIA Certifications:</span>',
     '  ✓ Network Security Professional (CNSP)',
@@ -196,12 +181,12 @@ const Terminal = () => {
     '',
     '<span class="white">Vendor Certifications:</span>',
     '  ✓ ConnectWise Manage Engineer',
-    '<br>',
+    '',
   ];
 
   const PROJECTS = [
-    '<br>',
-    '<span class="cyan">💻 PROJECTS</span>',
+    '',
+    '💻 PROJECTS',
     '',
     '<span class="white">1. Interactive Terminal</span>',
     '   The very thing you\'re using right now! React-based terminal emulator',
@@ -222,24 +207,24 @@ const Terminal = () => {
     '   Registry-based startup manager for Windows with search/filter',
     '   capabilities and user-friendly GUI.',
     '   → <a href="https://github.com/timothymaz/Startup-Manager" target="_blank">github.com/timothymaz/Startup-Manager</a>',
-    '<br>',
+    '',
   ];
 
   const SOCIAL = [
-    '<br>',
-    '<span class="cyan">🌐 FIND ME ONLINE</span>',
+    '',
+    '🌐 FIND ME ONLINE',
     '',
     'LinkedIn    → <a href="https://www.linkedin.com/in/timothy-mazur-b3bb4217a/" target="_blank">linkedin.com/in/timothy-mazur</a>',
     'GitHub      → <a href="https://github.com/timothymaz" target="_blank">github.com/timothymaz</a>',
     'Instagram   → <a href="https://www.instagram.com/tim.mazur" target="_blank">instagram.com/tim.mazur</a>',
     'Portfolio   → <a href="/" target="_blank">timothymazur.com</a>',
-    '<br>',
+    '',
   ];
 
   const SECRET = [
-    '<br>',
+    '',
     '<span class="command">sudo</span>           Only use if you\'re admin (hint: you\'re not 😏)',
-    '<br>',
+    '',
   ];
 
   const JOKES = [
@@ -325,14 +310,14 @@ const Terminal = () => {
 
       case 'contact':
         addOutput([
-          '<br>',
+          '',
           '<span class="cyan">📧 CONTACT INFORMATION</span>',
           '',
           'Email       → <a href="mailto:Tim@timothymazur.com">Tim@timothymazur.com</a>',
           'LinkedIn    → <a href="https://www.linkedin.com/in/timothy-mazur-b3bb4217a/" target="_blank">Send me a message</a>',
           '',
           '<span class="gray">Opening email client...</span>',
-          '<br>',
+          '',
         ], 'color2', 50);
         setTimeout(() => {
           window.open('mailto:Tim@timothymazur.com');
@@ -342,14 +327,14 @@ const Terminal = () => {
       case 'resume':
       case 'cv':
         addOutput([
-          '<br>',
+          '',
           '<span class="cyan">📄 RESUME</span>',
           '',
           'My resume is available on LinkedIn:',
           '<a href="https://www.linkedin.com/in/timothy-mazur-b3bb4217a/" target="_blank">linkedin.com/in/timothy-mazur</a>',
           '',
           '<span class="gray">Opening LinkedIn profile...</span>',
-          '<br>',
+          '',
         ], 'color2', 50);
         setTimeout(() => {
           window.open('https://www.linkedin.com/in/timothy-mazur-b3bb4217a/', '_blank');
@@ -358,7 +343,7 @@ const Terminal = () => {
 
       case 'blog':
         addOutput([
-          '<br>',
+          '',
           '<span class="cyan">📝 BLOG</span>',
           '',
           'Read my cybersecurity articles and MSP insights:',
@@ -370,7 +355,7 @@ const Terminal = () => {
           '• Building an MSP Incident Response Playbook',
           '',
           '<span class="gray">Redirecting to blog...</span>',
-          '<br>',
+          '',
         ], 'color2', 50);
         setTimeout(() => {
           window.location.href = '/blog';
@@ -380,45 +365,45 @@ const Terminal = () => {
       case 'matrix':
         setIsMatrixVisible(true);
         addOutput([
-          '<br>',
+          '',
           '<span class="cyan">Entering the Matrix...</span>',
           'Follow the white rabbit. 🐇',
           '',
           '<span class="gray">Type <span class="command">stopmatrix</span> to exit.</span>',
-          '<br>',
+          '',
         ], 'color2', 50);
         break;
 
       case 'stopmatrix':
         setIsMatrixVisible(false);
         addOutput([
-          '<br>',
+          '',
           '<span class="cyan">Exiting the Matrix...</span>',
           'You wake up in your bed and believe whatever you want to believe.',
-          '<br>',
+          '',
         ], 'color2', 50);
         break;
 
       case 'secret':
         setIsPasswordMode(true);
         addOutput([
-          '<br>',
+          '',
           '<span class="cyan">🔐 PASSWORD PROTECTED</span>',
           '',
           'Enter the secret password to unlock hidden commands:',
           '<span class="gray">(Hint: Check the console... you little hacker 😏)</span>',
-          '<br>',
+          '',
         ], 'color2', 50);
         break;
 
       case 'sudo':
         addOutput([
-          '<br>',
+          '',
           '<span class="error">⚠️  ACCESS DENIED</span>',
           '',
           'Oh no, you\'re not admin...',
           'Redirecting to mandatory security training...',
-          '<br>',
+          '',
         ], 'error', 50);
         setTimeout(() => {
           window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank');
@@ -426,7 +411,7 @@ const Terminal = () => {
         break;
 
       case 'history':
-        addOutput(['<br>', ...commandHistory.map((cmd, i) => `  ${i + 1}  ${cmd}`), '<br>'], 'color2', 30);
+        addOutput(['', ...commandHistory.map((cmd, i) => `  ${i + 1}  ${cmd}`), ''], 'color2', 30);
         break;
 
       case 'clear':
@@ -439,11 +424,11 @@ const Terminal = () => {
         break;
 
       case 'echo':
-        addOutput(['<br>', args.join(' ') || '', '<br>'], 'color2');
+        addOutput(['', args.join(' ') || '', ''], 'color2');
         break;
 
       case 'date':
-        addOutput(['<br>', new Date().toString(), '<br>'], 'color2');
+        addOutput(['', new Date().toString(), ''], 'color2');
         break;
 
       case 'weather':
@@ -454,25 +439,25 @@ const Terminal = () => {
           'Foggy vision due to too much screen time 🌫️',
           'Perfect weather for indoor hacking 💻',
         ];
-        addOutput(['<br>', weathers[Math.floor(Math.random() * weathers.length)], '<br>'], 'color2');
+        addOutput(['', weathers[Math.floor(Math.random() * weathers.length)], ''], 'color2');
         break;
 
       case 'coffee':
         addOutput([
-          '<br>',
+          '',
           'Brewing coffee...',
           '███████░░░░░░░░ 40%',
           '████████████░░░ 80%',
           '███████████████ 100%',
           '',
           '☕ Coffee ready! (Just kidding, this is a terminal. Go make real coffee!)',
-          '<br>',
+          '',
         ], 'color2', 300);
         break;
 
       case 'hack':
         addOutput([
-          '<br>',
+          '',
           '<span class="cyan">Initiating hacking sequence...</span>',
           '',
           'Connecting to mainframe...',
@@ -481,38 +466,38 @@ const Terminal = () => {
           'Downloading files...',
           '',
           '<span class="error">ERROR: Nice try! This is just for show 😄</span>',
-          '<br>',
+          '',
         ], 'color2', 400);
         break;
 
       case 'joke':
         const randomJoke = JOKES[Math.floor(Math.random() * JOKES.length)];
-        addOutput(['<br>', randomJoke, '<br>'], 'color2');
+        addOutput(['', randomJoke, ''], 'color2');
         break;
 
       case 'ls':
       case 'dir':
         addOutput([
-          '<br>',
+          '',
           'about.txt     skills.txt    experience.txt',
           'projects.txt  social.txt    contact.txt',
           'secret.txt    matrix.exe    coffee.sh',
-          '<br>',
+          '',
         ], 'color2');
         break;
 
       case 'pwd':
-        addOutput(['<br>', '/home/visitor/timothymazur.com', '<br>'], 'color2');
+        addOutput(['', '/home/visitor/timothymazur.com', ''], 'color2');
         break;
 
       case 'exit':
       case 'quit':
         addOutput([
-          '<br>',
+          '',
           '<span class="cyan">Thanks for visiting! 👋</span>',
           '',
           '<span class="gray">Redirecting to homepage...</span>',
-          '<br>',
+          '',
         ], 'color2', 50);
         setTimeout(() => {
           window.location.href = '/';
@@ -521,10 +506,10 @@ const Terminal = () => {
 
       default:
         addOutput([
-          '<br>',
+          '',
           `<span class="error">Command not found: ${command}</span>`,
           `Type <span class="command">help</span> for a list of available commands.`,
-          '<br>',
+          '',
         ], 'error');
     }
 
@@ -535,7 +520,7 @@ const Terminal = () => {
     if (input === PASSWORD) {
       setIsPasswordMode(false);
       addOutput([
-        '<br>',
+        '',
         '<span class="cyan">✓ ACCESS GRANTED</span>',
         '',
         ...SECRET,
@@ -543,11 +528,11 @@ const Terminal = () => {
     } else {
       setIsPasswordMode(false);
       addOutput([
-        '<br>',
+        '',
         '<span class="error">✗ Wrong password</span>',
         '',
         '<span class="gray">Hint: The password is a Matrix reference... 🤔</span>',
-        '<br>',
+        '',
       ], 'error', 50);
     }
     setCurrentCommand('');
