@@ -1,136 +1,189 @@
-// Automotive photography data for Timothy Mazur's portfolio
+// Automotive photography data - Folder-based system
+// Just add images to folders in /public/images/automotive/ and they'll automatically appear!
 
-export const automotivePhotos = [
+// Event/Location Configuration
+// Add your own folders here - the system will look for images in /public/images/automotive/{folderName}/
+export const eventFolders = [
   {
-    id: 1,
-    thumbnail: '/images/automotive/944_1_thumb.jpg',
-    fullSize: '/images/automotive/944_1_full.jpg',
-    caption: 'Summer Yellow 944 at Golden Hour',
+    folder: 'my_944',
     category: 'porsche944',
-    event: 'Personal Photography',
-    location: 'Pennsylvania Backroads',
-    date: '2024-10-15'
+    label: 'My Porsche 944',
+    defaultEvent: 'Personal Photography',
+    defaultLocation: 'Pennsylvania',
+    imageCount: 20 // How many images to look for (1.jpg, 2.jpg, etc.)
   },
   {
-    id: 2,
-    thumbnail: '/images/automotive/944_2_thumb.jpg',
-    fullSize: '/images/automotive/944_2_full.jpg',
-    caption: '1987 Porsche 944 - Side Profile',
-    category: 'porsche944',
-    event: 'Personal Photography',
-    location: 'Pennsylvania',
-    date: '2024-09-20'
+    folder: 'moab',
+    category: 'road_trips',
+    label: 'Moab Road Trip',
+    defaultEvent: 'Road Trip',
+    defaultLocation: 'Moab, Utah',
+    imageCount: 15
   },
   {
-    id: 3,
-    thumbnail: '/images/automotive/944_3_thumb.jpg',
-    fullSize: '/images/automotive/944_3_full.jpg',
-    caption: 'Engine Bay Detail',
-    category: 'porsche944',
-    event: 'Personal Photography',
-    location: 'Home Garage',
-    date: '2024-08-10'
+    folder: 'vermont',
+    category: 'road_trips',
+    label: 'Vermont',
+    defaultEvent: 'Road Trip',
+    defaultLocation: 'Vermont',
+    imageCount: 15
   },
   {
-    id: 4,
-    thumbnail: '/images/automotive/gridlife_1_thumb.jpg',
-    fullSize: '/images/automotive/gridlife_1_full.jpg',
-    caption: 'GRIDLIFE Track Action',
-    category: 'gridlife',
-    event: 'GRIDLIFE Midwest',
-    location: 'Road America',
-    date: '2024-08-20'
+    folder: '944_tent',
+    category: 'events',
+    label: '944 Tent',
+    defaultEvent: '944 Tent Event',
+    defaultLocation: 'Various',
+    imageCount: 10
   },
   {
-    id: 5,
-    thumbnail: '/images/automotive/gridlife_2_thumb.jpg',
-    fullSize: '/images/automotive/gridlife_2_full.jpg',
-    caption: 'Drift Competition - Tandem Run',
-    category: 'gridlife',
-    event: 'GRIDLIFE South',
-    location: 'Road Atlanta',
-    date: '2024-07-15'
-  },
-  {
-    id: 6,
-    thumbnail: '/images/automotive/gridlife_3_thumb.jpg',
-    fullSize: '/images/automotive/gridlife_3_full.jpg',
-    caption: 'Paddock Life',
-    category: 'gridlife',
-    event: 'GRIDLIFE',
-    location: 'Gingerman Raceway',
-    date: '2024-06-05'
-  },
-  {
-    id: 7,
-    thumbnail: '/images/automotive/944fest_1_thumb.jpg',
-    fullSize: '/images/automotive/944fest_1_full.jpg',
-    caption: '944Fest - Group Photo',
-    category: '944fest',
-    event: '944Fest 2024',
-    location: 'Virginia International Raceway',
-    date: '2024-05-18'
-  },
-  {
-    id: 8,
-    thumbnail: '/images/automotive/944fest_2_thumb.jpg',
-    fullSize: '/images/automotive/944fest_2_full.jpg',
-    caption: 'Track Day - 944 Turbo',
-    category: '944fest',
-    event: '944Fest 2024',
-    location: 'VIR',
-    date: '2024-05-19'
-  },
-  {
-    id: 9,
-    thumbnail: '/images/automotive/cars_coffee_1_thumb.jpg',
-    fullSize: '/images/automotive/cars_coffee_1_full.jpg',
-    caption: 'Monthly Cars & Coffee',
-    category: 'cars_coffee',
-    event: 'Cars & Coffee',
-    location: 'Local Meet',
-    date: '2024-09-07'
-  },
-  {
-    id: 10,
-    thumbnail: '/images/automotive/cars_coffee_2_thumb.jpg',
-    fullSize: '/images/automotive/cars_coffee_2_full.jpg',
-    caption: 'Classic Porsche Lineup',
-    category: 'cars_coffee',
-    event: 'Cars & Coffee',
-    location: 'Local Meet',
-    date: '2024-08-03'
-  },
-  {
-    id: 11,
-    thumbnail: '/images/automotive/pca_1_thumb.jpg',
-    fullSize: '/images/automotive/pca_1_full.jpg',
-    caption: 'PCA Track Day',
+    folder: 'tough_mudder_2024',
     category: 'other',
-    event: 'Porsche Club of America',
-    location: 'Pocono Raceway',
-    date: '2024-07-22'
+    label: 'Tough Mudder 2024',
+    defaultEvent: 'Tough Mudder',
+    defaultLocation: 'Pennsylvania',
+    imageCount: 10
   },
   {
-    id: 12,
-    thumbnail: '/images/automotive/pca_2_thumb.jpg',
-    fullSize: '/images/automotive/pca_2_full.jpg',
-    caption: 'PCA Social Event',
+    folder: 'tough_mudder_2025',
     category: 'other',
-    event: 'Porsche Club of America',
-    location: 'Pennsylvania',
-    date: '2024-06-14'
+    label: 'Tough Mudder 2025',
+    defaultEvent: 'Tough Mudder',
+    defaultLocation: 'Pennsylvania',
+    imageCount: 10
+  },
+  {
+    folder: 'light_painting',
+    category: 'creative',
+    label: 'Light Painting',
+    defaultEvent: 'Light Painting Photography',
+    defaultLocation: 'Studio',
+    imageCount: 10
+  },
+  {
+    folder: 'blue_gt3rs',
+    category: 'client_cars',
+    label: 'Blue GT3 RS',
+    defaultEvent: 'Car Photography',
+    defaultLocation: 'Pennsylvania',
+    imageCount: 15
+  },
+  {
+    folder: 'gridlife',
+    category: 'gridlife',
+    label: 'GRIDLIFE',
+    defaultEvent: 'GRIDLIFE Motorsports',
+    defaultLocation: 'Various Tracks',
+    imageCount: 20
+  },
+  {
+    folder: '944fest',
+    category: '944fest',
+    label: '944Fest',
+    defaultEvent: '944Fest',
+    defaultLocation: 'VIR',
+    imageCount: 15
+  },
+  {
+    folder: 'cars_coffee',
+    category: 'cars_coffee',
+    label: 'Cars & Coffee',
+    defaultEvent: 'Cars & Coffee',
+    defaultLocation: 'Local Meet',
+    imageCount: 15
+  },
+  {
+    folder: 'pca_events',
+    category: 'pca',
+    label: 'PCA Events',
+    defaultEvent: 'Porsche Club of America',
+    defaultLocation: 'Pennsylvania',
+    imageCount: 15
   }
 ];
 
+// Auto-generate photos from folders
+// Just number your images: 1.jpg, 2.jpg, 3.jpg, etc. in each folder
+export const generatePhotosFromFolders = () => {
+  const photos = [];
+  let photoId = 1;
+
+  eventFolders.forEach(folder => {
+    for (let i = 1; i <= folder.imageCount; i++) {
+      photos.push({
+        id: photoId++,
+        thumbnail: `/images/automotive/${folder.folder}/${i}.jpg`,
+        fullSize: `/images/automotive/${folder.folder}/${i}.jpg`,
+        caption: `${folder.label} - Photo ${i}`,
+        category: folder.category,
+        event: folder.defaultEvent,
+        location: folder.defaultLocation,
+        date: new Date().toISOString().split('T')[0], // Today's date as placeholder
+        folder: folder.folder
+      });
+    }
+  });
+
+  return photos;
+};
+
+// Export photos
+export const automotivePhotos = generatePhotosFromFolders();
+
+// Dynamic categories based on what folders you have
 export const categories = [
   { id: 'all', label: 'All Photos', count: automotivePhotos.length },
-  { id: 'porsche944', label: 'My Porsche 944', count: automotivePhotos.filter(p => p.category === 'porsche944').length },
-  { id: 'gridlife', label: 'GRIDLIFE', count: automotivePhotos.filter(p => p.category === 'gridlife').length },
-  { id: '944fest', label: '944Fest', count: automotivePhotos.filter(p => p.category === '944fest').length },
-  { id: 'cars_coffee', label: 'Cars & Coffee', count: automotivePhotos.filter(p => p.category === 'cars_coffee').length },
-  { id: 'other', label: 'Other Events', count: automotivePhotos.filter(p => p.category === 'other').length }
-];
+  {
+    id: 'porsche944',
+    label: 'My Porsche 944',
+    count: automotivePhotos.filter(p => p.category === 'porsche944').length
+  },
+  {
+    id: 'road_trips',
+    label: 'Road Trips',
+    count: automotivePhotos.filter(p => p.category === 'road_trips').length
+  },
+  {
+    id: 'events',
+    label: 'Events',
+    count: automotivePhotos.filter(p => p.category === 'events').length
+  },
+  {
+    id: 'gridlife',
+    label: 'GRIDLIFE',
+    count: automotivePhotos.filter(p => p.category === 'gridlife').length
+  },
+  {
+    id: '944fest',
+    label: '944Fest',
+    count: automotivePhotos.filter(p => p.category === '944fest').length
+  },
+  {
+    id: 'cars_coffee',
+    label: 'Cars & Coffee',
+    count: automotivePhotos.filter(p => p.category === 'cars_coffee').length
+  },
+  {
+    id: 'pca',
+    label: 'PCA Events',
+    count: automotivePhotos.filter(p => p.category === 'pca').length
+  },
+  {
+    id: 'creative',
+    label: 'Creative Photography',
+    count: automotivePhotos.filter(p => p.category === 'creative').length
+  },
+  {
+    id: 'client_cars',
+    label: 'Client Cars',
+    count: automotivePhotos.filter(p => p.category === 'client_cars').length
+  },
+  {
+    id: 'other',
+    label: 'Other',
+    count: automotivePhotos.filter(p => p.category === 'other').length
+  }
+].filter(cat => cat.count > 0 || cat.id === 'all'); // Only show categories with photos
 
 export const carStats = [
   { label: 'Year', value: '1987' },
