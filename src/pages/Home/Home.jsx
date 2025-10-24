@@ -22,10 +22,17 @@ const Home = () => {
   const certifications = [
     'CompTIA Network Security Professional (CNSP)',
     'CompTIA Network Vulnerability Assessment Professional (CNVP)',
+    'CompTIA PenTest+ ce Certification',
+    'CompTIA CySA+ ce Certification',
+    'CompTIA Security Analytics Professional (CSAP)',
     'CompTIA Security+ (SY0-601)',
     'CompTIA Network+ (N10-008)',
-    'CompTIA A+',
-    'ConnectWise Manage Engineer'
+    'CompTIA A+ ce Certification',
+    'CompTIA IT Operations Specialist (CIOS)',
+    'CompTIA Secure Infrastructure Specialist (CSIS)',
+    'ITIL® Foundation Certificate in IT Service Management',
+    'Linux Essentials Certification',
+    'ConnectWise Manage Engineer/Technician'
   ];
 
   return (
@@ -55,7 +62,7 @@ const Home = () => {
                 I Help Businesses Secure Their Valuable Data | Results-driven cybersecurity professional
                 with 3+ years in the MSP industry, overseeing security operations for 100+ clients and
                 3,500 endpoints. CompTIA-certified with a B.S. in Cybersecurity & Information Assurance
-                from Western Governors University.
+                from Western Governors University (2023).
               </p>
               <div className="hero-buttons">
                 <Link to="/portfolio" className="btn btn-primary">
@@ -96,10 +103,10 @@ const Home = () => {
           <div className="about-content">
             <div className="about-text">
               <p>
-                Results-driven cybersecurity professional with 3+ years in the MSP industry, most recently
+                Results-driven cybersecurity professional with 3+ years in the MSP industry, currently
                 serving as Director of Cybersecurity overseeing security operations for 100+ clients and
                 3,500 endpoints. Trusted technical advisor and procurement influencer, having evaluated
-                70+ security tools and participated in many vendor demos.
+                70+ security tools through hands-on vendor demos and technical reviews.
               </p>
               <p>
                 Known for translating technical capabilities into business value and aligning cybersecurity
@@ -108,10 +115,27 @@ const Home = () => {
                 deployed advanced security tools (EDR, Microsoft Security Suite, Zero Trust Network Access)
                 to proactively mitigate endpoint threats.
               </p>
+              <p>
+                Bachelor's degree in Cybersecurity & Information Assurance from Western Governors University
+                (2023), with multiple CompTIA certifications including PenTest+, CySA+, Security+, Network+,
+                and A+.
+              </p>
+              <h3>Beyond Cybersecurity</h3>
+              <p>
+                When I'm not securing networks, you'll find me working on my 1987 Summer Yellow Porsche 944
+                project car. I'm deeply involved in the automotive community as a volunteer photographer and
+                videographer for Porsche Club of America and monthly Cars & Coffee events. I capture automotive
+                content at events like GRIDLIFE and 944Fest, and spend weekends camping, hiking, or driving
+                scenic backroads.
+              </p>
               <h3>Hobbies & Interests</h3>
               <ul className="hobbies-list">
-                <li>Photography & Videography</li>
-                <li>FPV Drone Racing</li>
+                <li>Automotive Photography & Videography</li>
+                <li>1987 Porsche 944 Project Car - Summer Yellow</li>
+                <li>Cars & Coffee Monthly Volunteer</li>
+                <li>Porsche Club of America - Volunteer Photographer/Videographer</li>
+                <li>Automotive Events (GRIDLIFE, 944Fest)</li>
+                <li>Camping & Hiking</li>
                 <li>Security Research & CTF Challenges</li>
                 <li>Penetration Testing with Kali Linux</li>
               </ul>
@@ -187,15 +211,19 @@ const Home = () => {
             >
               <div className="timeline-marker"></div>
               <div className="timeline-content">
-                <span className="timeline-date">January 2024 – Present</span>
+                <span className="timeline-date">January 2024 – Present · 1 yr 10 mos</span>
                 <h3>Director of Cybersecurity</h3>
                 <h4>KPInterface</h4>
                 <p>
                   Led development and implementation of cybersecurity strategies for 100+ clients across
-                  3,500 endpoints. Conducted malware analysis using CrowdStrike and Huntress. Deployed
-                  advanced security tools (EDR, Microsoft Security Suite, Zero Trust Network Access).
-                  Acted as key influencer in security product procurement, evaluating 70+ tools through
-                  hands-on vendor demos and technical reviews.
+                  3,500 endpoints, improving protection consistency and security posture. Conducted malware
+                  analysis and vulnerability assessments using CrowdStrike and Huntress, decreasing response
+                  time and incident recurrence. Deployed and maintained advanced security tools (EDR, Microsoft
+                  Security Suite, Zero Trust Network Access) to proactively mitigate endpoint threats. Partnered
+                  with delivery and compliance teams to develop Microsoft 365 hardening templates, standardizing
+                  configurations and significantly reducing client incidents. Acted as a key influencer in security
+                  product procurement, evaluating and recommending tools through hands-on vendor demos and
+                  technical reviews.
                 </p>
               </div>
             </motion.div>
@@ -208,14 +236,17 @@ const Home = () => {
             >
               <div className="timeline-marker"></div>
               <div className="timeline-content">
-                <span className="timeline-date">January 2023 – January 2024</span>
+                <span className="timeline-date">January 2023 – January 2024 · 1 yr 1 mo</span>
                 <h3>Cyber Security Analyst</h3>
                 <h4>KPInterface</h4>
                 <p>
-                  Responded to malware alerts and conducted threat triage using CrowdStrike and Huntress.
-                  Remediated security incidents across 3000+ endpoints. Patched OS and application
-                  vulnerabilities using vendor advisories. Worked closely with service desk and project
-                  teams to support incident handling and security tool deployment.
+                  Responded to malware alerts and conducted threat triage using CrowdStrike and Huntress to
+                  resolve endpoint infections. Remediated security incidents across 3000+ endpoints by following
+                  SOPs and using endpoint detection tools to contain infections. Assisted with firewall firmware
+                  updates and basic ESXi VM maintenance. Used tools like ConnectWise and Liongard to log
+                  incidents, monitor client systems, and support issue resolution. Patched OS and application
+                  vulnerabilities using vendor advisories and internal checklists. Worked closely with service
+                  desk and project teams to support incident handling and security tool deployment tasks.
                 </p>
               </div>
             </motion.div>
@@ -225,6 +256,25 @@ const Home = () => {
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: experienceInView ? 1 : 0, x: experienceInView ? 0 : -50 }}
               transition={{ delay: 0.6 }}
+            >
+              <div className="timeline-marker"></div>
+              <div className="timeline-content">
+                <span className="timeline-date">November 2022 – January 2023 · 3 mos</span>
+                <h3>Technology Associate</h3>
+                <h4>KPInterface</h4>
+                <p>
+                  Provided tier 1 technical support and assistance using ConnectWise suite. Supported security
+                  awareness initiatives and helped clients with email security and basic cybersecurity practices.
+                  Gained foundational experience in MSP operations and client service delivery.
+                </p>
+              </div>
+            </motion.div>
+
+            <motion.div
+              className="timeline-item"
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: experienceInView ? 1 : 0, x: experienceInView ? 0 : -50 }}
+              transition={{ delay: 0.8 }}
             >
               <div className="timeline-marker"></div>
               <div className="timeline-content">
