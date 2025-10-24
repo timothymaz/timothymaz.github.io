@@ -14,7 +14,8 @@
       "Bash(npm run dev:*)",
       "Bash(ren:*)",
       "Bash(npm run photos:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(cat:*)"
     ],
     "deny": [],
     "ask": []
