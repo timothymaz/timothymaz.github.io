@@ -242,7 +242,10 @@ const Terminal = () => {
   const addOutput = (lines, className = 'color2', delay = 0) => {
     if (!Array.isArray(lines)) lines = [lines];
 
-    lines.forEach((line, index) => {
+    // Filter out empty strings to prevent excessive blank lines
+    const filteredLines = lines.filter(line => line !== '');
+
+    filteredLines.forEach((line, index) => {
       setTimeout(() => {
         setOutput(prev => [...prev, { text: line, className, timestamp: Date.now() }]);
       }, index * delay);

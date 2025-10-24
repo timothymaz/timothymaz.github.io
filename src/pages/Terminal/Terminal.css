@@ -108,9 +108,14 @@
   overflow-x: hidden;
   margin-bottom: var(--spacing-md);
   padding-right: var(--spacing-sm);
-  text-align: left;
+  text-align: left !important; /* Force left alignment */
   scroll-behavior: smooth; /* Smooth internal scrolling */
   max-height: 100%; /* Ensure it doesn't expand beyond container */
+}
+
+/* Force all terminal content to be left-aligned */
+.terminal-output * {
+  text-align: left !important;
 }
 
 .terminal-line {
@@ -215,8 +220,14 @@
   text-shadow: 0 0 5px rgba(255, 0, 85, 0.5);
 }
 
+.terminal-line.error {
+  color: var(--cyber-red);
+  text-align: left !important;
+}
+
 .terminal-line .error {
   color: var(--cyber-red);
+  text-align: left !important;
 }
 
 .terminal-line .color2 {
