@@ -1,6 +1,74 @@
 # Updates Applied Based on LinkedIn Profile
 
-## Changes Made (Date: 2025)
+## Latest Changes (October 23, 2025)
+
+### ✅ Portfolio Content Accuracy Update
+
+#### Hobbies & Interests
+- **Removed**: FPV Drone Racing (outdated hobby)
+- **Added**: Automotive Photography & Videography
+- **Added**: 1987 Porsche 944 Project Car - Summer Yellow
+- **Added**: Cars & Coffee Monthly Volunteer
+- **Added**: Porsche Club of America - Volunteer Photographer/Videographer
+- **Added**: Automotive Events (GRIDLIFE, 944Fest)
+- **Kept**: Camping & Hiking, Security Research, Penetration Testing
+
+#### Work Experience - Updated Dates & Descriptions
+1. **Director of Cybersecurity** (January 2024 – Present · 1 yr 10 mos)
+   - Updated description with Microsoft 365 hardening templates
+   - Added vulnerability assessments and multi-cloud environment management
+   - Enhanced responsibilities detail
+
+2. **Cyber Security Analyst** (January 2023 – January 2024 · 1 yr 1 mo)
+   - Updated with ConnectWise Automate/Manage expertise
+   - Added Liongard for asset management
+   - Added firewall firmware updates and policy management
+
+3. **Technology Associate** (November 2022 – January 2023 · 3 mos) **[NEW POSITION]**
+   - Company: KPInterface
+   - Responsibilities: Help desk support, device imaging, asset management
+   - Tools: PDQ, VPN troubleshooting, Microsoft 365
+
+#### Certifications - Complete List (13 Total)
+- CompTIA Network Security Professional (CNSP)
+- CompTIA Network Vulnerability Assessment Professional (CNVP)
+- CompTIA PenTest+ ce Certification
+- CompTIA CySA+ ce Certification
+- CompTIA Security Analytics Professional (CSAP)
+- CompTIA Security+ (SY0-601)
+- CompTIA Network+ (N10-008)
+- CompTIA A+ ce Certification
+- CompTIA IT Operations Specialist (CIOS)
+- CompTIA Secure Infrastructure Specialist (CSIS)
+- ITIL® Foundation Certificate in IT Service Management
+- Linux Essentials Certification
+- ConnectWise Manage Engineer/Technician
+
+#### About Me Section
+- Added "Beyond Cybersecurity" content
+- Highlighted automotive photography passion
+- Added Porsche 944 restoration details
+- Added volunteer work with PCA and Cars & Coffee
+
+#### SEO & Meta Tags (index.html)
+- Updated meta description with MSP focus and endpoint count
+- Updated keywords to include automotive photography and Porsche 944
+- Updated Open Graph title and description
+- Updated Twitter Card meta tags
+- **Updated Structured Data (Schema.org JSON-LD)**:
+  - Job title: "Director of Cybersecurity"
+  - Added MSP Security Operations, EDR/XDR, Zero Trust Network Access
+  - Added Automotive Photography and Videography to knowsAbout
+  - Added hasCredential section with B.S. degree details
+
+#### Vercel Analytics Integration
+- Installed `@vercel/analytics` package
+- Added `<Analytics />` component to App.jsx
+- Enables visitor tracking and performance monitoring
+
+---
+
+## Previous Changes (Date: 2025)
 
 ### ✅ Content Updates from LinkedIn
 
@@ -83,7 +151,25 @@ Total projects now: **4 projects** (was 2)
 
 ---
 
-## Files Modified
+## Files Modified (Latest Update)
+
+1. **src/pages/Home/Home.jsx**
+   - Updated Hobbies & Interests section (removed drones, added automotive)
+   - Updated Work Experience with accurate dates and Technology Associate position
+   - Updated certifications to full list of 13
+   - Updated About Me with automotive content
+   - Enhanced job descriptions with specific accomplishments
+
+2. **index.html**
+   - Updated meta description and keywords
+   - Updated Open Graph tags
+   - Updated Twitter Card meta tags
+   - Updated structured data (Schema.org JSON-LD)
+
+3. **src/App.jsx**
+   - Added Vercel Analytics component
+
+## Files Modified (Previous Updates)
 
 1. **src/pages/Home/Home.jsx**
    - Updated hero subtitle and description
@@ -147,10 +233,43 @@ Total projects now: **4 projects** (was 2)
 
 ## Build Status
 
-✅ **Build Successful** - All updates compiled without errors
-- Bundle size: ~318 KB (optimized)
-- No breaking changes
+✅ **Latest Build Successful** (October 23, 2025)
+- Build time: 1.43s
+- Bundle size: 517 KB (includes Security Demo components)
+- 362 modules transformed
 - All React components working correctly
+- Vercel Analytics integrated
+
+### Recent Builds:
+- **Portfolio Content Update**: ✅ 1.43s
+- **Security Demo Integration**: ✅ 1.50s (362 modules, 2210.26 KiB)
+- **Terminal Formatting Fixes**: ✅ 1.46s
+
+### Warnings:
+- `images/tim.jpg` is 3.77 MB (pre-existing, not blocking deployment)
+
+---
+
+## Complete Feature List
+
+### Pages:
+- ✅ Home (with updated content and certifications)
+- ✅ Portfolio (4 projects)
+- ✅ Blog (5 posts)
+- ✅ Contact (email, social links)
+- ✅ Terminal (interactive CLI experience)
+- ✅ Security Demo (XSS & SQL Injection educational demonstrations)
+
+### Features:
+- ✅ Responsive design (mobile-first)
+- ✅ Dark/Light theme toggle
+- ✅ Smooth animations (Framer Motion)
+- ✅ SEO optimized (meta tags, structured data)
+- ✅ PWA enabled
+- ✅ Google Analytics
+- ✅ Vercel Analytics
+- ✅ Interactive Terminal with ASCII art
+- ✅ Interactive Security demonstrations
 
 ---
 

@@ -109,8 +109,8 @@ export const blogPosts = [
     date: "2025-10-15",
     readTime: 10,
     author: "Timothy Mazur",
-    thumbnail: "/images/malware_analysis_thumbnail.jpg",
-    featuredImage: "/images/malware_analysis_featured.jpg",
+    thumbnail: "/images/malware_analysis_blog.png",
+    featuredImage: "/images/malware_analysis_blog.png",
     featured: true
   },
   {
@@ -273,8 +273,8 @@ export const blogPosts = [
     date: "2025-09-28",
     readTime: 12,
     author: "Timothy Mazur",
-    thumbnail: "/images/vendor_evaluation_thumbnail.jpg",
-    featuredImage: "/images/vendor_evaluation_featured.jpg",
+    thumbnail: "/images/msp_tool_evaluation_blog.png",
+    featuredImage: "/images/msp_tool_evaluation_blog.png",
     featured: true
   },
   {
@@ -459,8 +459,8 @@ export const blogPosts = [
     date: "2025-08-12",
     readTime: 11,
     author: "Timothy Mazur",
-    thumbnail: "/images/ztna_deployment_thumbnail.jpg",
-    featuredImage: "/images/ztna_deployment_featured.jpg",
+    thumbnail: "/images/ztna_deployment_blog.png",
+    featuredImage: "/images/ztna_deployment_blog.png",
     featured: true
   },
   {
@@ -690,8 +690,8 @@ export const blogPosts = [
     date: "2025-07-20",
     readTime: 12,
     author: "Timothy Mazur",
-    thumbnail: "/images/endpoint_security_thumbnail.jpg",
-    featuredImage: "/images/endpoint_security_featured.jpg",
+    thumbnail: "/images/endpoint_security_blog.png",
+    featuredImage: "/images/endpoint_security_blog.png",
     featured: false
   },
   {
@@ -959,8 +959,8 @@ export const blogPosts = [
     date: "2025-06-05",
     readTime: 14,
     author: "Timothy Mazur",
-    thumbnail: "/images/incident_response_thumbnail.jpg",
-    featuredImage: "/images/incident_response_featured.jpg",
+    thumbnail: "/images/incident_response_blog.png",
+    featuredImage: "/images/incident_response_blog.png",
     featured: false
   }
 ];
