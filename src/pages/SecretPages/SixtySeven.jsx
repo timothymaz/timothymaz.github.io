@@ -55,6 +55,23 @@ const SixtySeven = () => {
   const [timeWarp, setTimeWarp] = useState(false);
   const [achievement, setAchievement] = useState(null);
   const [modesUsed, setModesUsed] = useState(new Set());
+  const [showModeSelector, setShowModeSelector] = useState(false);
+
+  // All available modes
+  const MODES = [
+    { id: 'normal', label: 'Normal', key: 'N', icon: '😎' },
+    { id: 'gravity', label: 'Gravity', key: 'G', icon: '⬇️' },
+    { id: 'explosion', label: 'Explosion', key: 'E', icon: '💥' },
+    { id: 'spin', label: 'Spin', key: 'S', icon: '🌀' },
+    { id: 'bounce', label: 'Bounce', key: 'B', icon: '⚡' },
+    { id: 'glitch', label: 'Glitch', key: 'L', icon: '📺' },
+    { id: 'wave', label: 'Wave', key: 'W', icon: '🌊' },
+    { id: 'neon', label: 'Neon', key: 'O', icon: '💎' },
+    { id: 'rainbow', label: 'Rainbow', key: 'I', icon: '🌈' },
+    { id: 'shake', label: 'Shake', key: 'K', icon: '📳' },
+    { id: 'pulse', label: 'Pulse', key: 'P', icon: '💓' },
+    { id: 'zoom', label: 'Zoom', key: 'Z', icon: '🔍' }
+  ];
 
   const mouseRef = useRef({ x: 0, y: 0 });
   const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
@@ -425,15 +442,58 @@ const SixtySeven = () => {
       };
 
       switch(key) {
+        case 'n':
+          setMode('normal');
+          trackMode('normal');
+          break;
         case 'g':
-          setMode(prev => prev === 'gravity' ? 'normal' : 'gravity');
+          setMode('gravity');
           trackMode('gravity');
           break;
         case 'e':
-          setMode(prev => prev === 'explosion' ? 'normal' : 'explosion');
+          setMode('explosion');
           trackMode('explosion');
           break;
+        case 's':
+          setMode('spin');
+          trackMode('spin');
+          break;
+        case 'b':
+          setMode('bounce');
+          trackMode('bounce');
+          break;
+        case 'l':
+          setMode('glitch');
+          trackMode('glitch');
+          break;
+        case 'w':
+          setMode('wave');
+          trackMode('wave');
+          break;
+        case 'o':
+          setMode('neon');
+          trackMode('neon');
+          break;
+        case 'i':
+          setMode('rainbow');
+          trackMode('rainbow');
+          break;
+        case 'k':
+          setMode('shake');
+          trackMode('shake');
+          break;
+        case 'p':
+          setMode('pulse');
+          trackMode('pulse');
+          break;
+        case 'z':
+          setMode('zoom');
+          trackMode('zoom');
+          break;
         case 'r':
+          // Cycle through random mode
+          const randomMode = MODES[Math.floor(Math.random() * MODES.length)];
+          setMode(randomMode.id);
           trackMode('random');
           break;
         case 'f':
@@ -450,6 +510,10 @@ const SixtySeven = () => {
         case 't':
           setTimeWarp(prev => !prev);
           trackMode('timewarp');
+          break;
+        case 'v':
+          // Toggle mode selector (mobile friendly)
+          setShowModeSelector(prev => !prev);
           break;
         case ' ':
           event.preventDefault();
@@ -560,19 +624,84 @@ const SixtySeven = () => {
           >
             <div className="control-title">┌─ SECRET CONTROLS ─┐</div>
             <div className="control-item">CLICK - Spawn 67</div>
-            <div className="control-item">DBLCLICK - Shake</div>
             <div className="control-item">SPACE - Fireworks</div>
-            <div className="control-item">G - Gravity</div>
-            <div className="control-item">E - Explosion</div>
+            <div className="control-item">V - Mode Selector</div>
+            <div className="control-item">R - Random Mode</div>
             <div className="control-item">M - Matrix Rain</div>
             <div className="control-item">D - Disco Mode</div>
             <div className="control-item">T - Time Warp</div>
             <div className="control-item">F - Fullscreen</div>
-            <div className="control-item">ESC - Hide/Show</div>
+            <div className="control-secret">Press V for all modes!</div>
             <div className="control-secret">↑↑↓↓←→←→BA</div>
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Mobile-Friendly Mode Selector */}
+      <AnimatePresence>
+        {showModeSelector && (
+          <motion.div
+            className="mode-selector-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setShowModeSelector(false)}
+          >
+            <motion.div
+              className="mode-selector"
+              initial={{ scale: 0.5, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.5, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="mode-selector-title">
+                🎮 SELECT MODE 🎮
+              </div>
+              <div className="mode-grid">
+                {MODES.map(modeOption => (
+                  <motion.button
+                    key={modeOption.id}
+                    className={`mode-button ${mode === modeOption.id ? 'active' : ''}`}
+                    onClick={() => {
+                      setMode(modeOption.id);
+                      trackMode(modeOption.id);
+                      setShowModeSelector(false);
+                    }}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <div className="mode-icon">{modeOption.icon}</div>
+                    <div className="mode-label">{modeOption.label}</div>
+                    <div className="mode-key">{modeOption.key}</div>
+                  </motion.button>
+                ))}
+              </div>
+              <div className="mode-selector-footer">
+                <button
+                  className="mode-close-btn"
+                  onClick={() => setShowModeSelector(false)}
+                >
+                  CLOSE
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Floating Mode Selector Button (Mobile) */}
+      <motion.button
+        className="mode-selector-fab"
+        onClick={() => setShowModeSelector(true)}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1 }}
+      >
+        <span className="fab-icon">🎮</span>
+        <span className="fab-label">MODES</span>
+      </motion.button>
 
       {/* Floating Fact Cards */}
       <AnimatePresence>
