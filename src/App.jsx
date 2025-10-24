@@ -12,6 +12,7 @@ import Contact from './pages/Contact/Contact';
 import Terminal from './pages/Terminal/Terminal';
 import SecurityDemo from './pages/SecurityDemo/SecurityDemo';
 import Automotive from './pages/Automotive/Automotive';
+import SixtySeven from './pages/SecretPages/SixtySeven';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 import { ThemeProvider } from './context/ThemeContext';
 import './App.css';
@@ -32,6 +33,8 @@ function App() {
               <Route path="/contact" element={<Contact />} />
               <Route path="/terminal" element={<Terminal />} />
               <Route path="/security-demo" element={<SecurityDemo />} />
+              {/* Secret Easter Egg - No navigation link! */}
+              <Route path="/67" element={<SixtySeven />} />
             </Routes>
           </AnimatePresence>
         </main>
