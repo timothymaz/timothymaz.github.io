@@ -5,7 +5,7 @@
   padding: var(--spacing-xl);
   padding-top: calc(var(--header-height) + var(--spacing-xl));
   position: relative;
-  overflow: hidden;
+  overflow: visible; /* Don't prevent page scroll, but terminal won't cause it */
 }
 
 /* Terminal Container - Mac-style window */
@@ -109,6 +109,8 @@
   margin-bottom: var(--spacing-md);
   padding-right: var(--spacing-sm);
   text-align: left;
+  scroll-behavior: smooth; /* Smooth internal scrolling */
+  max-height: 100%; /* Ensure it doesn't expand beyond container */
 }
 
 .terminal-line {
@@ -155,6 +157,10 @@
   flex-shrink: 0;
   min-height: 1.5em;
   padding-bottom: var(--spacing-sm);
+  position: sticky; /* Keep input at bottom of terminal */
+  bottom: 0;
+  background: rgba(10, 10, 10, 0.95); /* Match container background */
+  padding-top: var(--spacing-sm); /* Add padding for visual separation */
 }
 
 .terminal-prompt {

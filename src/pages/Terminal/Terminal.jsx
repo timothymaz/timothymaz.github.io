@@ -13,7 +13,7 @@ const Terminal = () => {
 
   const terminalRef = useRef(null);
   const inputRef = useRef(null);
-  const outputEndRef = useRef(null);
+  const terminalOutputRef = useRef(null);
 
   const PASSWORD = 'NeoTrinity';
 
@@ -541,11 +541,16 @@ const Terminal = () => {
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
       e.preventDefault();
+      e.stopPropagation(); // Prevent event from bubbling up to page
       if (isPasswordMode) {
         checkPassword(currentCommand);
       } else {
         executeCommand(currentCommand);
       }
+      // Maintain focus without scrolling page
+      setTimeout(() => {
+        inputRef.current?.focus({ preventScroll: true });
+      }, 0);
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
       if (commandHistory.length > 0) {
@@ -584,14 +589,16 @@ const Terminal = () => {
     );
   }, []);
 
-  // Auto-scroll to bottom
+  // Auto-scroll to bottom (only scroll terminal output, NOT the page)
   useEffect(() => {
-    outputEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (terminalOutputRef.current) {
+      terminalOutputRef.current.scrollTop = terminalOutputRef.current.scrollHeight;
+    }
   }, [output]);
 
-  // Focus input on click anywhere
+  // Focus input on click anywhere (without scrolling page)
   useEffect(() => {
-    const handleClick = () => inputRef.current?.focus();
+    const handleClick = () => inputRef.current?.focus({ preventScroll: true });
     document.addEventListener('click', handleClick);
     return () => document.removeEventListener('click', handleClick);
   }, []);
@@ -619,7 +626,7 @@ const Terminal = () => {
         </div>
 
         <div className="terminal-body" ref={terminalRef}>
-          <div className="terminal-output">
+          <div className="terminal-output" ref={terminalOutputRef}>
             {output.map((line, index) => (
               <div
                 key={index}
@@ -627,7 +634,6 @@ const Terminal = () => {
                 dangerouslySetInnerHTML={{ __html: line.text }}
               />
             ))}
-            <div ref={outputEndRef} />
           </div>
 
           <div className="terminal-input-line">
