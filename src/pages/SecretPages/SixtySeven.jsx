@@ -100,70 +100,119 @@ const BUILDINGS = {
   }
 };
 
-// Load initial game state from localStorage
-const loadInitialState = () => {
-  const saved = localStorage.getItem('67-clicker-save');
-  if (saved) {
-    try {
-      const gameState = JSON.parse(saved);
-      console.log('Loading initial state from save:', gameState);
-
-      // Calculate offline earnings
-      const timeAway = Date.now() - (gameState.lastSave || Date.now());
-      const secondsAway = Math.floor(timeAway / 1000);
-
-      // Recalculate perSecond from saved buildings
-      let offlinePerSecond = 0;
-      Object.keys(BUILDINGS).forEach(key => {
-        const building = BUILDINGS[key];
-        const owned = gameState.buildings[key] || 0;
-        offlinePerSecond += building.baseProduction * owned;
-      });
-
-      const offlineEarnings = offlinePerSecond * secondsAway;
-
-      return {
-        sixtySevenCount: gameState.sixtySevenCount + offlineEarnings,
-        totalSixtySevensMade: gameState.totalSixtySevensMade + offlineEarnings,
-        buildings: gameState.buildings,
-        purchasedClickUpgrades: gameState.purchasedClickUpgrades || [],
-        offlineEarnings
-      };
-    } catch (e) {
-      console.error('Failed to load initial state:', e);
-    }
-  }
-  return null;
-};
-
 const SixtySeven = () => {
   const mountRef = useRef(null);
   const sceneRef = useRef(null);
   const rendererRef = useRef(null);
   const particlesRef = useRef([]);
   const lastSaveRef = useRef(Date.now());
+  const offlineEarningsRef = useRef(0);
 
-  // Load saved state or use defaults
-  const initialState = loadInitialState();
+  // Core game state - load from localStorage on first render
+  const [sixtySevenCount, setSixtySevenCount] = useState(() => {
+    const saved = localStorage.getItem('67-clicker-save');
+    if (saved) {
+      try {
+        const gameState = JSON.parse(saved);
+        console.log('Loading save:', gameState);
 
-  // Core game state
-  const [sixtySevenCount, setSixtySevenCount] = useState(initialState?.sixtySevenCount || 0);
-  const [totalSixtySevensMade, setTotalSixtySevensMade] = useState(initialState?.totalSixtySevensMade || 0);
+        // Calculate offline earnings
+        const timeAway = Date.now() - (gameState.lastSave || Date.now());
+        const secondsAway = Math.floor(timeAway / 1000);
+
+        let offlinePerSecond = 0;
+        Object.keys(BUILDINGS).forEach(key => {
+          const building = BUILDINGS[key];
+          const owned = gameState.buildings?.[key] || 0;
+          offlinePerSecond += building.baseProduction * owned;
+        });
+
+        const offlineEarnings = offlinePerSecond * secondsAway;
+        offlineEarningsRef.current = offlineEarnings;
+
+        return gameState.sixtySevenCount + offlineEarnings;
+      } catch (e) {
+        console.error('Failed to load save:', e);
+      }
+    }
+    return 0;
+  });
+
+  const [totalSixtySevensMade, setTotalSixtySevensMade] = useState(() => {
+    const saved = localStorage.getItem('67-clicker-save');
+    if (saved) {
+      try {
+        const gameState = JSON.parse(saved);
+        const timeAway = Date.now() - (gameState.lastSave || Date.now());
+        const secondsAway = Math.floor(timeAway / 1000);
+
+        let offlinePerSecond = 0;
+        Object.keys(BUILDINGS).forEach(key => {
+          const building = BUILDINGS[key];
+          const owned = gameState.buildings?.[key] || 0;
+          offlinePerSecond += building.baseProduction * owned;
+        });
+
+        const offlineEarnings = offlinePerSecond * secondsAway;
+        return gameState.totalSixtySevensMade + offlineEarnings;
+      } catch (e) {
+        console.error('Failed to load save:', e);
+      }
+    }
+    return 0;
+  });
+
   const [perClick, setPerClick] = useState(1);
   const [perSecond, setPerSecond] = useState(0);
-  const [buildings, setBuildings] = useState(initialState?.buildings || {
-    cursor: 0,
-    grandma: 0,
-    farm: 0,
-    factory: 0,
-    bank: 0,
-    temple: 0,
-    wizard: 0,
-    portal: 0,
-    timeMachine: 0,
-    quantum: 0
+
+  const [buildings, setBuildings] = useState(() => {
+    const saved = localStorage.getItem('67-clicker-save');
+    if (saved) {
+      try {
+        const gameState = JSON.parse(saved);
+        console.log('Loading buildings:', gameState.buildings);
+        return gameState.buildings || {
+          cursor: 0,
+          grandma: 0,
+          farm: 0,
+          factory: 0,
+          bank: 0,
+          temple: 0,
+          wizard: 0,
+          portal: 0,
+          timeMachine: 0,
+          quantum: 0
+        };
+      } catch (e) {
+        console.error('Failed to load buildings:', e);
+      }
+    }
+    return {
+      cursor: 0,
+      grandma: 0,
+      farm: 0,
+      factory: 0,
+      bank: 0,
+      temple: 0,
+      wizard: 0,
+      portal: 0,
+      timeMachine: 0,
+      quantum: 0
+    };
   });
-  const [purchasedClickUpgrades, setPurchasedClickUpgrades] = useState(initialState?.purchasedClickUpgrades || []);
+
+  const [purchasedClickUpgrades, setPurchasedClickUpgrades] = useState(() => {
+    const saved = localStorage.getItem('67-clicker-save');
+    if (saved) {
+      try {
+        const gameState = JSON.parse(saved);
+        return gameState.purchasedClickUpgrades || [];
+      } catch (e) {
+        console.error('Failed to load upgrades:', e);
+      }
+    }
+    return [];
+  });
 
   // UI state
   const [floatingNumbers, setFloatingNumbers] = useState([]);
@@ -371,7 +420,7 @@ const SixtySeven = () => {
 
   // Auto-save system
   useEffect(() => {
-    const interval = setInterval(() => {
+    const saveGame = () => {
       const gameState = {
         sixtySevenCount,
         totalSixtySevensMade,
@@ -382,16 +431,28 @@ const SixtySeven = () => {
       localStorage.setItem('67-clicker-save', JSON.stringify(gameState));
       lastSaveRef.current = Date.now();
       console.log('Game saved:', gameState);
-    }, 5000); // Auto-save every 5 seconds
+    };
 
-    return () => clearInterval(interval);
+    const interval = setInterval(saveGame, 5000); // Auto-save every 5 seconds
+
+    // Save immediately on buildings change
+    if (Object.values(buildings).some(count => count > 0) || purchasedClickUpgrades.length > 0) {
+      saveGame();
+    }
+
+    // Save on unmount (when component is about to be destroyed)
+    return () => {
+      clearInterval(interval);
+      saveGame(); // Final save before unmount
+      console.log('Saving on unmount');
+    };
   }, [sixtySevenCount, totalSixtySevensMade, buildings, purchasedClickUpgrades]);
 
   // Show offline earnings notification on mount
   useEffect(() => {
-    if (initialState?.offlineEarnings > 0) {
+    if (offlineEarningsRef.current > 0) {
       setTimeout(() => {
-        showFloatingText(`+${formatNumber(initialState.offlineEarnings)} offline!`, 'building');
+        showFloatingText(`+${formatNumber(offlineEarningsRef.current)} offline!`, 'building');
       }, 1000);
     }
   }, []);
