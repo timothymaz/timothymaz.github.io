@@ -2,6 +2,389 @@
 
 export const blogPosts = [
   {
+    id: 6,
+    title: "Windows 11 Privacy: The Complete Guide (2025)",
+    slug: "windows11-privacy-guide",
+    excerpt: "Debunking the TPM myth and discovering what you should actually worry about: telemetry, data collection, and how to protect yourself with actionable steps.",
+    content: `
+      <p style="font-size: 1.2em; text-align: center; max-width: 700px; margin: 0 auto 40px;">
+        Windows 11 has sparked countless privacy debates. But most people are worried about the wrong things.
+        Let's separate fact from fiction and give you <strong>actionable steps</strong> to protect your privacy today.
+      </p>
+
+      <h2>🔐 The Great TPM Misconception</h2>
+      <p>Let's clear up the biggest myth in Windows 11 privacy.</p>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin: 30px 0;">
+        <div style="background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%); color: white; border-radius: 12px; padding: 30px;">
+          <h4 style="color: white; margin-top: 0;">❌ The Myth</h4>
+          <p><strong>"TPM chips are Microsoft's spying tool that sends your data to the cloud and tracks everything you do."</strong></p>
+          <p style="margin-top: 15px;">This fear has spread across forums and social media, causing many to disable or avoid TPM entirely.</p>
+        </div>
+
+        <div style="background: linear-gradient(135deg, #51cf66 0%, #37b24d 100%); color: white; border-radius: 12px; padding: 30px;">
+          <h4 style="color: white; margin-top: 0;">✅ The Reality</h4>
+          <p><strong>TPM is a local security chip that NEVER transmits data. It's a vault inside your computer.</strong></p>
+          <p style="margin-top: 15px;">It stores encryption keys, protects BitLocker, and enables Windows Hello - all locally on your device.</p>
+        </div>
+      </div>
+
+      <div style="background: #d1ecf1; border-left: 5px solid #17a2b8; padding: 20px; border-radius: 8px; margin: 25px 0;">
+        <strong style="display: block; margin-bottom: 5px; font-size: 1.1em; color: #0c5460;">💡 Bottom Line:</strong>
+        <span style="color: #0c5460;">TPM is a security feature that protects YOU. Keep it enabled. The real privacy concerns are elsewhere (keep reading).</span>
+      </div>
+
+      <h2>⚠️ The REAL Privacy Problems</h2>
+      <p>Here's what you should actually be concerned about:</p>
+
+      <h3>1. Telemetry & Diagnostic Data Collection</h3>
+      <p>Windows 11 constantly sends data to Microsoft, including:</p>
+      <ul>
+        <li>Your app usage patterns and search queries</li>
+        <li>Device information and performance metrics</li>
+        <li>Location data and browsing history (if Edge is used)</li>
+        <li>Voice data from Cortana interactions</li>
+        <li>Typing patterns and autocorrect data</li>
+      </ul>
+
+      <h3>2. Microsoft Account Integration</h3>
+      <p>Windows 11 Home forces a Microsoft Account, which syncs:</p>
+      <ul>
+        <li>Your files and photos to OneDrive</li>
+        <li>Browser history and passwords</li>
+        <li>App preferences across devices</li>
+        <li>Activity history and timeline data</li>
+      </ul>
+
+      <h3>3. Third-Party Data Sharing</h3>
+      <p>Microsoft shares anonymized data with:</p>
+      <ul>
+        <li>Advertising partners for targeted ads</li>
+        <li>Analytics companies for product improvement</li>
+        <li>App developers for crash reports</li>
+      </ul>
+
+      <h2>Privacy Impact Analysis</h2>
+
+      <div style="background: white; border-radius: 12px; padding: 30px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); margin: 30px 0;">
+        <h3 style="text-align: center; margin-bottom: 30px;">How Much Telemetry Can You Reduce?</h3>
+
+        <div style="margin: 20px 0;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-weight: 600;">Default Windows 11</span>
+            <span>100%</span>
+          </div>
+          <div style="background: #e9ecef; border-radius: 20px; height: 30px; overflow: hidden;">
+            <div style="width: 100%; height: 100%; background: #dc3545; border-radius: 20px; display: flex; align-items: center; justify-content: flex-end; padding-right: 10px; color: white; font-weight: 600;">Maximum</div>
+          </div>
+        </div>
+
+        <div style="margin: 20px 0;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-weight: 600;">After Basic Settings</span>
+            <span>30%</span>
+          </div>
+          <div style="background: #e9ecef; border-radius: 20px; height: 30px; overflow: hidden;">
+            <div style="width: 30%; height: 100%; background: #fd7e14; border-radius: 20px; display: flex; align-items: center; justify-content: flex-end; padding-right: 10px; color: white; font-weight: 600;">Reduced</div>
+          </div>
+        </div>
+
+        <div style="margin: 20px 0;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-weight: 600;">After Advanced Tweaks</span>
+            <span>15%</span>
+          </div>
+          <div style="background: #e9ecef; border-radius: 20px; height: 30px; overflow: hidden;">
+            <div style="width: 15%; height: 100%; background: #ffc107; border-radius: 20px; display: flex; align-items: center; justify-content: flex-end; padding-right: 10px; color: white; font-weight: 600;">Better</div>
+          </div>
+        </div>
+
+        <div style="margin: 20px 0;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-weight: 600;">With Network Blocking</span>
+            <span>5%</span>
+          </div>
+          <div style="background: #e9ecef; border-radius: 20px; height: 30px; overflow: hidden;">
+            <div style="width: 5%; height: 100%; background: #20c997; border-radius: 20px;"></div>
+          </div>
+        </div>
+
+        <div style="margin: 20px 0;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-weight: 600;">Linux Alternatives</span>
+            <span>0%</span>
+          </div>
+          <div style="background: #e9ecef; border-radius: 20px; height: 30px; overflow: hidden;">
+            <div style="width: 2%; height: 100%; background: #28a745; border-radius: 20px;"></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background: #fff3cd; border-left: 5px solid #ffc107; padding: 20px; border-radius: 8px; margin: 25px 0;">
+        <strong style="display: block; margin-bottom: 5px; font-size: 1.1em; color: #856404;">⚠️ Important:</strong>
+        <span style="color: #856404;">You cannot eliminate all telemetry in Windows 11, even with advanced tools. Microsoft has hardcoded certain data collection into the OS. However, you can significantly reduce it.</span>
+      </div>
+
+      <h2>🛡️ How to Protect Yourself</h2>
+      <p>Step-by-step actions you can take today:</p>
+
+      <h3>Step 1: Minimize Telemetry During Installation</h3>
+      <p><strong>Best time to act:</strong> During initial Windows 11 setup</p>
+      <ul>
+        <li>Choose "Set up for personal use" (not organization)</li>
+        <li>When asked about privacy settings, toggle OFF everything:
+          <ul>
+            <li>Location</li>
+            <li>Find my device</li>
+            <li>Diagnostic data (choose "Required only")</li>
+            <li>Inking & typing</li>
+            <li>Tailored experiences</li>
+            <li>Advertising ID</li>
+          </ul>
+        </li>
+      </ul>
+
+      <div style="background: #d1ecf1; border-left: 5px solid #17a2b8; padding: 20px; border-radius: 8px; margin: 25px 0;">
+        <strong style="display: block; margin-bottom: 5px; font-size: 1.1em; color: #0c5460;">💡 Tip:</strong>
+        <span style="color: #0c5460;">If you've already installed Windows 11, don't worry - you can change these settings later (Step 2).</span>
+      </div>
+
+      <h3>Step 2: Configure Privacy Settings (Essential)</h3>
+      <p><strong>Time required:</strong> 5-10 minutes</p>
+
+      <div style="background: #2d3748; color: #e2e8f0; padding: 20px; border-radius: 8px; margin: 20px 0; font-family: 'Courier New', monospace;">
+<code>1. Press Windows + I to open Settings
+2. Navigate to: Privacy & Security
+3. Go through EACH section and disable:</code>
+      </div>
+
+      <ul>
+        <li><strong>General:</strong>
+          <ul>
+            <li>Let apps show me personalized ads: OFF</li>
+            <li>Let websites show locally relevant content: OFF</li>
+            <li>Let Windows improve Start and search: OFF</li>
+          </ul>
+        </li>
+        <li><strong>Diagnostics & Feedback:</strong>
+          <ul>
+            <li>Send optional diagnostic data: OFF</li>
+            <li>Improve inking and typing: OFF</li>
+            <li>Tailored experiences: OFF</li>
+            <li>Delete diagnostic data: Click "Delete"</li>
+          </ul>
+        </li>
+        <li><strong>Activity History:</strong>
+          <ul>
+            <li>Store my activity history: OFF</li>
+            <li>Clear activity history</li>
+          </ul>
+        </li>
+        <li><strong>App Permissions:</strong> Review each (Camera, Microphone, Location, etc.) and disable for apps you don't trust</li>
+      </ul>
+
+      <h3>Step 3: Use a Local Account (Windows 11 Pro/Enterprise)</h3>
+      <p><strong>Why:</strong> Prevents syncing your data to Microsoft's cloud</p>
+
+      <div style="background: #2d3748; color: #e2e8f0; padding: 20px; border-radius: 8px; margin: 20px 0; font-family: 'Courier New', monospace;">
+<code>Settings → Accounts → Your info → "Sign in with a local account instead"</code>
+      </div>
+
+      <div style="background: #fff3cd; border-left: 5px solid #ffc107; padding: 20px; border-radius: 8px; margin: 25px 0;">
+        <strong style="display: block; margin-bottom: 5px; font-size: 1.1em; color: #856404;">⚠️ Windows 11 Home users:</strong>
+        <span style="color: #856404;">Microsoft forces a Microsoft Account during setup. Workaround:</span>
+        <ul style="margin-left: 20px; margin-top: 5px; color: #856404;">
+          <li>At the Microsoft Account screen, press Shift + F10</li>
+          <li>Type: <code>OOBE\\BYPASSNRO</code> and press Enter</li>
+          <li>Computer will restart, allowing local account option</li>
+        </ul>
+      </div>
+
+      <h3>Step 4: Advanced: Use Group Policy Editor (Pro Only)</h3>
+      <p><strong>For Windows 11 Pro/Enterprise users</strong></p>
+
+      <div style="background: #2d3748; color: #e2e8f0; padding: 20px; border-radius: 8px; margin: 20px 0; font-family: 'Courier New', monospace;">
+<code>1. Press Windows + R, type: gpedit.msc
+2. Navigate to: Computer Configuration → Administrative Templates →
+   Windows Components → Data Collection and Preview Builds
+3. Double-click "Allow Diagnostic Data"
+4. Set to "Enabled" and choose "Diagnostic data off"
+5. Click Apply and OK</code>
+      </div>
+
+      <p><strong>Other important policies to disable:</strong></p>
+      <ul>
+        <li>Windows Components → Cloud Content → Turn off Microsoft consumer experiences</li>
+        <li>Windows Components → Windows Error Reporting → Disable Windows Error Reporting</li>
+        <li>System → Internet Communication Management → Turn off Windows Customer Experience Improvement Program</li>
+      </ul>
+
+      <h3>Step 5: Disable Telemetry Services</h3>
+      <p><strong>Power user option:</strong> Manually stop telemetry services</p>
+
+      <div style="background: #2d3748; color: #e2e8f0; padding: 20px; border-radius: 8px; margin: 20px 0; font-family: 'Courier New', monospace;">
+<code>1. Press Windows + R, type: services.msc
+2. Find these services and set to "Disabled":
+   - Connected User Experiences and Telemetry
+   - Diagnostic Policy Service (may break troubleshooting)
+   - dmwappushservice
+3. Right-click each → Properties → Startup type: Disabled → Stop</code>
+      </div>
+
+      <div style="background: #f8d7da; border-left: 5px solid #dc3545; padding: 20px; border-radius: 8px; margin: 25px 0;">
+        <strong style="display: block; margin-bottom: 5px; font-size: 1.1em; color: #721c24;">⚠️ Warning:</strong>
+        <span style="color: #721c24;">Disabling these services may prevent Windows Update troubleshooting and some diagnostic tools from working. Only proceed if you understand the trade-offs.</span>
+      </div>
+
+      <h3>Step 6: Consider Privacy Tools</h3>
+      <p>Third-party tools that automate privacy settings:</p>
+
+      <ul>
+        <li><strong>O&O ShutUp10++</strong> - Free tool to disable telemetry and privacy invasive features</li>
+        <li><strong>Simplewall</strong> - Firewall to block telemetry at network level</li>
+        <li><strong>DoNotSpy11</strong> - One-click privacy settings manager</li>
+        <li><strong>Pi-hole</strong> - Network-wide ad and telemetry blocking</li>
+      </ul>
+
+      <div style="background: #fff3cd; border-left: 5px solid #ffc107; padding: 20px; border-radius: 8px; margin: 25px 0;">
+        <strong style="display: block; margin-bottom: 5px; font-size: 1.1em; color: #856404;">⚠️ Caution:</strong>
+        <span style="color: #856404;">Always download these tools from official sources. Some "privacy tools" are actually malware in disguise. Research before installing.</span>
+      </div>
+
+      <h3>Step 7: Review App Permissions Regularly</h3>
+      <p><strong>Monthly habit:</strong> Check what apps have access to</p>
+
+      <div style="background: #2d3748; color: #e2e8f0; padding: 20px; border-radius: 8px; margin: 20px 0; font-family: 'Courier New', monospace;">
+<code>Settings → Privacy & Security → App permissions
+
+Review and disable access for:
+- Camera
+- Microphone
+- Location
+- Contacts
+- Calendar
+- Call history
+- Email
+- Tasks
+- Messaging
+- Radios
+- Other devices</code>
+      </div>
+
+      <div style="background: #d4edda; border-left: 5px solid #28a745; padding: 20px; border-radius: 8px; margin: 25px 0;">
+        <strong style="display: block; margin-bottom: 5px; font-size: 1.1em; color: #155724;">✅ Best Practice:</strong>
+        <span style="color: #155724;">Only grant permissions when absolutely necessary, and revoke them when you're done using the app. Most apps request more permissions than they need.</span>
+      </div>
+
+      <h2>⚖️ Understanding the Trade-offs</h2>
+      <p>What you gain vs. what you lose:</p>
+
+      <table style="width: 100%; border-collapse: collapse; margin: 30px 0; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <thead>
+          <tr style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+            <th style="color: white; padding: 20px; text-align: left;">Action</th>
+            <th style="color: white; padding: 20px; text-align: left;">Privacy Gain ✅</th>
+            <th style="color: white; padding: 20px; text-align: left;">Functionality Loss ❌</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom: 1px solid #e9ecef;">
+            <td style="padding: 20px;"><strong>Disable Telemetry</strong></td>
+            <td style="padding: 20px;">Stops most usage data collection</td>
+            <td style="padding: 20px;">May miss important security updates info, troubleshooting harder</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #e9ecef;">
+            <td style="padding: 20px;"><strong>Use Local Account</strong></td>
+            <td style="padding: 20px;">No data syncing to cloud</td>
+            <td style="padding: 20px;">Lose cross-device sync, OneDrive integration, Microsoft Store apps limited</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #e9ecef;">
+            <td style="padding: 20px;"><strong>Disable Location</strong></td>
+            <td style="padding: 20px;">Apps can't track your location</td>
+            <td style="padding: 20px;">Maps, weather, and location-based reminders won't work</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #e9ecef;">
+            <td style="padding: 20px;"><strong>Block Cortana</strong></td>
+            <td style="padding: 20px;">No voice data sent to Microsoft</td>
+            <td style="padding: 20px;">Voice assistant features unavailable</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #e9ecef;">
+            <td style="padding: 20px;"><strong>Disable Microsoft Defender telemetry</strong></td>
+            <td style="padding: 20px;">Antivirus samples not shared</td>
+            <td style="padding: 20px;">Slower threat response, cloud-based protection reduced</td>
+          </tr>
+          <tr>
+            <td style="padding: 20px;"><strong>Block Windows Update telemetry</strong></td>
+            <td style="padding: 20px;">Update metadata not shared</td>
+            <td style="padding: 20px;">May get incompatible updates, troubleshooting harder</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div style="background: linear-gradient(135deg, #fff5e6 0%, #ffe4cc 100%); border-radius: 12px; padding: 30px; margin: 30px 0;">
+        <h3 style="margin-top: 0;">💡 The Inconvenient Truth</h3>
+        <p>Even with all these steps, <strong>Windows 11 will still collect some telemetry</strong>. Microsoft has built it into the core OS, and certain data collection cannot be fully disabled without breaking Windows Update or security features.</p>
+        <p style="margin-top: 15px;"><strong>Your realistic options:</strong></p>
+        <ul>
+          <li><strong>Minimize telemetry</strong> (what this guide helps you do) - reduces to ~5-15% of default</li>
+          <li><strong>Accept the trade-off</strong> - use Windows but understand data is collected</li>
+          <li><strong>Switch to Linux</strong> - distributions like Ubuntu, Linux Mint, or Fedora have zero telemetry by default</li>
+          <li><strong>Use a virtual machine</strong> - run Windows in a sandboxed environment with network restrictions</li>
+        </ul>
+      </div>
+
+      <h2>📋 Quick Reference Checklist</h2>
+
+      <ul style="list-style: none; padding: 0;">
+        <li style="padding: 10px; margin: 5px 0; background: #f7fafc; border-radius: 5px;">☐ Configure privacy settings during Windows 11 installation (or do it now in Settings)</li>
+        <li style="padding: 10px; margin: 5px 0; background: #f7fafc; border-radius: 5px;">☐ Disable personalized ads (Settings → Privacy → General)</li>
+        <li style="padding: 10px; margin: 5px 0; background: #f7fafc; border-radius: 5px;">☐ Set diagnostic data to "Required only" (Settings → Privacy → Diagnostics & feedback)</li>
+        <li style="padding: 10px; margin: 5px 0; background: #f7fafc; border-radius: 5px;">☐ Disable activity history (Settings → Privacy → Activity history)</li>
+        <li style="padding: 10px; margin: 5px 0; background: #f7fafc; border-radius: 5px;">☐ Delete existing diagnostic data (Settings → Privacy → Diagnostics & feedback → Delete)</li>
+        <li style="padding: 10px; margin: 5px 0; background: #f7fafc; border-radius: 5px;">☐ Switch to local account instead of Microsoft Account (if possible)</li>
+        <li style="padding: 10px; margin: 5px 0; background: #f7fafc; border-radius: 5px;">☐ Review and limit app permissions (Settings → Privacy → App permissions)</li>
+        <li style="padding: 10px; margin: 5px 0; background: #f7fafc; border-radius: 5px;">☐ Disable location services (unless needed for specific apps)</li>
+        <li style="padding: 10px; margin: 5px 0; background: #f7fafc; border-radius: 5px;">☐ Disable camera and microphone access for untrusted apps</li>
+        <li style="padding: 10px; margin: 5px 0; background: #f7fafc; border-radius: 5px;">☐ Configure Group Policy settings (Windows Pro/Enterprise only)</li>
+        <li style="padding: 10px; margin: 5px 0; background: #f7fafc; border-radius: 5px;">☐ Consider disabling telemetry services (advanced users only)</li>
+        <li style="padding: 10px; margin: 5px 0; background: #f7fafc; border-radius: 5px;">☐ Install privacy tools (O&O ShutUp10++, Simplewall, etc.) - optional</li>
+        <li style="padding: 10px; margin: 5px 0; background: #f7fafc; border-radius: 5px;">☐ Set up network-level blocking (Pi-hole, firewall rules) - advanced</li>
+        <li style="padding: 10px; margin: 5px 0; background: #f7fafc; border-radius: 5px;">☐ Disable Cortana and web search in Start menu</li>
+        <li style="padding: 10px; margin: 5px 0; background: #f7fafc; border-radius: 5px;">☐ Review privacy settings monthly and after major Windows updates</li>
+      </ul>
+
+      <div style="background: #d1ecf1; border-left: 5px solid #17a2b8; padding: 20px; border-radius: 8px; margin: 25px 0;">
+        <strong style="display: block; margin-bottom: 5px; font-size: 1.1em; color: #0c5460;">💾 Save this checklist!</strong>
+        <span style="color: #0c5460;">Bookmark this page or print it out. Windows updates sometimes reset privacy settings, so you'll want to review this periodically.</span>
+      </div>
+
+      <h2>🎯 Final Recommendations</h2>
+      <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 12px; padding: 30px; margin: 30px 0;">
+        <ol style="font-size: 1.1em; line-height: 2;">
+          <li><strong>Keep TPM enabled</strong> - it's a security feature, not a spy tool</li>
+          <li><strong>Focus on telemetry</strong> - that's the real privacy concern</li>
+          <li><strong>Start with Step 2</strong> - configure privacy settings (takes 10 minutes, huge impact)</li>
+          <li><strong>Use a local account</strong> if you can (Pro/Enterprise users have it easier)</li>
+          <li><strong>Consider privacy tools</strong> for automated management</li>
+          <li><strong>Accept trade-offs</strong> - some data collection is unavoidable in Windows 11</li>
+          <li><strong>Review settings monthly</strong> - Windows updates can reset them</li>
+        </ol>
+
+        <p style="margin-top: 30px; font-size: 1.2em; font-weight: 600;">
+          Remember: Perfect privacy doesn't exist in Windows 11, but you CAN significantly reduce data collection from 100% to ~5-15% with the right steps.
+        </p>
+      </div>
+    `,
+    category: "Privacy",
+    tags: ["Windows 11", "Privacy", "Security", "Telemetry", "TPM", "Microsoft"],
+    date: "2025-01-06",
+    readTime: "15 min read",
+    author: "Timothy Mazur",
+    thumbnail: "/images/windows11-privacy-thumb.jpg",
+    featuredImage: "/images/windows11-privacy-cover.jpg",
+    featured: true
+  },
+  {
     id: 1,
     title: "Building an Effective Malware Analysis Workflow with CrowdStrike",
     slug: "malware-analysis-workflow-crowdstrike",
