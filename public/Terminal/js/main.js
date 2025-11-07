@@ -117,10 +117,6 @@ function commander(cmd) {
       loopLines(commands, "color2", 80);
       addLine("<br>", "command", 80 * commands.length + 50);
       break;
-    case "email":
-      addLine('Opening mailto:<a href="mailto:Tim@timothymazur.com">Tim@timothymazur.com</a>...', "color2", 80);
-      newTab(email);
-      break;
     case "clear":
       setTimeout(function() {
         terminal.innerHTML = '<a id="before"></a>';

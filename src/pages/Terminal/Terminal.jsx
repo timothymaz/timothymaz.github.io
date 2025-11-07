@@ -316,14 +316,14 @@ const Terminal = () => {
           '',
           '<span class="cyan">📧 CONTACT INFORMATION</span>',
           '',
-          'Email       → <a href="mailto:Tim@timothymazur.com">Tim@timothymazur.com</a>',
-          'LinkedIn    → <a href="https://www.linkedin.com/in/timothy-mazur-b3bb4217a/" target="_blank">Send me a message</a>',
+          'LinkedIn    → <a href="https://www.linkedin.com/in/tim--mazur/" target="_blank">Connect with me on LinkedIn</a>',
+          'GitHub      → <a href="https://github.com/timothymaz" target="_blank">Check out my projects</a>',
           '',
-          '<span class="gray">Opening email client...</span>',
+          '<span class="gray">Opening LinkedIn...</span>',
           '',
         ], 'color2', 50);
         setTimeout(() => {
-          window.open('mailto:Tim@timothymazur.com');
+          window.open('https://www.linkedin.com/in/tim--mazur/');
         }, 1000);
         break;
 

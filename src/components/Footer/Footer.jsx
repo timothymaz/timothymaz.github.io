@@ -20,11 +20,6 @@ const Footer = () => {
       name: 'Instagram',
       url: 'https://www.instagram.com/tim.mazur',
       icon: <FiInstagram />
-    },
-    {
-      name: 'Email',
-      url: 'mailto:timothymazur125@gmail.com',
-      icon: <FiMail />
     }
   ];
 

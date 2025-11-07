@@ -15,7 +15,9 @@
       "Bash(ren:*)",
       "Bash(npm run photos:*)",
       "Bash(find:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "Bash(deploy-now.bat)",
+      "Bash(xcopy:*)"
     ],
     "deny": [],
     "ask": []

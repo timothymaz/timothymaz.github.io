@@ -1,10 +1,9 @@
 var youtube = "N/A";
 var twitter = "N/A";
 var password = "NeoTrinity";
-var linkedin = "https://www.linkedin.com/in/timothy-mazur-b3bb4217a/";
+var linkedin = "https://www.linkedin.com/in/tim--mazur/";
 var instagram = "https://www.instagram.com/tim.mazur";
 var github = "https://github.com/timothymaz";
-var email = 'mailto:timothymazur125@gmail.com';
 
 whois = [
   "<br>",
@@ -65,7 +64,6 @@ help = [
 //  '<span class="command">projects</span>       View coding projects',
   '<span class="command">history</span>        View command history',
   '<span class="command">help</span>           You obviously already know what this does',
-  '<span class="command">email</span>          Do not email me',
   '<span class="command">clear</span>          Clear terminal',
   '<span class="command">banner</span>         Display the header',
   "<br>",

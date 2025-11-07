@@ -9,13 +9,6 @@ const Contact = () => {
 
   const contactMethods = [
     {
-      icon: <FiMail />,
-      title: 'Email',
-      value: 'timothymazur125@gmail.com',
-      link: 'mailto:timothymazur125@gmail.com',
-      description: 'Send me an email anytime'
-    },
-    {
       icon: <FiLinkedin />,
       title: 'LinkedIn',
       value: 'Timothy Mazur',
