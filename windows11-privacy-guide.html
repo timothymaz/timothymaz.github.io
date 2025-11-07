@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Complete guide to Windows 11 privacy: Debunking TPM myths, understanding real privacy risks, and step-by-step solutions to protect your data.">
+    <meta name="keywords" content="Windows 11, privacy, TPM, telemetry, security, Microsoft, data protection">
+    <meta name="author" content="Timothy Mazur">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Windows 11 Privacy: The Complete Guide (2025)">
+    <meta property="og:description" content="Learn the truth about TPM, discover real privacy concerns, and get actionable steps to secure your Windows 11 system.">
+    <meta property="og:image" content="https://timothymazur.com/images/windows11-privacy-cover.jpg">
+    <meta property="og:url" content="https://timothymazur.com/windows11-privacy-guide.html">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Windows 11 Privacy: The Complete Guide">
+    <meta name="twitter:description" content="Debunking TPM myths and protecting your privacy with actionable steps.">
+
+    <title>Windows 11 Privacy: The Complete Guide (2025) | Timothy Mazur</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --info: #17a2b8;
+            --bg-light: #f7fafc;
+            --text-dark: #2d3748;
+            --text-body: #4a5568;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
+            line-height: 1.8;
+            color: var(--text-body);
+            background: white;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            from { transform: translate(0, 0); }
+            to { transform: translate(50px, 50px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            font-weight: 800;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .hero p {
+            font-size: 1.3em;
+            opacity: 0.95;
+            margin-bottom: 30px;
+        }
+
+        .hero-icon {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+        }
+
+        /* Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .section {
+            margin-bottom: 80px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5em;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .section-header p {
+            font-size: 1.2em;
+            color: var(--text-body);
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            color: var(--text-dark);
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        /* Myth vs Reality */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .myth-card {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .reality-card {
+            background: linear-gradient(135deg, #51cf66 0%, #37b24d 100%);
+            color: white;
+            border-radius: 12px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .myth-card::before,
+        .reality-card::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            font-size: 100px;
+            opacity: 0.2;
+        }
+
+        .myth-card::before {
+            content: '❌';
+        }
+
+        .reality-card::before {
+            content: '✅';
+        }
+
+        .comparison-grid h4 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        /* TPM Diagram */
+        .diagram-container {
+            background: var(--bg-light);
+            border-radius: 12px;
+            padding: 40px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .tpm-diagram {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Data Flow */
+        .flow-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .flow-item {
+            flex: 1;
+            min-width: 150px;
+            text-align: center;
+        }
+
+        .flow-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 15px;
+        }
+
+        .flow-arrow {
+            font-size: 2em;
+            color: var(--text-body);
+            opacity: 0.5;
+        }
+
+        .flow-label {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-top: 10px;
+        }
+
+        /* Privacy Gauges */
+        .gauges-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .gauge {
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .gauge-circle {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 20px;
+            position: relative;
+        }
+
+        .gauge-label {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .gauge-value {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        /* Telemetry Chart */
+        .telemetry-chart {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            margin: 40px 0;
+        }
+
+        .chart-bar {
+            margin: 20px 0;
+        }
+
+        .bar-label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .bar-container {
+            background: #e9ecef;
+            border-radius: 20px;
+            height: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bar-fill {
+            height: 100%;
+            border-radius: 20px;
+            transition: width 1s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        /* Step Cards */
+        .steps-container {
+            margin: 40px 0;
+        }
+
+        .step-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: var(--shadow);
+            border-left: 5px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .step-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateX(5px);
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--primary-gradient);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5em;
+            font-weight: 700;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .step-title {
+            font-size: 1.4em;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .step-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 15px;
+        }
+
+        /* Alert Boxes */
+        .alert {
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+            border-left: 5px solid;
+            background: white;
+        }
+
+        .alert-warning {
+            border-color: var(--warning);
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .alert-danger {
+            border-color: var(--danger);
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .alert-success {
+            border-color: var(--success);
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .alert-info {
+            border-color: var(--info);
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .alert strong {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.1em;
+        }
+
+        /* Code Blocks */
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.95em;
+            overflow-x: auto;
+        }
+
+        .code-block code {
+            display: block;
+            line-height: 1.6;
+        }
+
+        /* Trade-offs Table */
+        .tradeoffs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .tradeoffs-table th {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 20px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .tradeoffs-table td {
+            padding: 20px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .tradeoffs-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Checklist */
+        .checklist {
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            margin: 40px 0;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            transition: background 0.2s ease;
+        }
+
+        .checklist-item:hover {
+            background: var(--bg-light);
+        }
+
+        .checklist-item input[type="checkbox"] {
+            width: 24px;
+            height: 24px;
+            margin-right: 15px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .checklist-item label {
+            cursor: pointer;
+            font-size: 1.05em;
+        }
+
+        /* Tools Grid */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .tool-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .tool-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 15px;
+        }
+
+        .tool-name {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+        }
+
+        .tool-description {
+            font-size: 0.9em;
+            color: var(--text-body);
+        }
+
+        /* Author Section */
+        .author-section {
+            background: var(--bg-light);
+            padding: 40px;
+            border-radius: 12px;
+            margin: 60px 0;
+            text-align: center;
+        }
+
+        .author-section h3 {
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+
+        .author-section p {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .author-section a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .author-section a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2em;
+            }
+
+            .hero p {
+                font-size: 1.1em;
+            }
+
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .flow-diagram {
+                flex-direction: column;
+            }
+
+            .flow-arrow {
+                transform: rotate(90deg);
+            }
+
+            .section-header h2 {
+                font-size: 2em;
+            }
+
+            .container {
+                padding: 40px 15px;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .hero {
+                background: white;
+                color: var(--text-dark);
+                padding: 20px;
+            }
+
+            body {
+                font-size: 12pt;
+            }
+
+            .card, .checklist {
+                break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+
+            .step-card {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-content">
+            <!-- Shield with Lock SVG -->
+            <svg class="hero-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#fff;stop-opacity:0.9" />
+                        <stop offset="100%" style="stop-color:#fff;stop-opacity:0.6" />
+                    </linearGradient>
+                </defs>
+                <!-- Shield -->
+                <path d="M 50 5 L 15 20 L 15 45 Q 15 75 50 95 Q 85 75 85 45 L 85 20 Z"
+                      fill="url(#shieldGrad)" stroke="white" stroke-width="2"/>
+                <!-- Lock -->
+                <rect x="40" y="50" width="20" height="20" fill="#764ba2" rx="2"/>
+                <path d="M 43 50 L 43 43 Q 43 37 50 37 Q 57 37 57 43 L 57 50"
+                      fill="none" stroke="#764ba2" stroke-width="3"/>
+                <circle cx="50" cy="60" r="3" fill="white"/>
+            </svg>
+
+            <h1>Windows 11 Privacy: The Complete Guide</h1>
+            <p>Debunking myths, understanding real risks, and taking back control of your data</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Introduction -->
+        <section class="section">
+            <p style="font-size: 1.2em; text-align: center; max-width: 700px; margin: 0 auto;">
+                Windows 11 has sparked countless privacy debates. But most people are worried about the wrong things.
+                Let's separate fact from fiction and give you <strong>actionable steps</strong> to protect your privacy today.
+            </p>
+        </section>
+
+        <!-- Section 1: TPM Misconception -->
+        <section class="section">
+            <div class="section-header">
+                <h2>🔐 The Great TPM Misconception</h2>
+                <p>Let's clear up the biggest myth in Windows 11 privacy</p>
+            </div>
+
+            <div class="comparison-grid">
+                <div class="myth-card">
+                    <h4>❌ The Myth</h4>
+                    <p><strong>"TPM chips are Microsoft's spying tool that sends your data to the cloud and tracks everything you do."</strong></p>
+                    <p style="margin-top: 15px;">This fear has spread across forums and social media, causing many to disable or avoid TPM entirely.</p>
+                </div>
+
+                <div class="reality-card">
+                    <h4>✅ The Reality</h4>
+                    <p><strong>TPM is a local security chip that NEVER transmits data. It's a vault inside your computer.</strong></p>
+                    <p style="margin-top: 15px;">It stores encryption keys, protects BitLocker, and enables Windows Hello - all locally on your device.</p>
+                </div>
+            </div>
+
+            <div class="diagram-container">
+                <h3 style="margin-bottom: 30px; color: var(--text-dark);">How TPM Actually Works</h3>
+                <!-- TPM Diagram SVG -->
+                <svg class="tpm-diagram" viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Computer outline -->
+                    <rect x="50" y="50" width="500" height="200" rx="10" fill="#e9ecef" stroke="#2d3748" stroke-width="3"/>
+                    <rect x="70" y="70" width="200" height="120" rx="5" fill="#cbd5e0" stroke="#4a5568" stroke-width="2"/>
+                    <text x="170" y="140" text-anchor="middle" font-size="14" fill="#2d3748" font-weight="600">Motherboard</text>
+
+                    <!-- TPM Chip (Vault) -->
+                    <g id="tpm-vault">
+                        <rect x="350" y="90" width="150" height="140" rx="8" fill="#667eea" stroke="#764ba2" stroke-width="3"/>
+                        <circle cx="425" cy="140" r="25" fill="#764ba2"/>
+                        <rect x="418" y="155" width="14" height="20" fill="#764ba2"/>
+                        <circle cx="425" cy="165" r="4" fill="white"/>
+                        <text x="425" y="210" text-anchor="middle" font-size="16" fill="white" font-weight="bold">TPM 2.0</text>
+                    </g>
+
+                    <!-- Labels -->
+                    <text x="425" y="250" text-anchor="middle" font-size="14" fill="#28a745" font-weight="bold">🔒 Local Storage Only</text>
+                    <text x="425" y="270" text-anchor="middle" font-size="14" fill="#28a745" font-weight="bold">❌ No Data Transmission</text>
+                </svg>
+
+                <div class="alert alert-info" style="margin-top: 30px;">
+                    <strong>💡 Bottom Line:</strong> TPM is a security feature that protects YOU. Keep it enabled.
+                    The real privacy concerns are elsewhere (keep reading).
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Real Privacy Problems -->
+        <section class="section">
+            <div class="section-header">
+                <h2>⚠️ The REAL Privacy Problems</h2>
+                <p>Here's what you should actually be concerned about</p>
+            </div>
+
+            <div class="card">
+                <h3>1. Telemetry & Diagnostic Data Collection</h3>
+                <p>Windows 11 constantly sends data to Microsoft, including:</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>Your app usage patterns and search queries</li>
+                    <li>Device information and performance metrics</li>
+                    <li>Location data and browsing history (if Edge is used)</li>
+                    <li>Voice data from Cortana interactions</li>
+                    <li>Typing patterns and autocorrect data</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>2. Microsoft Account Integration</h3>
+                <p>Windows 11 Home forces a Microsoft Account, which syncs:</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>Your files and photos to OneDrive</li>
+                    <li>Browser history and passwords</li>
+                    <li>App preferences across devices</li>
+                    <li>Activity history and timeline data</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>3. Third-Party Data Sharing</h3>
+                <p>Microsoft shares anonymized data with:</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>Advertising partners for targeted ads</li>
+                    <li>Analytics companies for product improvement</li>
+                    <li>App developers for crash reports</li>
+                </ul>
+            </div>
+
+            <!-- Data Flow Diagram -->
+            <div class="diagram-container">
+                <h3 style="margin-bottom: 30px; color: var(--text-dark);">Where Your Data Goes</h3>
+                <div class="flow-diagram">
+                    <div class="flow-item">
+                        <!-- PC Icon -->
+                        <svg class="flow-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="10" y="20" width="80" height="50" rx="5" fill="#667eea" stroke="#764ba2" stroke-width="2"/>
+                            <rect x="35" y="75" width="30" height="3" fill="#4a5568"/>
+                            <rect x="20" y="78" width="60" height="8" rx="2" fill="#4a5568"/>
+                            <circle cx="50" cy="45" r="8" fill="white"/>
+                        </svg>
+                        <div class="flow-label">Your PC</div>
+                    </div>
+
+                    <div class="flow-arrow">→</div>
+
+                    <div class="flow-item">
+                        <!-- Database Icon -->
+                        <svg class="flow-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <ellipse cx="50" cy="30" rx="40" ry="15" fill="#ffc107" stroke="#f59f00" stroke-width="2"/>
+                            <path d="M 10 30 L 10 50 Q 10 60 50 65 Q 90 60 90 50 L 90 30" fill="#ffc107" stroke="#f59f00" stroke-width="2"/>
+                            <ellipse cx="50" cy="50" rx="40" ry="15" fill="none" stroke="#f59f00" stroke-width="2"/>
+                        </svg>
+                        <div class="flow-label">Telemetry Collection</div>
+                    </div>
+
+                    <div class="flow-arrow">→</div>
+
+                    <div class="flow-item">
+                        <!-- Server Icon -->
+                        <svg class="flow-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="15" y="20" width="70" height="20" rx="3" fill="#17a2b8" stroke="#0c7c8c" stroke-width="2"/>
+                            <circle cx="25" cy="30" r="3" fill="#0c7c8c"/>
+                            <rect x="15" y="45" width="70" height="20" rx="3" fill="#17a2b8" stroke="#0c7c8c" stroke-width="2"/>
+                            <circle cx="25" cy="55" r="3" fill="#0c7c8c"/>
+                            <rect x="15" y="70" width="70" height="20" rx="3" fill="#17a2b8" stroke="#0c7c8c" stroke-width="2"/>
+                            <circle cx="25" cy="80" r="3" fill="#0c7c8c"/>
+                        </svg>
+                        <div class="flow-label">Microsoft Servers</div>
+                    </div>
+
+                    <div class="flow-arrow">→</div>
+
+                    <div class="flow-item">
+                        <!-- Third Party Icons -->
+                        <svg class="flow-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="10" y="30" width="25" height="50" rx="2" fill="#dc3545"/>
+                            <rect x="40" y="20" width="25" height="60" rx="2" fill="#dc3545"/>
+                            <rect x="70" y="35" width="25" height="45" rx="2" fill="#dc3545"/>
+                        </svg>
+                        <div class="flow-label">Third-Party Analytics/Ads</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Privacy Ratings -->
+            <div class="section-header">
+                <h3>Privacy Impact Analysis</h3>
+            </div>
+
+            <div class="gauges-container">
+                <div class="gauge">
+                    <!-- High Data Collection -->
+                    <svg class="gauge-circle" viewBox="0 0 150 150">
+                        <circle cx="75" cy="75" r="60" fill="none" stroke="#e9ecef" stroke-width="15"/>
+                        <circle cx="75" cy="75" r="60" fill="none" stroke="#dc3545" stroke-width="15"
+                                stroke-dasharray="377" stroke-dashoffset="75"
+                                transform="rotate(-90 75 75)" stroke-linecap="round"/>
+                        <text x="75" y="85" text-anchor="middle" font-size="36" font-weight="bold" fill="#dc3545">8/10</text>
+                    </svg>
+                    <div class="gauge-label">Data Collection Volume</div>
+                    <p style="font-size: 0.9em; color: var(--danger);">High - Extensive telemetry</p>
+                </div>
+
+                <div class="gauge">
+                    <!-- Low User Control -->
+                    <svg class="gauge-circle" viewBox="0 0 150 150">
+                        <circle cx="75" cy="75" r="60" fill="none" stroke="#e9ecef" stroke-width="15"/>
+                        <circle cx="75" cy="75" r="60" fill="none" stroke="#ffc107" stroke-width="15"
+                                stroke-dasharray="377" stroke-dashoffset="264"
+                                transform="rotate(-90 75 75)" stroke-linecap="round"/>
+                        <text x="75" y="85" text-anchor="middle" font-size="36" font-weight="bold" fill="#ffc107">3/10</text>
+                    </svg>
+                    <div class="gauge-label">User Control</div>
+                    <p style="font-size: 0.9em; color: var(--warning);">Low - Limited options</p>
+                </div>
+
+                <div class="gauge">
+                    <!-- Medium Transparency -->
+                    <svg class="gauge-circle" viewBox="0 0 150 150">
+                        <circle cx="75" cy="75" r="60" fill="none" stroke="#e9ecef" stroke-width="15"/>
+                        <circle cx="75" cy="75" r="60" fill="none" stroke="#ffc107" stroke-width="15"
+                                stroke-dasharray="377" stroke-dashoffset="226"
+                                transform="rotate(-90 75 75)" stroke-linecap="round"/>
+                        <text x="75" y="85" text-anchor="middle" font-size="36" font-weight="bold" fill="#ffc107">4/10</text>
+                    </svg>
+                    <div class="gauge-label">Transparency</div>
+                    <p style="font-size: 0.9em; color: var(--warning);">Medium - Vague policies</p>
+                </div>
+            </div>
+
+            <!-- Telemetry Reduction Chart -->
+            <div class="telemetry-chart">
+                <h3 style="margin-bottom: 30px; text-align: center;">How Much Telemetry Can You Reduce?</h3>
+
+                <div class="chart-bar">
+                    <div class="bar-label">
+                        <span>Default Windows 11</span>
+                        <span>100%</span>
+                    </div>
+                    <div class="bar-container">
+                        <div class="bar-fill" style="width: 100%; background: #dc3545;">Maximum</div>
+                    </div>
+                </div>
+
+                <div class="chart-bar">
+                    <div class="bar-label">
+                        <span>After Basic Settings</span>
+                        <span>30%</span>
+                    </div>
+                    <div class="bar-container">
+                        <div class="bar-fill" style="width: 30%; background: #fd7e14;">Reduced</div>
+                    </div>
+                </div>
+
+                <div class="chart-bar">
+                    <div class="bar-label">
+                        <span>After Advanced Tweaks</span>
+                        <span>15%</span>
+                    </div>
+                    <div class="bar-container">
+                        <div class="bar-fill" style="width: 15%; background: #ffc107;">Better</div>
+                    </div>
+                </div>
+
+                <div class="chart-bar">
+                    <div class="bar-label">
+                        <span>With Network Blocking</span>
+                        <span>5%</span>
+                    </div>
+                    <div class="bar-container">
+                        <div class="bar-fill" style="width: 5%; background: #20c997;">Much Better</div>
+                    </div>
+                </div>
+
+                <div class="chart-bar">
+                    <div class="bar-label">
+                        <span>Linux Alternatives</span>
+                        <span>0%</span>
+                    </div>
+                    <div class="bar-container">
+                        <div class="bar-fill" style="width: 2%; background: #28a745;">Best</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert alert-warning">
+                <strong>⚠️ Important:</strong> You cannot eliminate all telemetry in Windows 11, even with advanced tools.
+                Microsoft has hardcoded certain data collection into the OS. However, you can significantly reduce it.
+            </div>
+        </section>
+
+        <!-- Section 3: Protection Steps -->
+        <section class="section">
+            <div class="section-header">
+                <h2>🛡️ How to Protect Yourself</h2>
+                <p>Step-by-step actions you can take today</p>
+            </div>
+
+            <div class="steps-container">
+                <!-- Step 1 -->
+                <div class="step-card">
+                    <div class="step-header">
+                        <div class="step-number">1</div>
+                        <div>
+                            <div class="step-title">Minimize Telemetry During Installation</div>
+                        </div>
+                    </div>
+                    <p><strong>Best time to act:</strong> During initial Windows 11 setup</p>
+                    <ul style="margin-left: 40px; margin-top: 10px;">
+                        <li>Choose "Set up for personal use" (not organization)</li>
+                        <li>When asked about privacy settings, toggle OFF everything:
+                            <ul style="margin-left: 20px;">
+                                <li>Location</li>
+                                <li>Find my device</li>
+                                <li>Diagnostic data (choose "Required only")</li>
+                                <li>Inking & typing</li>
+                                <li>Tailored experiences</li>
+                                <li>Advertising ID</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="alert alert-info" style="margin-top: 15px;">
+                        <strong>💡 Tip:</strong> If you've already installed Windows 11, don't worry - you can change these settings later (Step 2).
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="step-card">
+                    <div class="step-header">
+                        <div class="step-number">2</div>
+                        <div>
+                            <div class="step-title">Configure Privacy Settings (Essential)</div>
+                        </div>
+                    </div>
+                    <p><strong>Time required:</strong> 5-10 minutes</p>
+
+                    <div class="code-block">
+<code>1. Press Windows + I to open Settings
+2. Navigate to: Privacy & Security
+3. Go through EACH section and disable:</code>
+                    </div>
+
+                    <ul style="margin-left: 40px;">
+                        <li><strong>General:</strong>
+                            <ul style="margin-left: 20px;">
+                                <li>Let apps show me personalized ads: OFF</li>
+                                <li>Let websites show locally relevant content: OFF</li>
+                                <li>Let Windows improve Start and search: OFF</li>
+                            </ul>
+                        </li>
+                        <li><strong>Diagnostics & Feedback:</strong>
+                            <ul style="margin-left: 20px;">
+                                <li>Send optional diagnostic data: OFF</li>
+                                <li>Improve inking and typing: OFF</li>
+                                <li>Tailored experiences: OFF</li>
+                                <li>Delete diagnostic data: Click "Delete"</li>
+                            </ul>
+                        </li>
+                        <li><strong>Activity History:</strong>
+                            <ul style="margin-left: 20px;">
+                                <li>Store my activity history: OFF</li>
+                                <li>Clear activity history</li>
+                            </ul>
+                        </li>
+                        <li><strong>App Permissions:</strong> Review each (Camera, Microphone, Location, etc.) and disable for apps you don't trust</li>
+                    </ul>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="step-card">
+                    <div class="step-header">
+                        <div class="step-number">3</div>
+                        <div>
+                            <div class="step-title">Use a Local Account (Windows 11 Pro/Enterprise)</div>
+                        </div>
+                    </div>
+                    <p><strong>Why:</strong> Prevents syncing your data to Microsoft's cloud</p>
+
+                    <div class="code-block">
+<code>Settings → Accounts → Your info → "Sign in with a local account instead"</code>
+                    </div>
+
+                    <div class="alert alert-warning" style="margin-top: 15px;">
+                        <strong>⚠️ Windows 11 Home users:</strong> Microsoft forces a Microsoft Account during setup.
+                        Workaround: Disconnect internet during installation, or use the bypass:
+                        <ul style="margin-left: 20px; margin-top: 5px;">
+                            <li>At the Microsoft Account screen, press Shift + F10</li>
+                            <li>Type: <code>OOBE\BYPASSNRO</code> and press Enter</li>
+                            <li>Computer will restart, allowing local account option</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="step-card">
+                    <div class="step-header">
+                        <div class="step-number">4</div>
+                        <div>
+                            <div class="step-title">Advanced: Use Group Policy Editor (Pro Only)</div>
+                        </div>
+                    </div>
+                    <p><strong>For Windows 11 Pro/Enterprise users</strong></p>
+
+                    <div class="code-block">
+<code>1. Press Windows + R, type: gpedit.msc
+2. Navigate to: Computer Configuration → Administrative Templates →
+   Windows Components → Data Collection and Preview Builds
+3. Double-click "Allow Diagnostic Data"
+4. Set to "Enabled" and choose "Diagnostic data off"
+5. Click Apply and OK</code>
+                    </div>
+
+                    <p style="margin-top: 15px;"><strong>Other important policies to disable:</strong></p>
+                    <ul style="margin-left: 40px;">
+                        <li>Windows Components → Cloud Content → Turn off Microsoft consumer experiences</li>
+                        <li>Windows Components → Windows Error Reporting → Disable Windows Error Reporting</li>
+                        <li>System → Internet Communication Management → Turn off Windows Customer Experience Improvement Program</li>
+                    </ul>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="step-card">
+                    <div class="step-header">
+                        <div class="step-number">5</div>
+                        <div>
+                            <div class="step-title">Disable Telemetry Service</div>
+                        </div>
+                    </div>
+                    <p><strong>Power user option:</strong> Manually stop telemetry services</p>
+
+                    <div class="code-block">
+<code>1. Press Windows + R, type: services.msc
+2. Find these services and set to "Disabled":
+   - Connected User Experiences and Telemetry
+   - Diagnostic Policy Service (may break troubleshooting)
+   - dmwappushservice
+3. Right-click each → Properties → Startup type: Disabled → Stop</code>
+                    </div>
+
+                    <div class="alert alert-danger">
+                        <strong>⚠️ Warning:</strong> Disabling these services may prevent Windows Update troubleshooting
+                        and some diagnostic tools from working. Only proceed if you understand the trade-offs.
+                    </div>
+                </div>
+
+                <!-- Step 6 -->
+                <div class="step-card">
+                    <div class="step-header">
+                        <div class="step-number">6</div>
+                        <div>
+                            <div class="step-title">Consider Privacy Tools</div>
+                        </div>
+                    </div>
+                    <p>Third-party tools that automate privacy settings:</p>
+
+                    <div class="tools-grid" style="margin-top: 20px;">
+                        <div class="tool-card">
+                            <svg class="tool-icon" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="10" y="10" width="40" height="40" rx="5" fill="#667eea"/>
+                                <text x="30" y="38" text-anchor="middle" font-size="24" fill="white" font-weight="bold">O&O</text>
+                            </svg>
+                            <div class="tool-name">O&O ShutUp10++</div>
+                            <div class="tool-description">Free tool to disable telemetry and privacy invasive features</div>
+                        </div>
+
+                        <div class="tool-card">
+                            <svg class="tool-icon" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="30" cy="30" r="25" fill="#28a745"/>
+                                <path d="M 20 30 L 27 37 L 42 22" stroke="white" stroke-width="4" fill="none" stroke-linecap="round"/>
+                            </svg>
+                            <div class="tool-name">Simplewall</div>
+                            <div class="tool-description">Firewall to block telemetry at network level</div>
+                        </div>
+
+                        <div class="tool-card">
+                            <svg class="tool-icon" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                                <polygon points="30,5 55,20 55,40 30,55 5,40 5,20" fill="#17a2b8"/>
+                                <circle cx="30" cy="30" r="10" fill="white"/>
+                                <line x1="30" y1="20" x2="30" y2="40" stroke="#17a2b8" stroke-width="3"/>
+                            </svg>
+                            <div class="tool-name">DoNotSpy11</div>
+                            <div class="tool-description">One-click privacy settings manager</div>
+                        </div>
+
+                        <div class="tool-card">
+                            <svg class="tool-icon" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="5" y="15" width="50" height="30" rx="3" fill="#ffc107"/>
+                                <circle cx="15" cy="30" r="4" fill="#2d3748"/>
+                                <circle cx="30" cy="30" r="4" fill="#2d3748"/>
+                                <circle cx="45" cy="30" r="4" fill="#2d3748"/>
+                            </svg>
+                            <div class="tool-name">Pi-hole</div>
+                            <div class="tool-description">Network-wide ad and telemetry blocking</div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-warning" style="margin-top: 20px;">
+                        <strong>⚠️ Caution:</strong> Always download these tools from official sources. Some "privacy tools"
+                        are actually malware in disguise. Research before installing.
+                    </div>
+                </div>
+
+                <!-- Step 7 -->
+                <div class="step-card">
+                    <div class="step-header">
+                        <div class="step-number">7</div>
+                        <div>
+                            <div class="step-title">Review App Permissions Regularly</div>
+                        </div>
+                    </div>
+                    <p><strong>Monthly habit:</strong> Check what apps have access to</p>
+
+                    <div class="code-block">
+<code>Settings → Privacy & Security → App permissions
+
+Review and disable access for:
+- Camera
+- Microphone
+- Location
+- Contacts
+- Calendar
+- Call history
+- Email
+- Tasks
+- Messaging
+- Radios
+- Other devices</code>
+                    </div>
+
+                    <div class="alert alert-success">
+                        <strong>✅ Best Practice:</strong> Only grant permissions when absolutely necessary, and revoke them
+                        when you're done using the app. Most apps request more permissions than they need.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Trade-offs -->
+        <section class="section">
+            <div class="section-header">
+                <h2>⚖️ Understanding the Trade-offs</h2>
+                <p>What you gain vs. what you lose</p>
+            </div>
+
+            <table class="tradeoffs-table">
+                <thead>
+                    <tr>
+                        <th>Action</th>
+                        <th>Privacy Gain ✅</th>
+                        <th>Functionality Loss ❌</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Disable Telemetry</strong></td>
+                        <td>Stops most usage data collection</td>
+                        <td>May miss important security updates info, troubleshooting harder</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Use Local Account</strong></td>
+                        <td>No data syncing to cloud</td>
+                        <td>Lose cross-device sync, OneDrive integration, Microsoft Store apps limited</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Disable Location</strong></td>
+                        <td>Apps can't track your location</td>
+                        <td>Maps, weather, and location-based reminders won't work</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Block Cortana</strong></td>
+                        <td>No voice data sent to Microsoft</td>
+                        <td>Voice assistant features unavailable</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Disable Microsoft Defender telemetry</strong></td>
+                        <td>Antivirus samples not shared</td>
+                        <td>Slower threat response, cloud-based protection reduced</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Block Windows Update telemetry</strong></td>
+                        <td>Update metadata not shared</td>
+                        <td>May get incompatible updates, troubleshooting harder</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="card" style="margin-top: 30px; background: linear-gradient(135deg, #fff5e6 0%, #ffe4cc 100%);">
+                <h3>💡 The Inconvenient Truth</h3>
+                <p>Even with all these steps, <strong>Windows 11 will still collect some telemetry</strong>. Microsoft has built it into the core OS,
+                and certain data collection cannot be fully disabled without breaking Windows Update or security features.</p>
+                <p style="margin-top: 15px;"><strong>Your realistic options:</strong></p>
+                <ul style="margin-left: 20px;">
+                    <li><strong>Minimize telemetry</strong> (what this guide helps you do) - reduces to ~5-15% of default</li>
+                    <li><strong>Accept the trade-off</strong> - use Windows but understand data is collected</li>
+                    <li><strong>Switch to Linux</strong> - distributions like Ubuntu, Linux Mint, or Fedora have zero telemetry by default</li>
+                    <li><strong>Use a virtual machine</strong> - run Windows in a sandboxed environment with network restrictions</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Section 5: Checklist -->
+        <section class="section">
+            <div class="section-header">
+                <h2>📋 Quick Reference Checklist</h2>
+                <p>Print this out and follow along</p>
+            </div>
+
+            <div class="checklist">
+                <h3 style="margin-bottom: 20px; color: var(--text-dark);">Privacy Configuration Checklist</h3>
+
+                <div class="checklist-item">
+                    <input type="checkbox" id="check1">
+                    <label for="check1">Configure privacy settings during Windows 11 installation (or do it now in Settings)</label>
+                </div>
+
+                <div class="checklist-item">
+                    <input type="checkbox" id="check2">
+                    <label for="check2">Disable personalized ads (Settings → Privacy → General)</label>
+                </div>
+
+                <div class="checklist-item">
+                    <input type="checkbox" id="check3">
+                    <label for="check3">Set diagnostic data to "Required only" (Settings → Privacy → Diagnostics & feedback)</label>
+                </div>
+
+                <div class="checklist-item">
+                    <input type="checkbox" id="check4">
+                    <label for="check4">Disable activity history (Settings → Privacy → Activity history)</label>
+                </div>
+
+                <div class="checklist-item">
+                    <input type="checkbox" id="check5">
+                    <label for="check5">Delete existing diagnostic data (Settings → Privacy → Diagnostics & feedback → Delete)</label>
+                </div>
+
+                <div class="checklist-item">
+                    <input type="checkbox" id="check6">
+                    <label for="check6">Switch to local account instead of Microsoft Account (if possible)</label>
+                </div>
+
+                <div class="checklist-item">
+                    <input type="checkbox" id="check7">
+                    <label for="check7">Review and limit app permissions (Settings → Privacy → App permissions)</label>
+                </div>
+
+                <div class="checklist-item">
+                    <input type="checkbox" id="check8">
+                    <label for="check8">Disable location services (unless needed for specific apps)</label>
+                </div>
+
+                <div class="checklist-item">
+                    <input type="checkbox" id="check9">
+                    <label for="check9">Disable camera and microphone access for untrusted apps</label>
+                </div>
+
+                <div class="checklist-item">
+                    <input type="checkbox" id="check10">
+                    <label for="check10">Configure Group Policy settings (Windows Pro/Enterprise only)</label>
+                </div>
+
+                <div class="checklist-item">
+                    <input type="checkbox" id="check11">
+                    <label for="check11">Consider disabling telemetry services (advanced users only)</label>
+                </div>
+
+                <div class="checklist-item">
+                    <input type="checkbox" id="check12">
+                    <label for="check12">Install privacy tools (O&O ShutUp10++, Simplewall, etc.) - optional</label>
+                </div>
+
+                <div class="checklist-item">
+                    <input type="checkbox" id="check13">
+                    <label for="check13">Set up network-level blocking (Pi-hole, firewall rules) - advanced</label>
+                </div>
+
+                <div class="checklist-item">
+                    <input type="checkbox" id="check14">
+                    <label for="check14">Disable Cortana and web search in Start menu</label>
+                </div>
+
+                <div class="checklist-item">
+                    <input type="checkbox" id="check15">
+                    <label for="check15">Review privacy settings monthly and after major Windows updates</label>
+                </div>
+
+                <div class="alert alert-info" style="margin-top: 30px;">
+                    <strong>💾 Save this checklist!</strong> Bookmark this page or print it out. Windows updates sometimes
+                    reset privacy settings, so you'll want to review this periodically.
+                </div>
+            </div>
+        </section>
+
+        <!-- Conclusion -->
+        <section class="section">
+            <div class="card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                <h2>🎯 Final Recommendations</h2>
+                <ol style="font-size: 1.1em; margin-left: 20px; line-height: 2;">
+                    <li><strong>Keep TPM enabled</strong> - it's a security feature, not a spy tool</li>
+                    <li><strong>Focus on telemetry</strong> - that's the real privacy concern</li>
+                    <li><strong>Start with Step 2</strong> - configure privacy settings (takes 10 minutes, huge impact)</li>
+                    <li><strong>Use a local account</strong> if you can (Pro/Enterprise users have it easier)</li>
+                    <li><strong>Consider privacy tools</strong> for automated management</li>
+                    <li><strong>Accept trade-offs</strong> - some data collection is unavoidable in Windows 11</li>
+                    <li><strong>Review settings monthly</strong> - Windows updates can reset them</li>
+                </ol>
+
+                <p style="margin-top: 30px; font-size: 1.2em; font-weight: 600;">
+                    Remember: Perfect privacy doesn't exist in Windows 11, but you CAN significantly reduce
+                    data collection from 100% to ~5-15% with the right steps.
+                </p>
+            </div>
+        </section>
+
+        <!-- Author Section -->
+        <div class="author-section">
+            <h3>About the Author</h3>
+            <p>
+                This guide was created by <a href="https://timothymazur.com">Timothy Mazur</a>,
+                Director of Cybersecurity with 3+ years of experience in the MSP industry,
+                overseeing security operations for 100+ clients. CompTIA-certified with expertise
+                in endpoint security, threat analysis, and privacy protection.
+            </p>
+            <p style="margin-top: 15px;">
+                <strong>Have questions?</strong> Connect with me on
+                <a href="https://www.linkedin.com/in/tim--mazur/">LinkedIn</a> or
+                check out my <a href="https://timothymazur.com/portfolio">portfolio</a>.
+            </p>
+            <p style="margin-top: 15px; font-size: 0.9em; color: var(--text-body);">
+                Last updated: January 2025 | Windows 11 Version 23H2
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Add smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Animate telemetry chart bars on scroll
+        const observerOptions = {
+            threshold: 0.5,
+            rootMargin: '0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.querySelectorAll('.bar-fill').forEach(bar => {
+                        bar.style.transition = 'width 1s ease';
+                    });
+                }
+            });
+        }, observerOptions);
+
+        const chart = document.querySelector('.telemetry-chart');
+        if (chart) observer.observe(chart);
+
+        // Save checklist state to localStorage
+        const checkboxes = document.querySelectorAll('.checklist input[type="checkbox"]');
+
+        // Load saved state
+        checkboxes.forEach(checkbox => {
+            const saved = localStorage.getItem(checkbox.id);
+            if (saved === 'true') {
+                checkbox.checked = true;
+            }
+        });
+
+        // Save state on change
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                localStorage.setItem(checkbox.id, checkbox.checked);
+            });
+        });
+
+        // Print functionality
+        window.addEventListener('beforeprint', () => {
+            document.body.classList.add('printing');
+        });
+
+        window.addEventListener('afterprint', () => {
+            document.body.classList.remove('printing');
+        });
+    </script>
+</body>
+</html>
