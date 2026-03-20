@@ -5,7 +5,8 @@
 
 .contact-header {
   padding: var(--spacing-4xl) 0 var(--spacing-3xl);
-  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+  background-color: var(--bg-primary);
+  background-image: var(--mesh-gradient-1), var(--mesh-gradient-2), var(--mesh-gradient-3);
   text-align: center;
 }
 
@@ -20,11 +21,14 @@
 }
 
 .contact-card {
-  background-color: var(--bg-secondary);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-xl);
   overflow: hidden;
-  box-shadow: var(--shadow-md);
-  transition: all var(--transition-base);
+  box-shadow: var(--glass-shadow);
+  transition: all 0.4s var(--ease-spring);
 }
 
 .contact-card:hover {
@@ -58,6 +62,7 @@
 
 .contact-card:hover .contact-icon {
   transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 0 20px var(--accent-primary);
 }
 
 .contact-title {

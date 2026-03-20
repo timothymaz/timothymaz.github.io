@@ -1,12 +1,36 @@
+import { useCallback, useState } from 'react';
 import { motion } from 'framer-motion';
-import { FiMail, FiLinkedin, FiGithub, FiInstagram, FiMapPin } from 'react-icons/fi';
-import { useInView } from '../../hooks/useInView';
+import { FiLinkedin, FiGithub, FiInstagram, FiMapPin } from 'react-icons/fi';
 import './Contact.css';
 
-const Contact = () => {
-  const [headerRef, headerInView] = useInView();
-  const [cardsRef, cardsInView] = useInView();
+function MagneticCard({ children, className, ...props }) {
+  const [offset, setOffset] = useState({ x: 0, y: 0 });
 
+  const handleMouseMove = useCallback((e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = (e.clientX - rect.left - rect.width / 2) * 0.08;
+    const y = (e.clientY - rect.top - rect.height / 2) * 0.08;
+    setOffset({ x, y });
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    setOffset({ x: 0, y: 0 });
+  }, []);
+
+  return (
+    <motion.div
+      className={className}
+      style={{ transform: `translate(${offset.x}px, ${offset.y}px)` }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      {...props}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+const Contact = () => {
   const contactMethods = [
     {
       icon: <FiLinkedin />,
@@ -42,11 +66,10 @@ const Contact = () => {
     <div className="contact-page">
       {/* Header */}
       <motion.section
-        ref={headerRef}
         className="contact-header"
         initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: headerInView ? 1 : 0, y: headerInView ? 0 : 30 }}
-        transition={{ duration: 0.8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
       >
         <div className="container">
           <h1 className="page-title">
@@ -60,20 +83,17 @@ const Contact = () => {
       </motion.section>
 
       {/* Contact Cards */}
-      <section ref={cardsRef} className="contact-section">
+      <section className="contact-section">
         <div className="container">
           <div className="contact-grid">
             {contactMethods.map((method, index) => (
-              <motion.div
+              <MagneticCard
                 key={method.title}
                 className="contact-card"
                 initial={{ opacity: 0, y: 30 }}
-                animate={{
-                  opacity: cardsInView ? 1 : 0,
-                  y: cardsInView ? 0 : 30
-                }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -5 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-50px' }}
+                transition={{ delay: index * 0.1, duration: 0.5 }}
               >
                 {method.link ? (
                   <a
@@ -95,7 +115,7 @@ const Contact = () => {
                     <p className="contact-description">{method.description}</p>
                   </div>
                 )}
-              </motion.div>
+              </MagneticCard>
             ))}
           </div>
         </div>

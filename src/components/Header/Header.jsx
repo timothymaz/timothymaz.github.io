@@ -79,11 +79,22 @@ const Header = () => {
           <motion.button
             className="theme-toggle"
             onClick={toggleTheme}
-            whileHover={{ scale: 1.1, rotate: 15 }}
+            whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             aria-label="Toggle theme"
           >
-            {getThemeIcon()}
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={theme}
+                className="theme-icon-wrapper"
+                initial={{ scale: 0, rotate: -180 }}
+                animate={{ scale: 1, rotate: 0 }}
+                exit={{ scale: 0, rotate: 180 }}
+                transition={{ duration: 0.3, ease: [0.34, 1.56, 0.64, 1] }}
+              >
+                {getThemeIcon()}
+              </motion.span>
+            </AnimatePresence>
           </motion.button>
 
           <button

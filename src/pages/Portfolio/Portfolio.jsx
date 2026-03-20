@@ -134,11 +134,18 @@ const Portfolio = () => {
       {/* Projects Grid */}
       <section className="projects-section">
         <div className="container">
+          <AnimatePresence mode="popLayout">
           <div className="projects-grid">
-            {filteredProjects.map((project) => (
-              <article
+            {filteredProjects.map((project, index) => (
+              <motion.article
                 key={project.id}
                 className="project-card"
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.35, delay: index * 0.05 }}
+                whileHover={{ y: -6 }}
               >
                 <div className="project-image">
                   <img src={project.image} alt={project.title} loading="lazy" />
@@ -186,9 +193,10 @@ const Portfolio = () => {
                     ))}
                   </ul>
                 </div>
-              </article>
+              </motion.article>
             ))}
           </div>
+          </AnimatePresence>
 
           {filteredProjects.length === 0 && (
             <div className="no-projects">

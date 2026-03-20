@@ -6,7 +6,8 @@
 /* Header */
 .blog-header {
   padding: var(--spacing-4xl) 0 var(--spacing-3xl);
-  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+  background-color: var(--bg-primary);
+  background-image: var(--mesh-gradient-1), var(--mesh-gradient-2), var(--mesh-gradient-3);
   text-align: center;
 }
 
@@ -42,15 +43,22 @@
 }
 
 .featured-card {
-  background-color: var(--bg-secondary);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-xl);
   overflow: hidden;
-  box-shadow: var(--shadow-md);
-  transition: all var(--transition-base);
+  box-shadow: var(--glass-shadow);
+  transition: all 0.4s var(--ease-spring);
   text-decoration: none;
   color: inherit;
   display: flex;
   flex-direction: column;
+}
+
+.featured-grid .featured-card:first-child {
+  grid-column: span 2;
 }
 
 .featured-card:hover {
@@ -207,7 +215,8 @@
 .search-input:focus {
   outline: none;
   border-color: var(--accent-primary);
-  box-shadow: 0 0 0 3px rgba(0, 212, 170, 0.1);
+  box-shadow: 0 0 0 3px rgba(0, 212, 170, 0.15), 0 0 20px rgba(0, 212, 170, 0.08);
+  background: var(--glass-bg);
 }
 
 .search-input::placeholder {
@@ -264,11 +273,14 @@
 }
 
 .blog-card {
-  background-color: var(--bg-secondary);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius-xl);
   overflow: hidden;
-  box-shadow: var(--shadow-md);
-  transition: all var(--transition-base);
+  box-shadow: var(--glass-shadow);
+  transition: all 0.4s var(--ease-spring);
 }
 
 .blog-card:hover {
